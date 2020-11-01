@@ -1,56 +1,30 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
+    <div
+      class="header"
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+      <img
+        class="logo-header"
+        src="./assets/img/default_2.png"
+      />
+    </div>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
+    <v-main class="main-view">
+      <router-view />
     </v-main>
+
+    <bottom-navigation />
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import BottomNavigation from './components/BottomNavigation';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    BottomNavigation
   },
 
   data: () => ({
@@ -58,3 +32,51 @@ export default {
   }),
 };
 </script>
+
+<style lang="scss">
+$break_small: 620px;
+
+.v-application {
+  font-family: 'effra', 'Helvetica', sans-serif !important;
+
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.logo-header {
+  align-self: center;
+  @media screen and (max-width: $break_small) {
+    height: 200px;
+  }
+  @media screen and (min-width: $break_small+1) {
+    height: 200px;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  @media screen and (max-width: $break_small) {
+    height: 70px;
+  }
+  @media screen and (min-width: $break_small+1) {
+    height: 90px;
+  }
+}
+
+@font-face {
+  font-family: 'effra';
+  src: url('https://www.static-src.com/fonts/1.0.0/effra/effra-regular.woff2') format('woff2'),
+  url('https://www.static-src.com/fonts/1.0.0/effra/effra-regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'efframedium';
+  src: url('https://www.static-src.com/fonts/1.0.0/effra/effraMedium-regular.woff2') format('woff2'),
+  url('https://www.static-src.com/fonts/1.0.0/effra/efframedium-regular.ttf') format('truetype');
+}
+</style>
