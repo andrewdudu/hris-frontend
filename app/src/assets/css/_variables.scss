@@ -9,3 +9,68 @@ $blu-blue-dark-1: #004f74;
 
 $main-font: "effra";
 $main-font-bold: "efframedium";
+
+body {
+  padding-bottom: 70px;
+}
+
+.large {
+  font-size: 22px;
+}
+
+.bold {
+  font-family: $main-font-bold;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.margin-left {
+  margin-left: 5px;
+}
+
+.margin-bot {
+  margin-top: 13px;
+}
+
+.medium {
+  font-size: 17px;
+}
+
+.small {
+  font-size: 13px;
+}
+
+.padding {
+  padding: 17px;
+}
+
+.padding-top {
+  padding-top: 20px;
+}
+
+.padding-right {
+  padding-right: 20px;
+}
+
+.padding-left {
+  padding-left: 20px;
+}
+
+.center {
+  justify-content: center;
+  display: flex;
+}
+
+.dark {
+  color: $blu-blue-dark-1;
+}

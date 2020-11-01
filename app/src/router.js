@@ -5,6 +5,7 @@ Vue.use(Router);
 
 // USER PAGE
 const HomePage = () => import("@/views/Home.vue");
+const AnnouncementPage = () => import("@/views/Announcement.vue");
 
 export default new Router({
   mode: "history",
@@ -15,5 +16,10 @@ export default new Router({
       name: "home",
       component: HomePage,
     },
+    {
+      path: "/announcements",
+      name: "announcements",
+      component: AnnouncementPage,
+    }
   ],
 });

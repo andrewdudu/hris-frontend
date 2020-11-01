@@ -4,7 +4,7 @@
     color="#0095DA"
     class="bottom-navigation"
   >
-    <v-btn>
+    <v-btn to="/">
       <span>Home</span>
 
       <v-icon>mdi-home</v-icon>

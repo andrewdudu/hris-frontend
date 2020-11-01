@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <div
-      app
       class="header"
     >
       <img
@@ -39,7 +38,7 @@ $break_small: 620px;
 
 .v-application {
   font-family: 'effra', 'Helvetica', sans-serif !important;
-  
+
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
