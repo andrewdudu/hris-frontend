@@ -1,5 +1,6 @@
 import color from "@/assets/js/color.js";
 import timestamp from "@/utils/timestamp.js";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
 	name: "Announcement",
@@ -9,16 +10,17 @@ export default {
 		};
 	},
 	methods: {
+		...mapActions('announcement', [
+			'fetchAnnouncements'
+		]),
 		unixToString(unix) {
 			return timestamp.unixToString(unix);
 		}
 	},
 	computed: {
-		announcements() {
-			return this.$store.state.announcements;
-		},
+		...mapGetters('announcement', ['announcements'])
 	},
 	created() {
-		this.$store.dispatch('fetchAnnouncements');
+		this.fetchAnnouncements();
 	}
 };
