@@ -1,26 +1,9 @@
+import { mapActions, mapGetters } from "vuex";
 import color from "@/assets/js/color.js";
 import nameToInitials from "@/utils/name-to-initials";
 import timestamp from "@/utils/timestamp";
 import moment from 'moment';
-import Vue from 'vue';
 import Map from '@/components/Map.vue';
-import { LMap, LTileLayer, LMarker, LCircleMarker, LPopup } from "vue2-leaflet";
-import { Icon } from "leaflet";
-import "leaflet/dist/leaflet.css";
-
-Vue.component("l-map", LMap);
-Vue.component("l-tile-layer", LTileLayer);
-Vue.component("l-circle-marker", LCircleMarker);
-Vue.component("l-marker", LMarker);
-Vue.component("v-popup", LPopup);
-
-delete Icon.Default.prototype._getIconUrl;
-
-Icon.Default.mergeOptions({
-  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-  iconUrl: require("leaflet/dist/images/marker-icon.png"),
-  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
-});
 
 export default {
   name: "Home",
@@ -44,6 +27,15 @@ export default {
     };
   },
   methods: {
+    ...mapActions('user', [
+        'fetchCurrentUser'
+    ]),
+    ...mapActions('dashboard', [
+      'fetchDashboardSummary'
+    ]),
+    ...mapActions('announcement', [
+      'fetchAnnouncements'
+    ]),
     onImageChange(file) {
       let reader = new FileReader();
       this.image = null;
@@ -88,15 +80,9 @@ export default {
     }
   },
   computed: {
-    announcements() {
-      return this.$store.state.announcements;
-    },
-    dashboardSummary() {
-      return this.$store.state.dashboardSummary;
-    },
-    currentUser() {
-      return this.$store.state.currentUser;
-    },
+    ...mapGetters('announcement', ['announcements']),
+    ...mapGetters('dashboard', ['dashboardSummary']),
+    ...mapGetters('user', ['currentUser']),
     initials() {
       if (this.currentUser !== null) {
         return nameToInitials(this.currentUser.name);
@@ -105,8 +91,8 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('fetchCurrentUser');
-    this.$store.dispatch('fetchDashboardSummary');
-    this.$store.dispatch('fetchAnnouncements');
+    this.fetchCurrentUser();
+    this.fetchDashboardSummary();
+    this.fetchAnnouncements();
   }
 };
