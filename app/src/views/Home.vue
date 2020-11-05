@@ -150,7 +150,7 @@
         <router-link to="/announcements" class="text-decoration-none"><span class="padding-right dark">Show All</span></router-link>
       </v-col>
       <div class="horizontal-scroll">
-        <v-card v-bind:key="announcement.id" v-for="announcement in announcements" class="horizontal-scroll-card padding">
+        <v-card v-bind:key="announcement.id" v-for="announcement in announcements" class="horizontal-scroll-card padding background-white">
           <v-row no-gutters>
             <v-col class="col-12">
               <span class="bold medium dark">{{ announcement.title }}</span>
@@ -196,7 +196,7 @@
 
 <script src="./js/home.js"></script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
   .last-attendance {
     width: 90%;
@@ -231,6 +231,10 @@
 
   .map {
     height: 250px;
+  }
+
+  .background-white {
+    background-color: white;
   }
 
   .clock {
