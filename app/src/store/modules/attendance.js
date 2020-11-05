@@ -10,7 +10,7 @@ const actions = {
 	postClockIn({ commit }, request) {
 		return api
 			.postClockIn(request)
-			.then(response => response)
+			.then(response => response);
 	},
 	// eslint-disable-next-line no-unused-vars
 	postClockOut({ commit }, request) {

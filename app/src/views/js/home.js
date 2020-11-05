@@ -1,4 +1,4 @@
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import color from "@/assets/js/color.js";
 import nameToInitials from "@/utils/name-to-initials";
 import timestamp from "@/utils/timestamp";
@@ -106,15 +106,9 @@ export default {
     }
   },
   computed: {
-    announcements() {
-      return this.$store.state.announcements;
-    },
-    dashboardSummary() {
-      return this.$store.state.dashboardSummary;
-    },
-    currentUser() {
-      return this.$store.state.currentUser;
-    },
+    ...mapGetters('announcement', ['announcements']),
+    ...mapGetters('dashboard', ['dashboardSummary']),
+    ...mapGetters('user', ['currentUser']),
     initials() {
       if (this.currentUser !== null) {
         return nameToInitials(this.currentUser.name);
@@ -123,8 +117,8 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('fetchCurrentUser');
-    this.$store.dispatch('fetchDashboardSummary');
-    this.$store.dispatch('fetchAnnouncements');
+    this.fetchCurrentUser();
+    this.fetchDashboardSummary();
+    this.fetchAnnouncements();
   }
 };
