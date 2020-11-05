@@ -155,6 +155,83 @@ const routes = [
 				}
 			}
 		}
+	},
+	{
+		method: 'GET',
+		url: '/users/current-user/attendance-summary',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				month: {
+					attendance: 120,
+					leave: 2,
+					absence: 2
+				},
+				year: {
+					attendance: 120,
+					leave: 2,
+					absence: 2
+				}
+			}
+		}
+	},
+	{
+		method: 'GET',
+		url: '/users/example@example.com/profile',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				attendance: 230,
+				leave: {
+					sick: 5,
+					marriage: 2,
+					childBaptism: 2,
+					childCircumcision: 0,
+					childBirth: 0,
+					hajj: 0,
+					maternity: 0,
+					mainFamilyDeath: 0,
+					closeFamilyDeath: 0
+				},
+				quota: {
+					annual: 8,
+					extra: 2
+				}
+			}
+		}
+	},
+	{
+		method: 'GET',
+		url: '/users/example@example.com/leave-quotas',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: [
+				{
+					type: "annual",
+					remaining: 10,
+					used: 2,
+					expire: 1603970498
+				},
+				{
+					type: "extra",
+					remaining: 3,
+					used: 1,
+					expire: 1603970498
+				},
+				{
+					type: "substitute",
+					remaining: 2,
+					used: 1,
+					expiries: [1603970498, 1603970497]
+				}
+			]
+		}
 	}
 ];
 

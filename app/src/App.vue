@@ -19,6 +19,7 @@
 
 <script>
 import BottomNavigation from './components/BottomNavigation';
+import { mapActions } from "vuex";
 
 export default {
   name: 'App',
@@ -27,9 +28,17 @@ export default {
     BottomNavigation
   },
 
+  methods: {
+    ...mapActions('user', ['fetchCurrentUser'])
+  },
+
   data: () => ({
     //
   }),
+
+  created() {
+    this.fetchCurrentUser();
+  }
 };
 </script>
 

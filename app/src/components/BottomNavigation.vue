@@ -28,7 +28,7 @@
       <v-icon>mdi-chart-line</v-icon>
     </v-btn>
 
-    <v-btn>
+    <v-btn to="/profile" @click="value = 4">
       <span>Profile</span>
 
       <v-icon>mdi-account</v-icon>
