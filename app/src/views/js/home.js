@@ -13,6 +13,7 @@ export default {
   data() {
     return {
       color,
+      hasClockedIn: 0,
       location,
       dialog: false,
       loading: false,
@@ -35,6 +36,10 @@ export default {
     ]),
     ...mapActions('announcement', [
       'fetchAnnouncements'
+    ]),
+    ...mapActions('attendance', [
+        'postClockIn',
+        'postClockOut'
     ]),
     onImageChange(file) {
       let reader = new FileReader();
@@ -61,13 +66,34 @@ export default {
     },
     onClockInSubmit() {
       this.dialog = false;
-      this.$store.dispatch('postClockIn', {
+      this.postClockIn({
         image: this.image,
         location: this.location
-      });
+      })
+          .then(res => this.onClockInSuccess(res))
+          .catch(err => this.onClockInFail(err));
     },
-    onClockIn() {
-      this.dialog = true;
+    onClockOutSubmit() {
+      this.dialog = false;
+      this.postClockOut({
+        location: this.location
+      })
+          .then(res => this.onClockOutSuccess(res))
+          .catch(err => this.onClockOutFail(err));
+    },
+    onClockOutSuccess() {},
+    onClockOutFail() {},
+    onClockInSuccess() {
+      this.hasClockedIn = 1;
+    },
+    onClockInFail() {},
+    hourTime(time) {
+      const calculatedTime = moment.duration(moment().diff(moment.unix(time)));
+      return Math.floor(calculatedTime.asHours());
+    },
+    minuteTime(time) {
+      const calculatedTime = moment.duration(moment().diff(moment.unix(time)));
+      return Math.floor(calculatedTime.asMinutes()) % 60;
     },
     unixToShortDay(value) {
       return timestamp.unixToShortDay(value);

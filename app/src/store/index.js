@@ -4,6 +4,7 @@ import announcement from './modules/announcement';
 import attendance from './modules/attendance';
 import dashboard from './modules/dashboard';
 import user from './modules/user';
+import authentication from './modules/authentication';
 
 Vue.use(Vuex);
 
@@ -12,8 +13,9 @@ const store = new Vuex.Store({
         announcement,
         attendance,
         dashboard,
-        user
+        user,
+        authentication
     }
-})
+});
 
 export default store;
