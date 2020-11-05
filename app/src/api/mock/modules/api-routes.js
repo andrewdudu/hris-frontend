@@ -24,6 +24,7 @@ const routes = [
 	{
 		method: 'GET',
 		url: '/dashboard/summary',
+		status: 200,
 		response: {
 			code: 200,
 			status: "Success",
@@ -42,7 +43,7 @@ const routes = [
 				attendance: {
 					current: {
 						date: {
-							start: 7817238
+							start: 1604545200
 						},
 						location: {
 							type: "INSIDE|OUTSIDE"
@@ -64,6 +65,7 @@ const routes = [
 	{
 		method: 'GET',
 		url: '/announcements',
+		status: 200,
 		response: {
 			code: 200,
 			status: "Success",
@@ -104,6 +106,7 @@ const routes = [
 	{
 		method: 'POST',
 		url: '/attendances/_clock-in',
+		status: 200,
 		response: {
 			code: 200,
 			status: "Success",
@@ -112,6 +115,43 @@ const routes = [
 				location: {
 					lat: 787.123123,
 					lon: 178.123123
+				}
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/attendances/_clock-out',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				location: {
+					lat: 787.123123,
+					lon: 178.123123
+				}
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/login',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				username: "example@example.com",
+				name: "John Doe",
+				roles: ["EMPLOYEE"],
+				department: "Technology",
+				office: {
+					name: "Sarana Jaya"
+				},
+				joinDate: 1603970498,
+				leave: {
+					remaining: 10
 				}
 			}
 		}

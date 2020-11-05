@@ -9,7 +9,11 @@ const config = {
 		},
 		announcement: '/announcements',
 		attendance: {
-			clockIn: '/attendances/_clock-in'
+			clockIn: '/attendances/_clock-in',
+			clockOut: '/attendances/_clock-out'
+		},
+		authentication: {
+			login: '/login'
 		}
 	}
 };

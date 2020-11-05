@@ -1,26 +1,9 @@
+import { mapActions } from "vuex";
 import color from "@/assets/js/color.js";
 import nameToInitials from "@/utils/name-to-initials";
 import timestamp from "@/utils/timestamp";
 import moment from 'moment';
-import Vue from 'vue';
 import Map from '@/components/Map.vue';
-import { LMap, LTileLayer, LMarker, LCircleMarker, LPopup } from "vue2-leaflet";
-import { Icon } from "leaflet";
-import "leaflet/dist/leaflet.css";
-
-Vue.component("l-map", LMap);
-Vue.component("l-tile-layer", LTileLayer);
-Vue.component("l-circle-marker", LCircleMarker);
-Vue.component("l-marker", LMarker);
-Vue.component("v-popup", LPopup);
-
-delete Icon.Default.prototype._getIconUrl;
-
-Icon.Default.mergeOptions({
-  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-  iconUrl: require("leaflet/dist/images/marker-icon.png"),
-  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
-});
 
 export default {
   name: "Home",
@@ -30,6 +13,7 @@ export default {
   data() {
     return {
       color,
+      hasClockedIn: 0,
       location,
       dialog: false,
       loading: false,
@@ -44,6 +28,19 @@ export default {
     };
   },
   methods: {
+    ...mapActions('user', [
+        'fetchCurrentUser'
+    ]),
+    ...mapActions('dashboard', [
+      'fetchDashboardSummary'
+    ]),
+    ...mapActions('announcement', [
+      'fetchAnnouncements'
+    ]),
+    ...mapActions('attendance', [
+        'postClockIn',
+        'postClockOut'
+    ]),
     onImageChange(file) {
       let reader = new FileReader();
       this.image = null;
@@ -69,13 +66,34 @@ export default {
     },
     onClockInSubmit() {
       this.dialog = false;
-      this.$store.dispatch('postClockIn', {
+      this.postClockIn({
         image: this.image,
         location: this.location
-      });
+      })
+          .then(res => this.onClockInSuccess(res))
+          .catch(err => this.onClockInFail(err));
     },
-    onClockIn() {
-      this.dialog = true;
+    onClockOutSubmit() {
+      this.dialog = false;
+      this.postClockOut({
+        location: this.location
+      })
+          .then(res => this.onClockOutSuccess(res))
+          .catch(err => this.onClockOutFail(err));
+    },
+    onClockOutSuccess() {},
+    onClockOutFail() {},
+    onClockInSuccess() {
+      this.hasClockedIn = 1;
+    },
+    onClockInFail() {},
+    hourTime(time) {
+      const calculatedTime = moment.duration(moment().diff(moment.unix(time)));
+      return Math.floor(calculatedTime.asHours());
+    },
+    minuteTime(time) {
+      const calculatedTime = moment.duration(moment().diff(moment.unix(time)));
+      return Math.floor(calculatedTime.asMinutes()) % 60;
     },
     unixToShortDay(value) {
       return timestamp.unixToShortDay(value);

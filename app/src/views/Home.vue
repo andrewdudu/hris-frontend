@@ -32,7 +32,7 @@
 
         <v-card>
           <v-card-title class="headline lighten-2 dark">
-            Clock In
+            Clock <span v-if="hasClockedIn === 0">In</span> <span v-if="hasClockedIn === 1">Out</span>
           </v-card-title>
 
           <v-card-text>
@@ -42,17 +42,39 @@
                   <v-col
                     cols="12"
                   >
-                    <span class="dark bold">Selfie</span>
-                    <v-file-input
-                      label="File input"
-                      filled
-                      prepend-icon="mdi-camera"
-                      accept="image/*"
-                      :rules="imageRules"
-                      @change="onImageChange"
-                      capture="camera"
-                    />
-                    <v-img :src="imageUrl"/>
+                    <div v-if="hasClockedIn === 0">
+                      <span class="dark bold">Selfie</span>
+                      <v-file-input
+                        label="File input"
+                        filled
+                        prepend-icon="mdi-camera"
+                        accept="image/*"
+                        :rules="imageRules"
+                        @change="onImageChange"
+                        capture="camera"
+                      />
+                      <v-img :src="imageUrl"/>
+                    </div>
+                    <div v-if="hasClockedIn === 1">
+                      <span class="dark bold">Clock in</span>
+                      <v-row class="padding-bot" no-gutters>
+                        <v-col class="col-12">
+                          <v-icon :color="color.blubluedark1" size="20">mdi-calendar</v-icon>
+                          <span class="bold dark margin-left">{{ unixToShortDay(dashboardSummary.attendance.current.date.start) }}, {{ unixToString(dashboardSummary.attendance.current.date.start) }}</span>
+                        </v-col>
+                        <v-col class="col-12">
+                          <v-icon :color="color.blubluedark1" size="20">mdi-clock-outline</v-icon>
+                          <span class="dark margin-left">
+                            {{ unixToTime(dashboardSummary.attendance.current.date.start) }}
+                          </span>
+                        </v-col>
+                        <v-col class="col-12">
+                          <span class="dark margin-left">
+                            You have worked for <strong>{{ hourTime(dashboardSummary.attendance.current.date.start) }} hour(s)</strong> and <strong>{{ minuteTime(dashboardSummary.attendance.current.date.start) }} minute(s)</strong>.
+                          </span>
+                        </v-col>
+                      </v-row>
+                    </div>
                     <span class="dark bold">Location</span>
                     <v-col class="map">
                       <Map @locationFound="onLocationFound" />
@@ -68,11 +90,20 @@
           <v-card-actions>
             <v-spacer/>
             <v-btn
+              v-if="hasClockedIn === 0"
               color="primary"
               text
               @click="onClockInSubmit"
             >
               Clock in
+            </v-btn>
+            <v-btn
+              v-if="hasClockedIn === 1"
+              color="primary"
+              text
+              @click="onClockOutSubmit"
+            >
+              Clock out
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -90,12 +121,22 @@
           </v-col>
           <v-col class="col-12 center margin-bot">
             <v-btn
+              v-if="hasClockedIn === 0"
               depressed
               :color="color.blubluedark1"
               dark
-              @click="onClockIn"
+              @click="dialog = true"
             >
               Clock in
+            </v-btn>
+            <v-btn
+              v-if="hasClockedIn === 1"
+              depressed
+              :color="color.blubluedark1"
+              dark
+              @click="dialog = true"
+            >
+              Clock out
             </v-btn>
           </v-col>
         </v-row>

@@ -29,13 +29,14 @@ function applyMock (data) {
 		}
 		mock[methodMap[d.method]](...params)
 			.reply(() => {
-				const { url, method, status, response } = d
+				const { url, method, status, response, header } = d
 				console.log('Req: ', '[' + method + '] ' + url,
 					'Status: ' + status,
 					'Res: ', response)
 				return [
 					status || 200,
-					response
+					response,
+					header
 				]
 			})
 	})
