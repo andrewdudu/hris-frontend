@@ -2,6 +2,8 @@ import ApiRoutes from './modules/api-routes'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
+const isMock = process.env.VUE_APP_IS_MOCK === 'true';
+
 let routes = [
 	...ApiRoutes
 ];
@@ -29,16 +31,19 @@ function applyMock (data) {
 		}
 		mock[methodMap[d.method]](...params)
 			.reply(() => {
-				const { url, method, status, response } = d
+				const { url, method, status, response, header } = d
 				console.log('Req: ', '[' + method + '] ' + url,
 					'Status: ' + status,
 					'Res: ', response)
 				return [
 					status || 200,
-					response
+					response,
+					header
 				]
 			})
 	})
 }
 
-applyMock(routes);
+isMock && applyMock(routes);
+
+export default routes;

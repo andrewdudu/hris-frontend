@@ -1,0 +1,11 @@
+{
+  "exclude": [
+    "integrations/**"
+  ],
+  "reporter": [
+    "lcov",
+    "text"
+  ],
+  "report-dir": "integrations/coverage",
+  "temp-dir": "integrations/.nyc_output"
+}
