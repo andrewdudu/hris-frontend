@@ -9,9 +9,9 @@
     "lint": "vue-cli-service lint",
     "integration:base": "cross-env BABEL_ENV=testing MOCK_ENV=false VUE_APP_IS_MOCK=false node -r esm node_modules/jest/bin/jest -c integrations/jest.config.js",
     "integration:updateSnapshot": "npm run integration:base -- --updateSnapshot",
-    "integration:run": " npm run integration:base",
-    "integration:report": "node build/post-integration-test.js && nyc report --nycrc-path=integrations/.nycrc.json",
-    "integration": "cross-env START_SERVER_AND_TEST_INSECURE=1 start-server-and-test https-get://localhost:10001 integration:run"
+    "integration:run": " npm run integration:base && npm run integration:report",
+    "integration:report": "nyc report --nycrc-path=integrations/.nycrc.json",
+    "integration": "cross-env START_SERVER_AND_TEST_INSECURE=1 start-server-and-test http-get://localhost:10001 integration:run"
   },
   "dependencies": {
     "axios": "^0.21.0",

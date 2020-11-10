@@ -1,6 +1,7 @@
 const path = require('path');
 
-const isMock = process.env.VUE_APP_ENVIRONMENT !== 'prod' && process.env.VUE_APP_IS_MOCK;
+const isMock = process.env.VUE_APP_ENVIRONMENT !== 'prod'
+    && process.env.VUE_APP_IS_MOCK === 'true';
 
 module.exports = {
   transpileDependencies: ["vuetify"],
