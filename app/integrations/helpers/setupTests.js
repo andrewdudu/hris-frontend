@@ -5,7 +5,7 @@ const imageSnapshotConfig = {
   customDiffConfig: {
     ssim: 'fast'
   },
-  failureThreshold: 0.01,
+  failureThreshold: 0.001,
   failureThresholdType: 'percent',
   // apply blur to tolerate intermittent inaccuracy on snapshot
   blur: 1

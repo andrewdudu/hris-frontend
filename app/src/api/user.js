@@ -13,5 +13,11 @@ export default {
 	},
 	fetchLeaveQuotas(id) {
 		return axios.get(config.api.user.leaveQuotas(id));
+	},
+	fetchAvailableRequests() {
+		return axios.get(config.api.user.availableRequests);
+	},
+	fetchAvailableSpecialRequests() {
+		return axios.get(config.api.user.availableSpecialRequests);
 	}
 }

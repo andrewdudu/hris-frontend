@@ -4,7 +4,9 @@ const state = {
 	currentUser: null,
 	currentUserSummary: null,
 	userProfile: null,
-	leaveQuotas: null
+	leaveQuotas: null,
+	availableRequests: null,
+	availableSpecialRequests: null
 };
 
 const mutations = {
@@ -19,6 +21,12 @@ const mutations = {
 	},
 	setLeaveQuotas(state, data) {
 		state.leaveQuotas = data;
+	},
+	setAvailableRequests(state, data) {
+		state.availableRequests = data;
+	},
+	setAvailableSpecialRequests(state, data) {
+		state.availableSpecialRequests = data;
 	}
 };
 
@@ -50,6 +58,20 @@ const actions = {
 				commit('setLeaveQuotas', leave.data.data);
 				return leave;
 			})
+	},
+	fetchAvailableRequests({ commit }) {
+		return api.fetchAvailableRequests()
+			.then(requests => {
+				commit('setAvailableRequests', requests.data.data);
+				return requests;
+			})
+	},
+	fetchAvailableSpecialRequests({ commit }) {
+		return api.fetchAvailableSpecialRequests()
+			.then(requests => {
+				commit('setAvailableSpecialRequests', requests.data.data);
+				return requests;
+			})
 	}
 };
 
@@ -65,6 +87,12 @@ const getters = {
 	},
 	leaveQuotas(state) {
 		return state.leaveQuotas || null;
+	},
+	availableRequests(state) {
+		return state.availableRequests || null;
+	},
+	availableSpecialRequests(state) {
+		return state.availableSpecialRequests || null;
 	}
 };
 

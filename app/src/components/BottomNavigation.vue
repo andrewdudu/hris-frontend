@@ -10,7 +10,7 @@
       <v-icon>mdi-home</v-icon>
     </v-btn>
 
-    <v-btn>
+    <v-btn to="/request">
       <span>Request</span>
 
       <v-icon>mdi-calendar-remove</v-icon>
