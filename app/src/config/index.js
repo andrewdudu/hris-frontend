@@ -22,6 +22,7 @@ const config = {
 		},
 		request: {
 			leave: '/request/leave',
+			extend: '/request/extend-leave'
 		}
 	},
 	requestRoute: {
@@ -30,7 +31,7 @@ const config = {
 		SPECIAL_LEAVE: '/request/special',
 		EXTRA_LEAVE: '/request/leave?type=EXTRA_LEAVE',
 		SUBSTITUTE_LEAVE: '/request/leave?type=SUBSTITUTE_LEAVE',
-		EXTEND_ANNUAL_LEAVE: '/'
+		EXTEND_ANNUAL_LEAVE: '/request/extend'
 	},
 	leaveIsOneDay: {
 		ATTENDANCE: true,

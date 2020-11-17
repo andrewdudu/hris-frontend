@@ -12,6 +12,7 @@ const ProfileReportPage = () => import("@/views/ProfileReport.vue");
 const RequestPage = () => import("@/views/Request.vue");
 const SpecialLeaveListPage = () => import("@/views/request/SpecialLeaveList.vue");
 const RequestLeavePage = () => import("@/views/request/RequestLeave.vue");
+const ExtendLeavePage = () => import("@/views/request/ExtendLeave.vue");
 
 export default new Router({
   mode: "history",
@@ -56,6 +57,11 @@ export default new Router({
       path: "/request/leave",
       name: "Request Leave",
       component: RequestLeavePage
+    },
+    {
+      path: "/request/extend",
+      name: "Extend Leave",
+      component: ExtendLeavePage
     }
   ],
 });
