@@ -9,6 +9,9 @@ const AnnouncementPage = () => import("@/views/Announcement.vue");
 const LoginPage = () => import("@/views/Login.vue");
 const ProfilePage = () => import("@/views/Profile.vue");
 const ProfileReportPage = () => import("@/views/ProfileReport.vue");
+const RequestPage = () => import("@/views/Request.vue");
+const SpecialLeaveListPage = () => import("@/views/request/SpecialLeaveList.vue");
+const RequestLeavePage = () => import("@/views/request/RequestLeave.vue");
 
 export default new Router({
   mode: "history",
@@ -38,6 +41,21 @@ export default new Router({
       path: "/profile/report",
       name: "profile report",
       component: ProfileReportPage
+    },
+    {
+      path: "/request",
+      name: "request page",
+      component: RequestPage
+    },
+    {
+      path: "/request/special",
+      name: "special request list",
+      component: SpecialLeaveListPage
+    },
+    {
+      path: "/request/leave",
+      name: "Request Leave",
+      component: RequestLeavePage
     }
   ],
 });
