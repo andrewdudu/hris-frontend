@@ -232,6 +232,60 @@ const routes = [
 				}
 			]
 		}
+	},
+	{
+		method: 'GET',
+		url: '/users/current-user/available-requests',
+		status: 200,
+		response: {
+			code: 200,
+			status: 'Success',
+			data: [
+				"ATTENDANCE",
+				"ANNUAL_LEAVE",
+				"SPECIAL_LEAVE",
+				"EXTRA_LEAVE",
+				"SUBSTITUTE_LEAVE",
+				"EXTEND_ANNUAL_LEAVE"
+			]
+		}
+	},
+	{
+		method: 'GET',
+		url: '/users/current-user/available-special-requests',
+		status: 200,
+		response: {
+			code: 200,
+			status: 'Success',
+			data: [
+				"SICK",
+				"SICK_WITH_MEDICAL_LETTER",
+				"MARRIAGE",
+				"MATERNITY",
+				"CHILDBIRTH",
+				"MAIN_FAMILY_DEATH",
+				"CLOSE_FAMILY_DEATH",
+				"HAJJ",
+				"CHILD_BAPTISM",
+				"CHILD_CIRCUMCISION",
+				"UNPAID_LEAVE"
+			]
+		}
+	},
+	{
+		method: 'POST',
+		url: '/request/leave',
+		status: 200,
+		response: {
+			code: 200,
+			status: 'Success',
+			data: {
+				dates: ["2020-11-11"],
+				files: ["https://google.com"],
+				notes: "notes",
+				type: "SICK"
+			}
+		}
 	}
 ];
 
