@@ -286,6 +286,35 @@ const routes = [
 				type: "SICK"
 			}
 		}
+	},
+	{
+		method: 'GET',
+		url: '/request/extend-leave',
+		status: 200,
+		response: {
+			code: 200,
+			status: 'Success',
+			data: {
+				status: "AVAILABLE",
+				quota: {
+					remaining: 8,
+					extensionDate: 1603970498
+				}
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/request/extend-leave',
+		status: 200,
+		response: {
+			code: 200,
+			status: 'Success',
+			data: {
+				status: 'REQUESTED',
+				notes: 'notes'
+			}
+		}
 	}
 ];
 
