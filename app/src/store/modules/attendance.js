@@ -1,9 +1,14 @@
 import api from '@/api/attendance';
 
 const state = {
+	attendances: []
 };
 
-const mutations = {};
+const mutations = {
+	setAttendance(state, attendances) {
+		state.attendances = attendances;
+	}
+};
 
 const actions = {
 	// eslint-disable-next-line no-unused-vars
@@ -17,10 +22,21 @@ const actions = {
 		return api
 			.postClockOut(request)
 			.then(response => response);
+	},
+	fetchAttendances({ commit }, query) {
+		return api.fetchAttendances(query)
+			.then(res => {
+				commit('setAttendance', res.data.data);
+				return res;
+			})
 	}
 };
 
-const getters = {};
+const getters = {
+	attendances(state) {
+		return state.attendances || [];
+	}
+};
 
 export default {
 	namespaced: true,

@@ -330,6 +330,39 @@ const routes = [
 				notes: "notes"
 			}
 		}
+	},
+	{
+		method: 'GET',
+		url: '/attendances',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: [
+				{
+					date: {
+						start: 1603970498,
+						end: 1603970498
+					},
+					location: {
+						type: "INSIDE",
+						lat: 78123.123123,
+						lon: 78.123123
+					}
+				},
+				{
+					date: {
+						start: 1603970498,
+						end: 1603970498
+					},
+					location: {
+						type: "OUTSIDE",
+						lat: 78123.123123,
+						lon: 78.123123
+					}
+				}
+			]
+		}
 	}
 ];
 

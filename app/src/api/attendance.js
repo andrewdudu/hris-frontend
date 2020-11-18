@@ -7,5 +7,10 @@ export default {
 	},
 	postClockOut() {
 		return axios.post(config.api.attendance.clockOut);
+	},
+	fetchAttendances(query) {
+		return axios.get(config.api.attendance.attendances, {
+			params: query
+		});
 	}
 }
