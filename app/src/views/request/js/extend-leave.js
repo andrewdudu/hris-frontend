@@ -16,6 +16,7 @@ export default {
 	},
 	methods: {
 		...mapActions('request', ['getExtendLeave', 'postExtendLeave']),
+		...mapActions('component', ['openSnackbar']),
 		toLowerCase(str) {
 			return lowerCase(str);
 		},
@@ -25,8 +26,17 @@ export default {
 		onRequest() {
 			this.postExtendLeave({
 				notes: this.notes,
-			}).then(res => {
-				console.log(res);
+			}).then(() => {
+				this.openSnackbar({
+					message: 'Request Successfully',
+					color: 'success'
+				});
+				this.$router.push('/');
+			}).catch(() => {
+				this.openSnackbar({
+					message: 'Something went wrong, please try again later.',
+					color: 'error'
+				});
 			})
 		},
 	},

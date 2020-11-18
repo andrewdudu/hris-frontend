@@ -6,6 +6,7 @@ import dashboard from './modules/dashboard';
 import user from './modules/user';
 import authentication from './modules/authentication';
 import request from './modules/request';
+import component from './modules/component';
 
 Vue.use(Vuex);
 
@@ -16,7 +17,8 @@ const store = new Vuex.Store({
         dashboard,
         user,
         authentication,
-        request
+        request,
+        component
     }
 });
 

@@ -10,5 +10,8 @@ export default {
 	},
 	postExtendLeave(data) {
 		return axios.post(config.api.request.extend, data);
+	},
+	postRequestAttendance(data) {
+		return axios.post(config.api.request.attendance, data);
 	}
 }
