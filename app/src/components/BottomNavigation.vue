@@ -16,7 +16,7 @@
       <v-icon>mdi-calendar-remove</v-icon>
     </v-btn>
 
-    <v-btn>
+    <v-btn to="/attendance">
       <span>Attendance</span>
 
       <v-icon>mdi-calendar</v-icon>

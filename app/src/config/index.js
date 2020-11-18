@@ -15,7 +15,8 @@ const config = {
 		announcement: '/announcements',
 		attendance: {
 			clockIn: '/attendances/_clock-in',
-			clockOut: '/attendances/_clock-out'
+			clockOut: '/attendances/_clock-out',
+			attendances: '/attendances'
 		},
 		authentication: {
 			login: '/login'
