@@ -37,6 +37,13 @@ const actions = {
 				commit('setExtendLeaveResponse', res.data.data);
 				return res;
 			})
+	},
+	// eslint-disable-next-line no-unused-vars
+	postRequestAttendance({ commit }, data) {
+		return api.postRequestAttendance(data)
+			.then(res => {
+				return res;
+			});
 	}
 };
 

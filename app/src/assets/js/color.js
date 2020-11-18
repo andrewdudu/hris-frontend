@@ -7,4 +7,6 @@ export default {
   blubluedark: "#0072a7",
   blubluedark1: "#004f74",
   blublue: "#0095da",
+  success: "#9bce59",
+  error: "#f25b61"
 };

@@ -275,7 +275,7 @@ const routes = [
 	{
 		method: 'POST',
 		url: '/request/leave',
-		status: 200,
+		status: 400,
 		response: {
 			code: 200,
 			status: 'Success',
@@ -313,6 +313,21 @@ const routes = [
 			data: {
 				status: 'REQUESTED',
 				notes: 'notes'
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/request/attendances',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				date: "2020-05-25",
+				clockIn: "08:00",
+				clockOut: "17:00",
+				notes: "notes"
 			}
 		}
 	}

@@ -22,19 +22,20 @@ const config = {
 		},
 		request: {
 			leave: '/request/leave',
-			extend: '/request/extend-leave'
+			extend: '/request/extend-leave',
+			attendance: '/request/attendances'
 		}
 	},
 	requestRoute: {
-		ATTENDANCE: '/',
-		ANNUAL_LEAVE: '/',
+		ATTENDANCE: '/request/attendance',
+		ANNUAL_LEAVE: '/request/leave?type=ANNUAL_LEAVE',
 		SPECIAL_LEAVE: '/request/special',
 		EXTRA_LEAVE: '/request/leave?type=EXTRA_LEAVE',
 		SUBSTITUTE_LEAVE: '/request/leave?type=SUBSTITUTE_LEAVE',
 		EXTEND_ANNUAL_LEAVE: '/request/extend'
 	},
 	leaveIsOneDay: {
-		ATTENDANCE: true,
+		ATTENDANCE: false,
 		ANNUAL_LEAVE: false,
 		EXTRA_LEAVE: false,
 		SUBSTITUTE_LEAVE: true,
