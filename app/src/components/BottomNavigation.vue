@@ -22,7 +22,7 @@
       <v-icon>mdi-calendar</v-icon>
     </v-btn>
 
-    <v-btn>
+    <v-btn to="/report">
       <span>Reports</span>
 
       <v-icon>mdi-chart-line</v-icon>

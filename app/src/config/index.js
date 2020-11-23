@@ -7,7 +7,8 @@ const config = {
 			availableRequests: '/users/current-user/available-requests',
 			availableSpecialRequests: '/users/current-user/available-special-requests',
 			profile: (id) => `/users/${id}/profile`,
-			leaveQuotas: (id) => `/users/${id}/leave-quotas`
+			leaveQuotas: (id) => `/users/${id}/leave-quotas`,
+			attendanceSummary: '/users/current-user/attendance-summary'
 		},
 		dashboard: {
 			summary: '/dashboard/summary'

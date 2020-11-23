@@ -19,5 +19,8 @@ export default {
 	},
 	fetchAvailableSpecialRequests() {
 		return axios.get(config.api.user.availableSpecialRequests);
+	},
+	fetchAttendanceSummary() {
+		return axios.get(config.api.user.attendanceSummary);
 	}
 }
