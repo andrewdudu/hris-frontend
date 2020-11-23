@@ -12,6 +12,10 @@ const ProfileReportPage = () => import("@/views/ProfileReport.vue");
 const RequestPage = () => import("@/views/Request.vue");
 const SpecialLeaveListPage = () => import("@/views/request/SpecialLeaveList.vue");
 const RequestLeavePage = () => import("@/views/request/RequestLeave.vue");
+const ExtendLeavePage = () => import("@/views/request/ExtendLeave.vue");
+const RequestAttendancePage = () => import("@/views/request/Attendance.vue");
+const AttendancePage = () => import("@/views/Attendance.vue");
+const ReportPage = () => import("@/views/Report.vue");
 
 export default new Router({
   mode: "history",
@@ -56,6 +60,26 @@ export default new Router({
       path: "/request/leave",
       name: "Request Leave",
       component: RequestLeavePage
+    },
+    {
+      path: "/request/extend",
+      name: "Extend Leave",
+      component: ExtendLeavePage
+    },
+    {
+      path: "/request/attendance",
+      name: "Request Attendance",
+      component: RequestAttendancePage
+    },
+    {
+      path: "/attendance",
+      name: "Attendance Page",
+      component: AttendancePage
+    },
+    {
+      path: "/report",
+      name: "Report Page",
+      component: ReportPage
     }
   ],
 });

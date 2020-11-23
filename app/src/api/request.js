@@ -3,7 +3,15 @@ import axios from 'axios';
 
 export default {
 	postRequestLeave(data) {
-		console.log(data);
 		return axios.post(config.api.request.leave, data);
+	},
+	getExtendLeave() {
+		return axios.get(config.api.request.extend);
+	},
+	postExtendLeave(data) {
+		return axios.post(config.api.request.extend, data);
+	},
+	postRequestAttendance(data) {
+		return axios.post(config.api.request.attendance, data);
 	}
 }

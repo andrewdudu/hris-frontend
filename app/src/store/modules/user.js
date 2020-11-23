@@ -6,7 +6,8 @@ const state = {
 	userProfile: null,
 	leaveQuotas: null,
 	availableRequests: null,
-	availableSpecialRequests: null
+	availableSpecialRequests: null,
+	attendanceSummary: null
 };
 
 const mutations = {
@@ -27,6 +28,9 @@ const mutations = {
 	},
 	setAvailableSpecialRequests(state, data) {
 		state.availableSpecialRequests = data;
+	},
+	setAttendanceSummary(state, data) {
+		state.attendanceSummary = data;
 	}
 };
 
@@ -72,6 +76,13 @@ const actions = {
 				commit('setAvailableSpecialRequests', requests.data.data);
 				return requests;
 			})
+	},
+	fetchAttendanceSummary({ commit }) {
+		return api.fetchAttendanceSummary()
+			.then(res => {
+				commit('setAttendanceSummary', res.data.data);
+				return res;
+			})
 	}
 };
 
@@ -93,6 +104,9 @@ const getters = {
 	},
 	availableSpecialRequests(state) {
 		return state.availableSpecialRequests || null;
+	},
+	attendanceSummary(state) {
+		return state.attendanceSummary || null;
 	}
 };
 

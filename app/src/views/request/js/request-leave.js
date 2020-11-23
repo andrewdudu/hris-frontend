@@ -25,14 +25,15 @@ export default {
 				v => !!v || 'File is required'
 			],
 			noteRules: [
-				v => !!v || 'Note is required',
-				v => v.length <= 256 || 'Name must be less than 10 characters'
+				v => this.$route.query.type !== 'SUBSTITUTE_LEAVE' || !!v || 'Note is required',
+				v => v.length <= 256 || 'Name must be less or equal than 256 characters'
 			]
 		};
 	},
 	methods: {
 		...mapActions('request', ['postRequestLeave']),
 		...mapActions('user', ['fetchAvailableSpecialRequests']),
+		...mapActions('component', ['openSnackbar']),
 		toLowerCase(str) {
 			return lowerCase(str);
 		},
@@ -60,8 +61,17 @@ export default {
 				files: [this.file],
 				notes: this.notes,
 				type: this.$route.query.type
-			}).then(res => {
-				console.log(res);
+			}).then(() => {
+				this.openSnackbar({
+					message: 'Request Successfully',
+					color: 'success'
+				});
+				this.$router.push('/');
+			}).catch(() => {
+				this.openSnackbar({
+					message: 'Something went wrong, please try again later.',
+					color: 'error'
+				});
 			})
 		},
 		dateRange(startDate, endDate, steps = 1) {
@@ -80,7 +90,7 @@ export default {
 	computed: {
 		...mapGetters('user', ['availableSpecialRequests']),
 		valid() {
-			return (this.pdf !== null || this.$route.query.type !== 'SICK_WITH_MEDICAL_LETTER') && this.date !== null && this.note.length !== 0 && this.note.length <= 256;
+			return (this.pdf !== null || this.$route.query.type !== 'SICK_WITH_MEDICAL_LETTER') && this.date !== null && (this.note.length !== 0 || this.$route.query.type !== 'SUBSTITUTE_LEAVE') && this.note.length <= 256;
 		}
 	},
 	created() {

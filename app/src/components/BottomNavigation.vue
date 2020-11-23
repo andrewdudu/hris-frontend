@@ -16,13 +16,13 @@
       <v-icon>mdi-calendar-remove</v-icon>
     </v-btn>
 
-    <v-btn>
+    <v-btn to="/attendance">
       <span>Attendance</span>
 
       <v-icon>mdi-calendar</v-icon>
     </v-btn>
 
-    <v-btn>
+    <v-btn to="/report">
       <span>Reports</span>
 
       <v-icon>mdi-chart-line</v-icon>

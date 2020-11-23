@@ -286,6 +286,102 @@ const routes = [
 				type: "SICK"
 			}
 		}
+	},
+	{
+		method: 'GET',
+		url: '/request/extend-leave',
+		status: 200,
+		response: {
+			code: 200,
+			status: 'Success',
+			data: {
+				status: "AVAILABLE",
+				quota: {
+					remaining: 8,
+					extensionDate: 1603970498
+				}
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/request/extend-leave',
+		status: 200,
+		response: {
+			code: 200,
+			status: 'Success',
+			data: {
+				status: 'REQUESTED',
+				notes: 'notes'
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/request/attendances',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				date: "2020-05-25",
+				clockIn: "08:00",
+				clockOut: "17:00",
+				notes: "notes"
+			}
+		}
+	},
+	{
+		method: 'GET',
+		url: '/attendances',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: [
+				{
+					date: {
+						start: 1603970498,
+						end: 1603970498
+					},
+					location: {
+						type: "INSIDE",
+						lat: 78123.123123,
+						lon: 78.123123
+					}
+				},
+				{
+					date: {
+						start: 1603970498,
+						end: 1603970498
+					},
+					location: {
+						type: "OUTSIDE",
+						lat: 78123.123123,
+						lon: 78.123123
+					}
+				}
+			]
+		}
+	},
+	{
+		method: 'GET',
+		url: '/users/current-user/attendance-summary',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				month: {
+					attendance: 120,
+					absent: 20
+				},
+				year: {
+					attendance: 120,
+					absent: 2
+				}
+			}
+		}
 	}
 ];
 

@@ -1,13 +1,12 @@
 <template>
   <v-app>
-    <div
-      class="header"
-    >
+    <div class="header">
       <img
         class="logo-header"
         src="./assets/img/default_2.png"
-      />
+        alt="logo"/>
     </div>
+    <Snackbar />
 
     <v-main class="main-view">
       <router-view />
@@ -19,12 +18,14 @@
 
 <script>
 import BottomNavigation from './components/BottomNavigation';
+import Snackbar from './components/Snackbar';
 import { mapActions } from "vuex";
 
 export default {
   name: 'App',
 
   components: {
+    Snackbar,
     BottomNavigation
   },
 

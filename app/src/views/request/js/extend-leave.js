@@ -1,0 +1,49 @@
+import color from "@/assets/js/color.js";
+import { mapActions, mapGetters } from "vuex";
+import { lowerCase } from 'lodash';
+import config from '@/config';
+import moment from 'moment';
+
+export default {
+	name: "extend-leave",
+	data() {
+		return {
+			color,
+			config,
+			modal: false,
+			note: ''
+		};
+	},
+	methods: {
+		...mapActions('request', ['getExtendLeave', 'postExtendLeave']),
+		...mapActions('component', ['openSnackbar']),
+		toLowerCase(str) {
+			return lowerCase(str);
+		},
+		toMonth(time) {
+			return moment.unix(time).format('MMM YYYY');
+		},
+		onRequest() {
+			this.postExtendLeave({
+				notes: this.notes,
+			}).then(() => {
+				this.openSnackbar({
+					message: 'Request Successfully',
+					color: 'success'
+				});
+				this.$router.push('/');
+			}).catch(() => {
+				this.openSnackbar({
+					message: 'Something went wrong, please try again later.',
+					color: 'error'
+				});
+			})
+		},
+	},
+	computed: {
+		...mapGetters('request', ['extendLeave'])
+	},
+	created() {
+		this.getExtendLeave();
+	}
+};
