@@ -275,7 +275,7 @@ const routes = [
 	{
 		method: 'POST',
 		url: '/request/leave',
-		status: 400,
+		status: 200,
 		response: {
 			code: 200,
 			status: 'Success',
@@ -362,6 +362,25 @@ const routes = [
 					}
 				}
 			]
+		}
+	},
+	{
+		method: 'GET',
+		url: '/users/current-user/attendance-summary',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				month: {
+					attendance: 120,
+					absent: 20
+				},
+				year: {
+					attendance: 120,
+					absent: 2
+				}
+			}
 		}
 	}
 ];

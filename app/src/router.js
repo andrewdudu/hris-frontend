@@ -15,6 +15,7 @@ const RequestLeavePage = () => import("@/views/request/RequestLeave.vue");
 const ExtendLeavePage = () => import("@/views/request/ExtendLeave.vue");
 const RequestAttendancePage = () => import("@/views/request/Attendance.vue");
 const AttendancePage = () => import("@/views/Attendance.vue");
+const ReportPage = () => import("@/views/Report.vue");
 
 export default new Router({
   mode: "history",
@@ -74,6 +75,11 @@ export default new Router({
       path: "/attendance",
       name: "Attendance Page",
       component: AttendancePage
+    },
+    {
+      path: "/report",
+      name: "Report Page",
+      component: ReportPage
     }
   ],
 });
