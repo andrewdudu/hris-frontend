@@ -14,7 +14,7 @@ const routes = [
 				office: {
 					name: "Sarana Jaya"
 				},
-				joinDate: 788781273,
+				joinDate: 1590339600000,
 				leave: {
 					remaining: 10
 				}
@@ -246,7 +246,8 @@ const routes = [
 				"SPECIAL_LEAVE",
 				"EXTRA_LEAVE",
 				"SUBSTITUTE_LEAVE",
-				"EXTEND_ANNUAL_LEAVE"
+				"EXTEND_ANNUAL_LEAVE",
+				"INCOMING_REQUESTS"
 			]
 		}
 	},
@@ -380,6 +381,140 @@ const routes = [
 					attendance: 120,
 					absent: 2
 				}
+			}
+		}
+	},
+	{
+		method: 'GET',
+		url: '/requests',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: [
+				{
+					id: "1823a87f-12387321adf-123123adf",
+					user: {
+						name: "John Doe",
+						department: "Technology",
+						office: {
+							name: "Sarana Jaya"
+						}
+					},
+					status: "PENDING",
+					type: "ATTENDANCE",
+					detail: {
+						attendance: {
+							date: {
+								start: 788781273,
+								end: 788781273
+							},
+							notes: "Forgot to fill attendance on 18 August 2020"
+						}
+					},
+					date: 1590339600000
+				},
+				{
+					id: "1823a87f-12387321adf-123123adf",
+					user: {
+						name: "John Doe",
+						department: "Technology",
+						office: {
+							name: "Sarana Jaya"
+						}
+					},
+					status: "PENDING",
+					type: "LEAVE",
+					detail: {
+						leave: {
+							dates: ["2020-09-25"],
+							files: ["http://file.pdf", "http://file.webp"],
+							notes: "Forgot to fill attendance on 18 August 2020",
+							type: "SICK"
+						}
+					},
+					date: 788781273
+				},
+				{
+					id: "1823a87f-12387321adf-123123adf",
+					user: {
+						name: "John Doe",
+						department: "Technology",
+						office: {
+							name: "Sarana Jaya"
+						}
+					},
+					status: "PENDING",
+					type: "EXTEND",
+					detail: {
+						extend: {
+							notes: "Forgot to fill attendance on 18 August 2020"
+						}
+					},
+					date: 788781273
+				}
+			]
+		}
+	},
+	{
+		method: 'POST',
+		url: '/request/1823a87f-12387321adf-123123adf/_approve',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				id: "1823a87f-12387321adf-123123adf",
+				user: {
+					name: "John Doe",
+					department: "Technology",
+					office: {
+						name: "Sarana Jaya"
+					}
+				},
+				status: "PENDING",
+				type: "ATTENDANCE",
+				detail: {
+					attendance: {
+						date: {
+							start: 788781273,
+							end: 788781273
+						},
+						notes: "Forgot to fill attendance on 18 August 2020"
+					}
+				},
+				date: 1590339600000
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/request/1823a87f-12387321adf-123123adf/_reject',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				id: "1823a87f-12387321adf-123123adf",
+				user: {
+					name: "John Doe",
+					department: "Technology",
+					office: {
+						name: "Sarana Jaya"
+					}
+				},
+				status: "PENDING",
+				type: "ATTENDANCE",
+				detail: {
+					attendance: {
+						date: {
+							start: 788781273,
+							end: 788781273
+						},
+						notes: "Forgot to fill attendance on 18 August 2020"
+					}
+				},
+				date: 1590339600000
 			}
 		}
 	}
