@@ -565,7 +565,7 @@ const routes = [
 					]
 				},
 				{
-					date: 1606521600000,
+					date: 1609521600000,
 					status: "WORKING",
 					events: [
 						{
@@ -574,7 +574,7 @@ const routes = [
 					]
 				},
 				{
-					date: 1606608000000,
+					date: 1608708000000,
 					status: "WORKING",
 					events: [
 						{
@@ -583,6 +583,20 @@ const routes = [
 					]
 				}
 			]
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/calendar/days/2020-12-23/events',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				name: "Independence Day",
+				notes: "Notes",
+				calendarStatus: "HOLIDAY"
+			}
 		}
 	}
 ];

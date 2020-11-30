@@ -31,7 +31,8 @@ const config = {
 			reject: (id) => `/api/request/${id}/_reject`
 		},
 		calendar: {
-			day: '/api/calendar/days'
+			day: '/api/calendar/days',
+			setHoliday: (date) => `/api/calendar/days/${date}/events`
 		}
 	},
 	requestRoute: {

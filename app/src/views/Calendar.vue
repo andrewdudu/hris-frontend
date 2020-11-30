@@ -1,5 +1,53 @@
 <template>
     <div>
+        <v-dialog
+                v-model="dialog"
+                width="500"
+        >
+            <v-card class="dark">
+                <v-card-title class="headline lighten-2 center text-capitalize">
+                    Set Holiday
+                </v-card-title>
+
+                <v-card-text>
+                    <v-row no-gutters>
+                        <v-col class="col-12">
+                            <span class="dark medium bold">{{ unixToShortDay(date) }}, {{ unixToString(date) }}</span>
+                            <v-form v-model="valid">
+                                <v-text-field
+                                    label="Title"
+                                    v-model="title"
+                                    :rules="titleRules"
+                                />
+                                <v-textarea
+                                    label="Notes"
+                                    v-model="notes"
+                                    :rules="notesRules"
+                                    maxLength="256"
+                                    :counter="256"
+                                />
+                            </v-form>
+                        </v-col>
+                    </v-row>
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-row no-gutters>
+                        <v-col class="col-12 text-align-left center">
+                            <v-btn
+                                class="white--text"
+                                :color="color.blubluedark1"
+                                :disabled="!valid"
+                                @click="onSubmit"
+                            >
+                                Set Holiday
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
         <v-col class="col-7 bold dark no-gutters">
             <v-select
                 :value="value"
@@ -28,6 +76,7 @@
                                     v-if="isPassed(calendar)"
                                     :color="color.blubluedark1"
                                     dark
+                                    @click="onSetHoliday(calendar.date)"
                                 >
                                     Set Holiday
                                 </v-btn>
