@@ -1,7 +1,7 @@
 const routes = [
 	{
 		method: 'GET',
-		url: '/users/current-user',
+		url: '/api/users/current-user',
 		status: 200,
 		response: {
 			code: 200,
@@ -23,7 +23,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/dashboard/summary',
+		url: '/api/dashboard/summary',
 		status: 200,
 		response: {
 			code: 200,
@@ -64,7 +64,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/announcements',
+		url: '/api/announcements',
 		status: 200,
 		response: {
 			code: 200,
@@ -105,7 +105,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/attendances/_clock-in',
+		url: '/api/attendances/_clock-in',
 		status: 200,
 		response: {
 			code: 200,
@@ -121,7 +121,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/attendances/_clock-out',
+		url: '/api/attendances/_clock-out',
 		status: 200,
 		response: {
 			code: 200,
@@ -136,7 +136,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/login',
+		url: '/auth/login',
 		status: 200,
 		response: {
 			code: 200,
@@ -158,7 +158,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/users/current-user/attendance-summary',
+		url: '/api/users/current-user/attendance-summary',
 		status: 200,
 		response: {
 			code: 200,
@@ -179,7 +179,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/users/example@example.com/profile',
+		url: '/api/users/example@example.com/profile',
 		status: 200,
 		response: {
 			code: 200,
@@ -206,7 +206,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/users/example@example.com/leave-quotas',
+		url: '/api/users/example@example.com/leave-quotas',
 		status: 200,
 		response: {
 			code: 200,
@@ -235,7 +235,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/users/current-user/available-requests',
+		url: '/api/users/current-user/available-requests',
 		status: 200,
 		response: {
 			code: 200,
@@ -247,13 +247,15 @@ const routes = [
 				"EXTRA_LEAVE",
 				"SUBSTITUTE_LEAVE",
 				"EXTEND_ANNUAL_LEAVE",
-				"INCOMING_REQUESTS"
+				"INCOMING_REQUESTS",
+				"SET_HOLIDAY",
+				"EMPLOYEE"
 			]
 		}
 	},
 	{
 		method: 'GET',
-		url: '/users/current-user/available-special-requests',
+		url: '/api/users/current-user/available-special-requests',
 		status: 200,
 		response: {
 			code: 200,
@@ -275,7 +277,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/request/leave',
+		url: '/api/request/leaves',
 		status: 200,
 		response: {
 			code: 200,
@@ -290,7 +292,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/request/extend-leave',
+		url: '/api/request/extend-leave',
 		status: 200,
 		response: {
 			code: 200,
@@ -306,7 +308,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/request/extend-leave',
+		url: '/api/request/extend-leave',
 		status: 200,
 		response: {
 			code: 200,
@@ -319,7 +321,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/request/attendances',
+		url: '/api/request/attendances',
 		status: 200,
 		response: {
 			code: 200,
@@ -334,7 +336,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/attendances',
+		url: '/api/attendances',
 		status: 200,
 		response: {
 			code: 200,
@@ -367,7 +369,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/users/current-user/attendance-summary',
+		url: '/api/users/current-user/attendance-summary',
 		status: 200,
 		response: {
 			code: 200,
@@ -386,7 +388,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/requests',
+		url: '/api/requests',
 		status: 200,
 		response: {
 			code: 200,
@@ -458,7 +460,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/request/1823a87f-12387321adf-123123adf/_approve',
+		url: '/api/request/1823a87f-12387321adf-123123adf/_approve',
 		status: 200,
 		response: {
 			code: 200,
@@ -489,7 +491,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/request/1823a87f-12387321adf-123123adf/_reject',
+		url: '/api/request/1823a87f-12387321adf-123123adf/_reject',
 		status: 200,
 		response: {
 			code: 200,
@@ -516,6 +518,71 @@ const routes = [
 				},
 				date: 1590339600000
 			}
+		}
+	},
+	{
+		method: 'GET',
+		url: '/api/calendar/days',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: [
+				// {
+				// 	date: 1606176000000,
+				// 	status: "WORKING",
+				// 	events: [
+				// 		{
+				// 			name: "Independence Day"
+				// 		}
+				// 	]
+				// },
+				// {
+				// 	date: 1606315016000,
+				// 	status: "WORKING",
+				// 	events: [
+				// 		{
+				// 			name: "Independence Day"
+				// 		}
+				// 	]
+				// },
+				// {
+				// 	date: 1606348800000,
+				// 	status: "WORKING",
+				// 	events: [
+				// 		{
+				// 			name: "Independence Day"
+				// 		}
+				// 	]
+				// },
+				{
+					date: 1606435200000,
+					status: "WORKING",
+					events: [
+						{
+							name: "Independence Day"
+						}
+					]
+				},
+				{
+					date: 1606521600000,
+					status: "WORKING",
+					events: [
+						{
+							name: "Independence Day"
+						}
+					]
+				},
+				{
+					date: 1606608000000,
+					status: "WORKING",
+					events: [
+						{
+							name: "Independence Day"
+						}
+					]
+				}
+			]
 		}
 	}
 ];
