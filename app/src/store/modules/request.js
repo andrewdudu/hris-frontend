@@ -2,6 +2,7 @@ import api from '@/api/request';
 
 const state = {
 	extendLeave: null,
+	incomingRequests: [],
 };
 
 const mutations = {
@@ -12,6 +13,9 @@ const mutations = {
 		if (state.extendLeave !== null) {
 			state.extendLeave.status = extendLeaveResponse.status;
 		}
+	},
+	setIncomingRequests(state, requests) {
+		state.incomingRequests = requests;
 	}
 };
 
@@ -44,12 +48,36 @@ const actions = {
 			.then(res => {
 				return res;
 			});
+	},
+	fetchIncomingRequests({ commit }, data) {
+		return api.fetchIncomingRequest(data)
+			.then(res => {
+				commit('setIncomingRequests', res.data.data);
+				return res;
+			})
+	},
+	// eslint-disable-next-line no-unused-vars
+	postApprove({ commit }, data) {
+		return api.postApprove(data)
+			.then(res => {
+				return res;
+			})
+	},
+	// eslint-disable-next-line no-unused-vars
+	postReject({ commit }, data) {
+		return api.postReject(data)
+			.then(res => {
+				return res;
+			})
 	}
 };
 
 const getters = {
 	extendLeave(state) {
 		return state.extendLeave || null;
+	},
+	incomingRequests(state) {
+		return state.incomingRequests || null;
 	}
 };
 

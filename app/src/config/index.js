@@ -2,30 +2,36 @@ const config = {
 	api: {
 		basePath: '',
 		user: {
-			current:'/users/current-user',
-			currentSummary: '/users/current-user/attendance-summary',
-			availableRequests: '/users/current-user/available-requests',
-			availableSpecialRequests: '/users/current-user/available-special-requests',
-			profile: (id) => `/users/${id}/profile`,
-			leaveQuotas: (id) => `/users/${id}/leave-quotas`,
-			attendanceSummary: '/users/current-user/attendance-summary'
+			current:'/api/users/current-user',
+			currentSummary: '/api/users/current-user/attendance-summary',
+			availableRequests: '/api/users/current-user/available-requests',
+			availableSpecialRequests: '/api/users/current-user/available-special-requests',
+			profile: (id) => `/api/users/${id}/profile`,
+			leaveQuotas: (id) => `/api/users/${id}/leave-quotas`,
+			attendanceSummary: '/api/users/current-user/attendance-summary'
 		},
 		dashboard: {
-			summary: '/dashboard/summary'
+			summary: '/api/dashboard/summary'
 		},
-		announcement: '/announcements',
+		announcement: '/api/announcements',
 		attendance: {
-			clockIn: '/attendances/_clock-in',
-			clockOut: '/attendances/_clock-out',
-			attendances: '/attendances'
+			clockIn: '/api/attendances/_clock-in',
+			clockOut: '/api/attendances/_clock-out',
+			attendances: '/api/attendances'
 		},
 		authentication: {
-			login: '/login'
+			login: '/auth/login'
 		},
 		request: {
-			leave: '/request/leave',
-			extend: '/request/extend-leave',
-			attendance: '/request/attendances'
+			leave: '/api/request/leaves',
+			extend: '/api/request/extend-leave',
+			attendance: '/api/request/attendances',
+			incoming: '/api/requests',
+			approve: (id) => `/api/request/${id}/_approve`,
+			reject: (id) => `/api/request/${id}/_reject`
+		},
+		calendar: {
+			day: '/api/calendar/days'
 		}
 	},
 	requestRoute: {
@@ -34,7 +40,10 @@ const config = {
 		SPECIAL_LEAVE: '/request/special',
 		EXTRA_LEAVE: '/request/leave?type=EXTRA_LEAVE',
 		SUBSTITUTE_LEAVE: '/request/leave?type=SUBSTITUTE_LEAVE',
-		EXTEND_ANNUAL_LEAVE: '/request/extend'
+		EXTEND_ANNUAL_LEAVE: '/request/extend',
+		INCOMING_REQUESTS: '/request/incoming',
+		SET_HOLIDAY: '/calendar',
+		EMPLOYEE: '/employee'
 	},
 	leaveIsOneDay: {
 		ATTENDANCE: false,

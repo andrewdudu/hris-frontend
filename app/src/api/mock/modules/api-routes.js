@@ -1,7 +1,7 @@
 const routes = [
 	{
 		method: 'GET',
-		url: '/users/current-user',
+		url: '/api/users/current-user',
 		status: 200,
 		response: {
 			code: 200,
@@ -14,7 +14,7 @@ const routes = [
 				office: {
 					name: "Sarana Jaya"
 				},
-				joinDate: 788781273,
+				joinDate: 1590339600000,
 				leave: {
 					remaining: 10
 				}
@@ -23,7 +23,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/dashboard/summary',
+		url: '/api/dashboard/summary',
 		status: 200,
 		response: {
 			code: 200,
@@ -64,7 +64,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/announcements',
+		url: '/api/announcements',
 		status: 200,
 		response: {
 			code: 200,
@@ -105,7 +105,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/attendances/_clock-in',
+		url: '/api/attendances/_clock-in',
 		status: 200,
 		response: {
 			code: 200,
@@ -121,7 +121,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/attendances/_clock-out',
+		url: '/api/attendances/_clock-out',
 		status: 200,
 		response: {
 			code: 200,
@@ -136,7 +136,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/login',
+		url: '/auth/login',
 		status: 200,
 		response: {
 			code: 200,
@@ -158,7 +158,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/users/current-user/attendance-summary',
+		url: '/api/users/current-user/attendance-summary',
 		status: 200,
 		response: {
 			code: 200,
@@ -179,7 +179,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/users/example@example.com/profile',
+		url: '/api/users/example@example.com/profile',
 		status: 200,
 		response: {
 			code: 200,
@@ -206,7 +206,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/users/example@example.com/leave-quotas',
+		url: '/api/users/example@example.com/leave-quotas',
 		status: 200,
 		response: {
 			code: 200,
@@ -235,7 +235,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/users/current-user/available-requests',
+		url: '/api/users/current-user/available-requests',
 		status: 200,
 		response: {
 			code: 200,
@@ -246,13 +246,16 @@ const routes = [
 				"SPECIAL_LEAVE",
 				"EXTRA_LEAVE",
 				"SUBSTITUTE_LEAVE",
-				"EXTEND_ANNUAL_LEAVE"
+				"EXTEND_ANNUAL_LEAVE",
+				"INCOMING_REQUESTS",
+				"SET_HOLIDAY",
+				"EMPLOYEE"
 			]
 		}
 	},
 	{
 		method: 'GET',
-		url: '/users/current-user/available-special-requests',
+		url: '/api/users/current-user/available-special-requests',
 		status: 200,
 		response: {
 			code: 200,
@@ -274,7 +277,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/request/leave',
+		url: '/api/request/leaves',
 		status: 200,
 		response: {
 			code: 200,
@@ -289,7 +292,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/request/extend-leave',
+		url: '/api/request/extend-leave',
 		status: 200,
 		response: {
 			code: 200,
@@ -305,7 +308,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/request/extend-leave',
+		url: '/api/request/extend-leave',
 		status: 200,
 		response: {
 			code: 200,
@@ -318,7 +321,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/request/attendances',
+		url: '/api/request/attendances',
 		status: 200,
 		response: {
 			code: 200,
@@ -333,7 +336,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/attendances',
+		url: '/api/attendances',
 		status: 200,
 		response: {
 			code: 200,
@@ -366,7 +369,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/users/current-user/attendance-summary',
+		url: '/api/users/current-user/attendance-summary',
 		status: 200,
 		response: {
 			code: 200,
@@ -381,6 +384,205 @@ const routes = [
 					absent: 2
 				}
 			}
+		}
+	},
+	{
+		method: 'GET',
+		url: '/api/requests',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: [
+				{
+					id: "1823a87f-12387321adf-123123adf",
+					user: {
+						name: "John Doe",
+						department: "Technology",
+						office: {
+							name: "Sarana Jaya"
+						}
+					},
+					status: "PENDING",
+					type: "ATTENDANCE",
+					detail: {
+						attendance: {
+							date: {
+								start: 788781273,
+								end: 788781273
+							},
+							notes: "Forgot to fill attendance on 18 August 2020"
+						}
+					},
+					date: 1590339600000
+				},
+				{
+					id: "1823a87f-12387321adf-123123adf",
+					user: {
+						name: "John Doe",
+						department: "Technology",
+						office: {
+							name: "Sarana Jaya"
+						}
+					},
+					status: "PENDING",
+					type: "LEAVE",
+					detail: {
+						leave: {
+							dates: ["2020-09-25"],
+							files: ["http://file.pdf", "http://file.webp"],
+							notes: "Forgot to fill attendance on 18 August 2020",
+							type: "SICK"
+						}
+					},
+					date: 788781273
+				},
+				{
+					id: "1823a87f-12387321adf-123123adf",
+					user: {
+						name: "John Doe",
+						department: "Technology",
+						office: {
+							name: "Sarana Jaya"
+						}
+					},
+					status: "PENDING",
+					type: "EXTEND",
+					detail: {
+						extend: {
+							notes: "Forgot to fill attendance on 18 August 2020"
+						}
+					},
+					date: 788781273
+				}
+			]
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/request/1823a87f-12387321adf-123123adf/_approve',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				id: "1823a87f-12387321adf-123123adf",
+				user: {
+					name: "John Doe",
+					department: "Technology",
+					office: {
+						name: "Sarana Jaya"
+					}
+				},
+				status: "PENDING",
+				type: "ATTENDANCE",
+				detail: {
+					attendance: {
+						date: {
+							start: 788781273,
+							end: 788781273
+						},
+						notes: "Forgot to fill attendance on 18 August 2020"
+					}
+				},
+				date: 1590339600000
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/request/1823a87f-12387321adf-123123adf/_reject',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				id: "1823a87f-12387321adf-123123adf",
+				user: {
+					name: "John Doe",
+					department: "Technology",
+					office: {
+						name: "Sarana Jaya"
+					}
+				},
+				status: "PENDING",
+				type: "ATTENDANCE",
+				detail: {
+					attendance: {
+						date: {
+							start: 788781273,
+							end: 788781273
+						},
+						notes: "Forgot to fill attendance on 18 August 2020"
+					}
+				},
+				date: 1590339600000
+			}
+		}
+	},
+	{
+		method: 'GET',
+		url: '/api/calendar/days',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: [
+				// {
+				// 	date: 1606176000000,
+				// 	status: "WORKING",
+				// 	events: [
+				// 		{
+				// 			name: "Independence Day"
+				// 		}
+				// 	]
+				// },
+				// {
+				// 	date: 1606315016000,
+				// 	status: "WORKING",
+				// 	events: [
+				// 		{
+				// 			name: "Independence Day"
+				// 		}
+				// 	]
+				// },
+				// {
+				// 	date: 1606348800000,
+				// 	status: "WORKING",
+				// 	events: [
+				// 		{
+				// 			name: "Independence Day"
+				// 		}
+				// 	]
+				// },
+				{
+					date: 1606435200000,
+					status: "WORKING",
+					events: [
+						{
+							name: "Independence Day"
+						}
+					]
+				},
+				{
+					date: 1606521600000,
+					status: "WORKING",
+					events: [
+						{
+							name: "Independence Day"
+						}
+					]
+				},
+				{
+					date: 1606608000000,
+					status: "WORKING",
+					events: [
+						{
+							name: "Independence Day"
+						}
+					]
+				}
+			]
 		}
 	}
 ];

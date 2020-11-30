@@ -1,5 +1,5 @@
 import ApiRoutes from './modules/api-routes'
-import axios from 'axios'
+import axios from '.././axios'
 import MockAdapter from 'axios-mock-adapter'
 
 const isMock = process.env.VUE_APP_IS_MOCK === 'true';

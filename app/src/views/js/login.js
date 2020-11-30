@@ -23,7 +23,7 @@ export default {
 	methods: {
 		onLogin() {
 			this.postLogin({
-				username: this.username,
+				username: this.email,
 				password: this.password
 			})
 				.then(res => this.onSuccess(res))

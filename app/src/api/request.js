@@ -1,5 +1,5 @@
 import config from '@/config';
-import axios from 'axios';
+import axios from './axios';
 
 export default {
 	postRequestLeave(data) {
@@ -13,5 +13,16 @@ export default {
 	},
 	postRequestAttendance(data) {
 		return axios.post(config.api.request.attendance, data);
+	},
+	fetchIncomingRequest(params) {
+		return axios.get(config.api.request.incoming, {
+			params
+		});
+	},
+	postApprove(id) {
+		return axios.post(config.api.request.approve(id));
+	},
+	postReject(id) {
+		return axios.post(config.api.request.reject(id));
 	}
 }

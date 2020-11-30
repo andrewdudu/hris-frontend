@@ -2,24 +2,24 @@ import moment from 'moment';
 
 export default {
 	unixToDay(value) {
-		return moment.unix(value).format('dddd');
+		return moment(value).format('dddd');
 	},
 	unixToShortDay(value) {
-		return moment.unix(value).format('ddd');
+		return moment(value).format('ddd');
 	},
 	unixToMonth(value) {
-		return moment.unix(value).format('MMMM');
+		return moment(value).format('MMMM');
 	},
 	unixToYear(value) {
-		return moment.unix(value).format('YYYY');
+		return moment(value).format('YYYY');
 	},
 	unixToDate(value) {
-		return moment.unix(value).format('DD');
+		return moment(value).format('DD');
 	},
 	unixToTime(value) {
-		return moment.unix(value).format('hh:mm A');
+		return moment(value).format('hh:mm A');
 	},
 	unixToString(value) {
-		return moment.unix(value).format('DD MMMM YYYY');
+		return moment(value).format('DD MMMM YYYY');
 	}
 }

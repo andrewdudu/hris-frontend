@@ -16,6 +16,8 @@ const ExtendLeavePage = () => import("@/views/request/ExtendLeave.vue");
 const RequestAttendancePage = () => import("@/views/request/Attendance.vue");
 const AttendancePage = () => import("@/views/Attendance.vue");
 const ReportPage = () => import("@/views/Report.vue");
+const IncomingRequestPage = () => import("@/views/IncomingRequests.vue");
+const CalendarPage = () => import("@/views/Calendar.vue");
 
 export default new Router({
   mode: "history",
@@ -80,6 +82,16 @@ export default new Router({
       path: "/report",
       name: "Report Page",
       component: ReportPage
+    },
+    {
+      path: "/request/incoming",
+      name: "Incoming Page",
+      component: IncomingRequestPage
+    },
+    {
+      path: "/calendar",
+      name: "Calendar Page",
+      component: CalendarPage
     }
   ],
 });
