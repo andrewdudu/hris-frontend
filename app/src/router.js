@@ -18,6 +18,9 @@ const AttendancePage = () => import("@/views/Attendance.vue");
 const ReportPage = () => import("@/views/Report.vue");
 const IncomingRequestPage = () => import("@/views/IncomingRequests.vue");
 const CalendarPage = () => import("@/views/Calendar.vue");
+const DepartmentPage = () => import("@/views/employee/EmployeeList.vue");
+const EmployeePage = () => import("@/views/employee/Employee.vue");
+const EmployeeDetailPage = () => import("@/views/employee/EmployeeDetail.vue");
 
 export default new Router({
   mode: "history",
@@ -92,6 +95,21 @@ export default new Router({
       path: "/calendar",
       name: "Calendar Page",
       component: CalendarPage
+    },
+    {
+      path: "/department",
+      name: "Department Page",
+      component: DepartmentPage
+    },
+    {
+      path: "/employee",
+      name: "Employee Page",
+      component: EmployeePage
+    },
+    {
+      path: "/employee/detail",
+      name: "Employee Page",
+      component: EmployeeDetailPage
     }
   ],
 });

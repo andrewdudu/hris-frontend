@@ -33,6 +33,11 @@ const config = {
 		calendar: {
 			day: '/api/calendar/days',
 			setHoliday: (date) => `/api/calendar/days/${date}/events`
+		},
+		departments: '/api/departments',
+		employee: {
+			employees: '/api/employees',
+			employeeDetail: (id) => `/api/employee/${id}`
 		}
 	},
 	requestRoute: {
@@ -44,7 +49,7 @@ const config = {
 		EXTEND_ANNUAL_LEAVE: '/request/extend',
 		INCOMING_REQUESTS: '/request/incoming',
 		SET_HOLIDAY: '/calendar',
-		EMPLOYEE: '/employee'
+		EMPLOYEE: '/department'
 	},
 	leaveIsOneDay: {
 		ATTENDANCE: false,

@@ -598,6 +598,107 @@ const routes = [
 				calendarStatus: "HOLIDAY"
 			}
 		}
+	},
+	{
+		method: 'GET',
+		url: '/api/departments',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: [
+				{
+					name: "Human Resources",
+					code: "HUMAN_RESOURCES"
+				},
+				{
+					name: "Marketing",
+					code: "MARKETING"
+				},
+				{
+					name: "Operation",
+					code: "OPERATION"
+				},
+				{
+					name: "Technology",
+					code: "TECHNOLOGY"
+				}
+			]
+		}
+	},
+	{
+		method: 'GET',
+		url: '/api/employees',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: [
+				{
+					id: "aw",
+					name: "Andrew Wijaya",
+					department: "Technology",
+					office: {
+						name: "Sarana Jaya"
+					}
+				},
+				{
+					id: "aw",
+					name: "Andrew Wijaya",
+					department: "Technology",
+					office: {
+						name: "Sarana Jaya"
+					}
+				},
+				{
+					id: "aw",
+					name: "Andrew Wijaya",
+					department: "Technology",
+					office: {
+						name: "Sarana Jaya"
+					}
+				},
+				{
+					id: "aw",
+					name: "Andrew Wijaya",
+					department: "Technology",
+					office: {
+						name: "Sarana Jaya"
+					}
+				}
+			],
+			paging: {}
+		}
+	},
+	{
+		method: 'GET',
+		url: '/api/employee/aw',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				user: {
+					name: "Andrew Wijaya",
+					department: "Technology",
+					office: {
+						name: "Sarana Jaya"
+					}
+				},
+				attendance: {
+					image: "https://cdn.pixabay.com/photo/2015/03/26/09/47/sky-690293__340.jpg",
+					date: {
+						start: 7817238,
+						end: 1287383
+					},
+					location: {
+						type: "INSIDE",
+						lat: 6.2088,
+						lon: 106.8456
+					}
+				}
+			}
+		}
 	}
 ];
 

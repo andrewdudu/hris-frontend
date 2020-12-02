@@ -40,18 +40,24 @@
 				bounds: null,
 			}
 		},
+        props: ['coord'],
 		mounted() {
-			navigator.geolocation.getCurrentPosition(
-				({ coords }) => {
-                    this.center = [coords.latitude, coords.longitude];
-                    this.$emit('locationFound', this.center);
-                    this.loaded = true;
-				},
-                () => {
-					this.loaded = true;
-					this.$emit('locationFound', null);
-                }
-			);
+			if (this.coord === undefined) {
+                navigator.geolocation.getCurrentPosition(
+                    ({ coords }) => {
+                        this.center = [coords.latitude, coords.longitude];
+                        this.$emit('locationFound', this.center);
+                        this.loaded = true;
+                    },
+                    () => {
+                        this.loaded = true;
+                        this.$emit('locationFound', null);
+                    }
+                );
+            } else {
+				this.center = this.coord;
+				this.loaded = true;
+            }
 		},
 	};
 </script>
