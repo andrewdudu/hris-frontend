@@ -30,7 +30,6 @@ module.exports = {
     )
   },
   devServer: {
-    https: true,
     proxy
   },
 };
