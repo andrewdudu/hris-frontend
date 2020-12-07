@@ -8,17 +8,30 @@ export default {
 	data() {
 		return {
 			color,
+			dialog: false,
+			date: null,
+			valid: false,
+			title: '',
+			notes: '',
 			month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 			thisMonth: moment().format('M') - 1,
 			startUnix: moment().startOf('week').toString(),
-			endUnix: moment().endOf('week').toString()
+			endUnix: moment().endOf('week').toString(),
+			notesRules: [
+				v => !!v || 'Note is required',
+				v => v.length <= 256 || 'Name must be less or equal than 256 characters'
+			],
+			titleRules: [
+				v => !!v || 'Title is required',
+			]
 		};
 	},
 	methods: {
 		...mapActions('attendance', [
 			'fetchAttendances'
 		]),
-		...mapActions('calendar', ['fetchCalendarDay']),
+		...mapActions('calendar', ['fetchCalendarDay', 'postSetHoliday']),
+		...mapActions('component', ['openSnackbar']),
 		unixToShortDay(value) {
 			return timestamp.unixToShortDay(value);
 		},
@@ -36,6 +49,29 @@ export default {
 			this.fetchCalendarDay({
 				month: this.month[this.thisMonth],
 				year: moment().format('YYYY')
+			})
+		},
+		onSetHoliday(date) {
+			this.dialog = true;
+			this.date = date;
+		},
+		onSubmit() {
+			this.postSetHoliday({
+				date: moment(this.date).format("YYYY-MM-DD"),
+				name: this.title,
+				notes: this.notes,
+				calendarStatus: 'HOLIDAY'
+			}).then(() => {
+				this.dialog = false;
+				this.openSnackbar({
+					message: 'Success',
+					color: 'success'
+				})
+			}).catch(() => {
+				this.openSnackbar({
+					message: 'Something went wrong, please try again later.',
+					color: 'error'
+				})
 			})
 		}
 	},

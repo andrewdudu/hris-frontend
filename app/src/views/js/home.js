@@ -3,7 +3,7 @@ import color from "@/assets/js/color.js";
 import nameToInitials from "@/utils/name-to-initials";
 import timestamp from "@/utils/timestamp";
 import moment from 'moment';
-import Map from '@/components/Map.vue';
+const Map = () => import(/* webpackChunkName:'c-map' */'@/components/Map.vue');
 
 export default {
   name: "Home",
@@ -17,6 +17,7 @@ export default {
       location,
       dialog: false,
       loading: false,
+      fileExtension: '',
       image: null,
       imageUrl: null,
       imageSize: 0,
@@ -45,41 +46,38 @@ export default {
       let reader = new FileReader();
       this.image = null;
       this.url = null;
-      if (file !== undefined) {
-        reader.readAsDataURL(file);
-        this.imageSize = file.size;
-        this.imageUrl = URL.createObjectURL(file);
-        reader.onload = () => {
-          this.image = reader.result.substr(reader.result.indexOf(",") + 1);
-        };
-      }
+      reader.readAsDataURL(file);
+      this.imageSize = file.size;
+      this.imageUrl = URL.createObjectURL(file);
+      this.fileExtension = file.name.split('.').pop();
+      reader.onload = () => {
+        this.image = reader.result.substr(reader.result.indexOf(",") + 1);
+      };
     },
     onLocationFound(coordinates) {
-      if (coordinates !== null) {
-        this.location = {
-          lat: coordinates[0],
-          lon: coordinates[1]
-        };
-      } else {
-        // TODO: Handle if GPS not function correctly
+      if (!coordinates) {
+        // TODO: if GPS Notfound
+        return;
+      }
+      this.location = {
+        lat: coordinates[0],
+        lon: coordinates[1]
       }
     },
     onClockInSubmit() {
       this.dialog = false;
       this.postClockIn({
-        image: this.image,
+        image: `${this.fileExtension};${this.image}`,
         location: this.location
       })
-          .then(res => this.onClockInSuccess(res))
-          .catch(err => this.onClockInFail(err));
+          .then(this.onClockInSuccess)
     },
     onClockOutSubmit() {
       this.dialog = false;
       this.postClockOut({
         location: this.location
       })
-          .then(res => this.onClockOutSuccess(res))
-          .catch(err => this.onClockOutFail(err));
+          .then(this.onClockOutSuccess);
     },
     onClockOutSuccess() {},
     onClockOutFail() {},
@@ -110,10 +108,7 @@ export default {
     ...mapGetters('dashboard', ['dashboardSummary']),
     ...mapGetters('user', ['currentUser']),
     initials() {
-      if (this.currentUser !== null) {
-        return nameToInitials(this.currentUser.name);
-      }
-      return "G";
+      return nameToInitials(this.currentUser.name);
     }
   },
   created() {

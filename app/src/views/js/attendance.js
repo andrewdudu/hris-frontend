@@ -9,8 +9,8 @@ export default {
 		return {
 			color,
 			value: 'This Week',
-			startUnix: moment().startOf('week').toString(),
-			endUnix: moment().endOf('week').toString()
+			startUnix: moment().startOf('week').format('x').toString(),
+			endUnix: moment().endOf('week').format('x').toString()
 		};
 	},
 	methods: {
@@ -28,8 +28,8 @@ export default {
 		},
 		onFilterChange(value) {
 			this.value = value;
-			this.startUnix = moment().startOf(this.value.split(' ').pop()).toString();
-			this.endUnix = moment().endOf(this.value.split(' ').pop()).toString();
+			this.startUnix = moment().startOf(this.value.split(' ').pop()).format('x').toString();
+			this.endUnix = moment().endOf(this.value.split(' ').pop()).format('x').toString();
 			this.fetchAttendances({
 				startDate: this.startUnix,
 				endDate: this.endUnix

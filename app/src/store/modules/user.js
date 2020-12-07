@@ -88,7 +88,7 @@ const actions = {
 
 const getters = {
 	currentUser(state) {
-		return state.currentUser || null;
+		return state.currentUser || {};
 	},
 	currentUserSummary(state) {
 		return state.currentUserSummary || null;

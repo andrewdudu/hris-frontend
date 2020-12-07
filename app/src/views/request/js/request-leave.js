@@ -51,15 +51,18 @@ export default {
 		},
 		onRequest() {
 			let date = this.date;
+			let files = this.file;
 			if (Array.isArray(date)) {
 				date.sort;
-				console.log(this.dateRange(date[0], date[1]));
 			}
 			else date = [date];
+			if (this.file !== null) {
+				files = [this.file]
+			}
 			this.postRequestLeave({
 				dates: date,
-				files: [this.file],
-				notes: this.notes,
+				files,
+				notes: this.note,
 				type: this.$route.query.type
 			}).then(() => {
 				this.openSnackbar({
