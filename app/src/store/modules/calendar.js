@@ -17,6 +17,13 @@ const actions = {
 				commit('setCalendarDay', res.data.data);
 				return res;
 			})
+	},
+	// eslint-disable-next-line no-unused-vars
+	postSetHoliday({ commit }, data) {
+		return api.postSetHoliday(data)
+			.then(res => {
+				return res;
+			})
 	}
 };
 

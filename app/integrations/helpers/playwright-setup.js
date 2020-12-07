@@ -4,8 +4,8 @@ const mockLoader = require('./mock-loader');
 
 async function launchBrowser () {
   const browser = await playwright['chromium'].launch({
-    headless: false,
-    devtools: true
+    // headless: false,
+    // devtools: true
   });
   return browser
 }

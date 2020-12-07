@@ -12,7 +12,7 @@
         </v-col>
         <v-col class="col-1"/>
         <v-col class="col-7 avatar-info text-align-left">
-          <v-row v-if="currentUser !== null" no-gutters>
+          <v-row v-if="Object.keys(currentUser).length !== 0" no-gutters>
             <v-col cols="12"><span class="bold large">{{ currentUser.name }}</span></v-col>
             <v-col cols="12" class="margin"><span>{{ currentUser.department }} - {{ currentUser.office.name }}</span></v-col>
             <v-col cols="12"><span>{{ currentUser.leave.remaining }} Leave(s) left</span></v-col>

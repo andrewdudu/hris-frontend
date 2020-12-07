@@ -8,6 +8,8 @@ import authentication from './modules/authentication';
 import request from './modules/request';
 import component from './modules/component';
 import calendar from "./modules/calendar";
+import department from "./modules/department";
+import employee from "./modules/employee";
 
 Vue.use(Vuex);
 
@@ -20,7 +22,9 @@ const store = new Vuex.Store({
         authentication,
         request,
         component,
-        calendar
+        calendar,
+        department,
+        employee
     }
 });
 

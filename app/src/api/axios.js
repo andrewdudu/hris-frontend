@@ -1,5 +1,5 @@
 import axios from "axios";
-import router from "@/router.js";
+import router from "./../router.js";
 
 const ajax = axios.create({
 	withCredentials: true

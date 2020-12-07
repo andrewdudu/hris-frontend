@@ -25,12 +25,11 @@ module.exports = {
   },
   chainWebpack: config => {
     config.resolve.alias.set(
-        'vue-mock',
+        '@vue-mock',
         (isMock ? path.resolve(__dirname, `src/api/mock`) : path.resolve(__dirname, `src/empty.js`))
     )
   },
   devServer: {
-    https: true,
     proxy
   },
 };
