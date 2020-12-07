@@ -4,8 +4,8 @@ import Router from "vue-router";
 Vue.use(Router);
 
 // USER PAGE
-const HomePage = () => import("@/views/Home.vue");
-const AnnouncementPage = () => import("@/views/Announcement.vue");
+const HomePage = () => import(/* webpackChunkName:'p-home' */"@/views/Home.vue");
+const AnnouncementPage = () => import(/* webpackChunkName:'p-announcement' */"@/views/Announcement.vue");
 const LoginPage = () => import("@/views/Login.vue");
 const ProfilePage = () => import("@/views/Profile.vue");
 const ProfileReportPage = () => import("@/views/ProfileReport.vue");
@@ -108,7 +108,7 @@ export default new Router({
     },
     {
       path: "/employee/detail",
-      name: "Employee Page",
+      name: "Employee Detail Page",
       component: EmployeeDetailPage
     }
   ],

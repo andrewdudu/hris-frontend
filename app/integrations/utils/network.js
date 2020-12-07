@@ -1,4 +1,4 @@
-async function waitForNetworkIdle (page, timeout, maxInflightRequests = 0) {
+async function waitForNetworkIdle (page, timeout = 30, maxInflightRequests = 0) {
   page.on('request', onRequestStarted)
   page.on('requestfinished', onRequestFinished)
   page.on('requestfailed', onRequestFinished)

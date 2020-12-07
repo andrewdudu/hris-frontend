@@ -11,9 +11,9 @@ const mutations = {
 };
 
 const actions = {
-	fetchAnnouncements({ commit }) {
+	fetchAnnouncements({ commit }, params) {
 		return api
-			.fetchAnnouncements()
+			.fetchAnnouncements(params)
 			.then(announcements => {
 				commit('setAnnouncements', announcements.data.data);
 				return announcements;

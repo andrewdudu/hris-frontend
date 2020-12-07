@@ -4,7 +4,7 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
-import 'vue-mock';
+import '@vue-mock';
 
 Vue.config.productionTip = false;
 
