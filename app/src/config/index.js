@@ -28,7 +28,8 @@ const config = {
 			attendance: '/api/request/attendances',
 			incoming: '/api/requests',
 			approve: (id) => `/api/request/${id}/_approve`,
-			reject: (id) => `/api/request/${id}/_reject`
+			reject: (id) => `/api/request/${id}/_reject`,
+			excel: '/api/reports/leaves'
 		},
 		calendar: {
 			day: '/api/calendar/days',

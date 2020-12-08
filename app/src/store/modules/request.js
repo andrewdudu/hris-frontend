@@ -3,6 +3,7 @@ import api from '@/api/request';
 const state = {
 	extendLeave: null,
 	incomingRequests: [],
+	excelReport: []
 };
 
 const mutations = {
@@ -16,6 +17,9 @@ const mutations = {
 	},
 	setIncomingRequests(state, requests) {
 		state.incomingRequests = requests;
+	},
+	setExcelReport(state, requests) {
+		state.excelReport = requests;
 	}
 };
 
@@ -69,6 +73,13 @@ const actions = {
 			.then(res => {
 				return res;
 			})
+	},
+	fetchExcelReport({ commit }, params) {
+		return api.fetchExcelReport(params)
+			.then(res => {
+				commit('setExcelReport', res.data.data);
+				return res;
+			});
 	}
 };
 
@@ -78,6 +89,9 @@ const getters = {
 	},
 	incomingRequests(state) {
 		return state.incomingRequests || null;
+	},
+	excelReport(state) {
+		return state.excelReport || null;
 	}
 };
 
