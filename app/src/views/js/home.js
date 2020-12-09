@@ -13,6 +13,7 @@ export default {
   data() {
     return {
       color,
+      isMock: process.env.VUE_APP_ENVIRONMENT !== 'prod' && process.env.VUE_APP_IS_MOCK === 'true',
       hasClockedIn: 0,
       location,
       dialog: false,
@@ -71,13 +72,15 @@ export default {
         location: this.location
       })
           .then(this.onClockInSuccess)
+          .catch(this.onClockInFail);
     },
     onClockOutSubmit() {
       this.dialog = false;
       this.postClockOut({
         location: this.location
       })
-          .then(this.onClockOutSuccess);
+          .then(this.onClockOutSuccess)
+          .catch(this.onClockOutFail);
     },
     onClockOutSuccess() {},
     onClockOutFail() {},
@@ -86,10 +89,12 @@ export default {
     },
     onClockInFail() {},
     hourTime(time) {
+      if (this.isMock) return 0;
       const calculatedTime = moment.duration(moment().diff(moment.unix(time)));
       return Math.floor(calculatedTime.asHours());
     },
     minuteTime(time) {
+      if (this.isMock) return 0;
       const calculatedTime = moment.duration(moment().diff(moment.unix(time)));
       return Math.floor(calculatedTime.asMinutes()) % 60;
     },

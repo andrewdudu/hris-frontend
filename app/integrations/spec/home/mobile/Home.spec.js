@@ -13,7 +13,7 @@ describe.only('Home Page', () => {
 	});
 
 	test('should clock in and clock out well', async () => {
-		await page.waitForTimeout(1000);
+		await page.waitForTimeout(2000);
 		network.waitForNetworkIdle(page);
 		let image = await page.screenshot();
 		expect(image).toMatchImageSnapshot();
@@ -41,12 +41,14 @@ describe.only('Home Page', () => {
 		await page.waitForTimeout(1000);
 		image = await page.screenshot();
 		expect(image).toMatchImageSnapshot();
+	});
 
+	test('should clock out well', async () => {
 		await page.waitForSelector('.clock > .row > .col-12 > .v-btn > .v-btn__content');
 		await page.click('.clock > .row > .col-12 > .v-btn > .v-btn__content');
 		await page.waitForTimeout(2000);
 		network.waitForNetworkIdle(page);
-		image = await page.screenshot();
+		let image = await page.screenshot();
 		expect(image).toMatchImageSnapshot();
 
 		await page.waitForSelector('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
@@ -54,5 +56,5 @@ describe.only('Home Page', () => {
 		network.waitForNetworkIdle(page);
 		image = await page.screenshot();
 		expect(image).toMatchImageSnapshot();
-	});
+	})
 });

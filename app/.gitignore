@@ -21,7 +21,8 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-/integrations/.nyc_output/
-/integrations/coverage/
-/integrations/screenshots/
+.nyc_output
+coverage
+integrations/screenshots
 __image_snapshots__
+.scannerwork
