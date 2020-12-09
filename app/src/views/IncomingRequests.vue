@@ -62,6 +62,30 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+
+        <v-text-field
+            v-model="search"
+            color="grey"
+            hide-no-data
+            hide-selected
+            item-text="Description"
+            item-value="Search"
+            placeholder="Start typing to Search"
+            prepend-icon="mdi-magnify"
+            return-object
+        />
+
+        <v-col v-if="departments.length !== 0" class="col-7 bold dark no-gutters">
+            <v-select
+                class="margin-filter"
+                :value="value"
+                :color="color.blubluedark1"
+                :items="this.departments"
+                prepend-icon="mdi-filter-variant"
+                @change="onChange"
+            />
+        </v-col>
+
         <v-row v-bind:key="idx" v-for="(request, idx) in incomingRequests" class="margin-top" @click="onClick(request)" no-gutters>
             <v-col class="col-2 margin-left dark">
                 <v-avatar
@@ -109,6 +133,11 @@
 
     .headline-small {
         font-size: 20px;
+    }
+
+    .margin-filter {
+        padding: 0;
+        margin-top: -10px;
     }
 
 </style>
