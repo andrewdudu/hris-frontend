@@ -24,5 +24,10 @@ export default {
 	},
 	postReject(id) {
 		return axios.post(config.api.request.reject(id));
+	},
+	fetchExcelReport(params) {
+		return axios.get(config.api.request.excel, {
+			params
+		})
 	}
 }

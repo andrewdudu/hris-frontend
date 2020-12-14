@@ -11,7 +11,7 @@ export default {
 		return axios.post(config.api.calendar.setHoliday(data.date), {
 			name: data.name,
 			notes: data.notes,
-			calendarStatus: data.calendarStatus
+			status: data.status
 		});
 	}
 }

@@ -11,6 +11,16 @@
             prepend-icon="mdi-magnify"
             return-object
         />
+        <v-row no-gutters>
+            <v-col class="col-12 text-align-right">
+                <json-excel
+                        :fetch="fetchExcelReportData"
+                        :fields="excelFields"
+                        :data="excelReport">
+                    Download Excel
+                </json-excel>
+            </v-col>
+        </v-row>
         <img v-if="employee.length === 0" class="img-class" src="./../../assets/img/empty.svg"  alt="not-found"/>
         <router-link v-bind:key="idx" v-for="(emp, idx) in employee" class="text-decoration-none" :to="`/employee/detail?id=${emp.id}`" no-gutters>
             <v-row class="margin-top" no-gutters>

@@ -8,7 +8,7 @@ const imageSnapshotConfig = {
   failureThreshold: 0.001,
   failureThresholdType: 'percent',
   // apply blur to tolerate intermittent inaccuracy on snapshot
-  blur: 2
+  blur: 1
 }
 
 configureToMatchImageSnapshot(imageSnapshotConfig);

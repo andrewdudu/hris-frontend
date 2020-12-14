@@ -32,7 +32,7 @@
 
         <v-card>
           <v-card-title class="headline lighten-2 dark">
-            Clock <span v-if="hasClockedIn === 0">In</span> <span v-if="hasClockedIn === 1">Out</span>
+            Clock <span v-if="hasClockedIn === 0 && !employeeClockedIn">In</span> <span v-if="hasClockedIn === 1 || employeeClockedIn">Out</span>
           </v-card-title>
 
           <v-card-text>
@@ -42,7 +42,7 @@
                   <v-col
                     cols="12"
                   >
-                    <div v-if="hasClockedIn === 0">
+                    <div v-if="hasClockedIn === 0 && !employeeClockedIn">
                       <span class="dark bold">Selfie</span>
                       <v-file-input
                         label="File input"
@@ -55,7 +55,7 @@
                       />
                       <v-img :src="imageUrl"/>
                     </div>
-                    <div v-if="hasClockedIn === 1">
+                    <div v-else>
                       <span class="dark bold">Clock in</span>
                       <v-row class="padding-bot" no-gutters>
                         <v-col class="col-12">
@@ -90,7 +90,7 @@
           <v-card-actions>
             <v-spacer/>
             <v-btn
-              v-if="hasClockedIn === 0"
+              v-if="hasClockedIn === 0 && !employeeClockedIn"
               color="primary"
               text
               @click="onClockInSubmit"
@@ -98,7 +98,7 @@
               Clock in
             </v-btn>
             <v-btn
-              v-if="hasClockedIn === 1"
+              v-else
               color="primary"
               text
               @click="onClockOutSubmit"
@@ -116,12 +116,12 @@
           <v-col class="col-9 text-align-left clock-detail">
             <v-row no-gutters>
               <v-col class="col-12"><span class="bold">{{ today }}</span></v-col>
-              <v-col v-if="dashboardSummary !== null" class="col-12 margin"><span class="small text-capitalize">{{ dashboardSummary.calendar.status.toLowerCase() }}</span></v-col>
+              <v-col v-if="dashboardSummary !== null" class="col-12 margin"><span class="small text-capitalize">{{ dashboardSummary.calendar.status }}</span></v-col>
             </v-row>
           </v-col>
           <v-col class="col-12 center margin-bot">
             <v-btn
-              v-if="hasClockedIn === 0"
+              v-if="hasClockedIn === 0 && !employeeClockedIn"
               depressed
               :color="color.blubluedark1"
               dark
@@ -130,11 +130,12 @@
               Clock in
             </v-btn>
             <v-btn
-              v-if="hasClockedIn === 1"
+              v-else
               depressed
+              class="white--text"
               :color="color.blubluedark1"
-              dark
               @click="dialog = true"
+              :disabled="!hasAttend"
             >
               Clock out
             </v-btn>
@@ -166,13 +167,13 @@
         </v-card>
       </div>
     </v-row>
-    <v-row class="margin-bot center" no-gutters>
+    <v-row v-if="Object.keys(currentUser).length !== 0" class="margin-bot center" no-gutters>
       <v-col class="col-12 bold dark">
-        <span class="padding-left">Last Attendance</span>
+        <span v-if="currentUser.roles !== null" class="padding-left">{{ currentUser.roles.includes('ADMIN') ? 'Attendance Summary' :  'Last Attendance' }}</span>
       </v-col>
       <div class="last-attendance center">
         <v-card v-if="dashboardSummary !== null" class="padding last-attendance-card">
-          <v-row no-gutters>
+          <v-row v-if="dashboardSummary.attendance !== null && !currentUser.roles.includes('ADMIN') && dashboardSummary.attendance.latest.date !== null" no-gutters>
             <v-col class="col-12 margin">
               <v-icon :color="color.blubluedark1" size="20">mdi-calendar</v-icon>
               <span class="bold dark margin-left">{{ unixToShortDay(dashboardSummary.attendance.latest.date.start) }}, {{ unixToString(dashboardSummary.attendance.latest.date.start) }}</span>
@@ -186,6 +187,18 @@
             <v-col class="col-12">
               <v-icon :color="color.blubluedark1" size="20">mdi-map-marker-outline</v-icon>
               <span class="dark margin-left text-capitalize">{{ dashboardSummary.attendance.latest.location.type.toLowerCase() }} Office</span>
+            </v-col>
+          </v-row>
+          <v-row v-if="dashboardSummary.report !== null" no-gutters>
+            <v-col class="col-12 margin">
+              <v-icon :color="color.blubluedark1" size="20">mdi-calendar</v-icon>
+              <span class="bold dark margin-left">{{ dashboardSummary.report.absent }} absent(s)</span>
+            </v-col>
+            <v-col class="col-12">
+              <v-icon :color="color.blubluedark1" size="20">mdi-clock-outline</v-icon>
+              <span class="dark margin-left">
+                  {{ dashboardSummary.report.working }} working
+                </span>
             </v-col>
           </v-row>
         </v-card>
@@ -205,6 +218,7 @@
   .last-attendance-card {
     margin-top: 10px;
     border-radius: 13px !important;
+    width: 100%;
   }
 
   .horizontal-scroll {
