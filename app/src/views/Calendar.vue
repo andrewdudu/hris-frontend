@@ -67,13 +67,17 @@
                                 <v-icon :color="color.blubluedark1" size="20">mdi-calendar</v-icon>
                                 <span class="bold dark margin-left">{{ unixToShortDay(calendar.date) }}, {{ unixToString(calendar.date) }}</span>
                             </v-col>
+                            <v-col v-if="calendar.events.length > 0" class="col-12">
+                                <v-icon :color="color.blubluedark1" size="20">mdi-map-calendar</v-icon>
+                                <span v-bind:key="event.name" v-for="event in calendar.events" class="dark margin-left text-capitalize">{{ event.name }}</span>
+                            </v-col>
                             <v-col class="col-12">
                                 <v-icon :color="color.blubluedark1" size="20">mdi-map-marker-outline</v-icon>
                                 <span class="dark margin-left text-capitalize">{{ calendar.status.toLowerCase() }}</span>
                             </v-col>
                             <v-col class="col-12 center">
                                 <v-btn
-                                    v-if="isPassed(calendar)"
+                                    v-if="calendar.events.length === 0 && isPassed(calendar)"
                                     :color="color.blubluedark1"
                                     dark
                                     @click="onSetHoliday(calendar.date)"

@@ -57,7 +57,7 @@ export default {
 			}
 			else date = [date];
 			if (this.file !== null) {
-				files = [this.file]
+				files = ['pdf;' + this.file]
 			}
 			this.postRequestLeave({
 				dates: date,

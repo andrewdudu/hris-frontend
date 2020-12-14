@@ -699,6 +699,48 @@ const routes = [
 				}
 			}
 		}
+	},
+	{
+		method: 'GET',
+		url: '/api/reports/leaves',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: [
+				{
+					id: "1273-123-123",
+					employee: {
+						nik: "1273",
+						name: "name",
+						position: {
+							name: "name"
+						},
+						department: {
+							name: "Technology"
+						},
+						organizationUnit: {
+							name: "name"
+						},
+						office: {
+							name: "Sarana Jaya"
+						}
+					},
+					dateString: "2020-05-25",
+					type: "HAJJ",
+					typeLabel: "Hajj",
+					date: {
+						start: 1608708000000,
+						end: 1608708000000
+					},
+					createdDate: 1608708000000,
+					createdBy: "username",
+					lastModifiedDate: 1608708000000,
+					lastModifiedBy: "username",
+					notes: ""
+				}
+			]
+		}
 	}
 ];
 

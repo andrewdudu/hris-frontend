@@ -31,16 +31,16 @@
                 <span>Clock In</span>
             </v-col>
             <v-col class="col-3 dark">
-                <span>: {{ unixToTime(employeeDetail.attendance.date.start) }}</span>
+                <span>: {{ employeeDetail.attendance.date.start ? unixToTime(employeeDetail.attendance.date.start) : '-' }}</span>
             </v-col>
             <v-col class="col-6 dark bold">
-                <span>{{ employeeDetail.attendance.location.type }} Office</span>
+                <span>{{ employeeDetail.attendance.location.type || '-' }}</span>
             </v-col>
             <v-col class="col-3 margin-minus dark bold">
                 <span>Clock Out</span>
             </v-col>
             <v-col class="col-3 margin-minus dark">
-                <span>: {{ unixToTime(employeeDetail.attendance.date.end) }}</span>
+                <span>: {{ employeeDetail.attendance.date.end ? unixToTime(employeeDetail.attendance.date.end) : '-' }}</span>
             </v-col>
             <v-col class="col-6 margin-minus dark bold">
                 <v-btn :color="color.blubluedark1" class="white--text" @click="dialog = true">Show Selfie</v-btn>

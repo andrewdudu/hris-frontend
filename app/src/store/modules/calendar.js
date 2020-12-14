@@ -11,8 +11,8 @@ const mutations = {
 };
 
 const actions = {
-	fetchCalendarDay({ commit }) {
-		return api.fetchCalendarDay()
+	fetchCalendarDay({ commit }, params) {
+		return api.fetchCalendarDay(params)
 			.then(res => {
 				commit('setCalendarDay', res.data.data);
 				return res;

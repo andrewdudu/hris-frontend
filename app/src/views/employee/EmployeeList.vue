@@ -4,7 +4,7 @@
             <router-link class="text-decoration-none" :to="`/employee?department=${department.code}`">
                 <v-row class="margin-top dark" no-gutters>
                     <v-col class="col-11 text-capitalize">
-                        {{ toLowerCase(department.code) }}
+                        {{ toLowerCase(department.name) }}
                     </v-col>
                     <v-col class="col-1">
                         <v-icon>mdi-chevron-right</v-icon>

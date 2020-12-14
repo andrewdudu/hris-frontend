@@ -15,8 +15,8 @@ export default {
 			notes: '',
 			month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 			thisMonth: moment().format('M') - 1,
-			startUnix: moment().startOf('week').toString(),
-			endUnix: moment().endOf('week').toString(),
+			startUnix: moment().startOf('month').toString(),
+			endUnix: moment().endOf('month').toString(),
 			notesRules: [
 				v => !!v || 'Note is required',
 				v => v.length <= 256 || 'Name must be less or equal than 256 characters'
@@ -47,7 +47,7 @@ export default {
 		onFilterChange(value) {
 			this.thisMonth = this.month.indexOf(value);
 			this.fetchCalendarDay({
-				month: this.month[this.thisMonth],
+				month: this.thisMonth + 1,
 				year: moment().format('YYYY')
 			})
 		},
@@ -60,7 +60,7 @@ export default {
 				date: moment(this.date).format("YYYY-MM-DD"),
 				name: this.title,
 				notes: this.notes,
-				calendarStatus: 'HOLIDAY'
+				status: 'HOLIDAY'
 			}).then(() => {
 				this.dialog = false;
 				this.openSnackbar({
@@ -83,10 +83,9 @@ export default {
 		}
 	},
 	created() {
-		this.fetchAttendances({
-			startDate: this.startUnix,
-			endDate: this.endUnix
+		this.fetchCalendarDay({
+			month: this.thisMonth + 1,
+			year: moment().format('YYYY')
 		});
-		this.fetchCalendarDay();
 	}
 };

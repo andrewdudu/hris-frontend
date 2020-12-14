@@ -27,8 +27,9 @@ const config = {
 			extend: '/api/request/extend-leave',
 			attendance: '/api/request/attendances',
 			incoming: '/api/requests',
-			approve: (id) => `/api/request/${id}/_approve`,
-			reject: (id) => `/api/request/${id}/_reject`
+			approve: (id) => `/api/requests/${id}/_approve`,
+			reject: (id) => `/api/requests/${id}/_reject`,
+			excel: '/api/reports/leaves'
 		},
 		calendar: {
 			day: '/api/calendar/days',

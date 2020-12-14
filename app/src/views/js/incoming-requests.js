@@ -4,6 +4,7 @@ import timestamp from "@/utils/timestamp";
 import moment from 'moment';
 import pdf from 'vue-pdf';
 import { mapActions, mapGetters } from "vuex";
+import _ from "lodash";
 
 export default {
 	name: "incoming-request",
@@ -14,6 +15,9 @@ export default {
 		return {
 			color,
 			dialog: false,
+			search: '',
+			value: '',
+			departments: [],
 			data: {
 					id: "1823a87f-12387321adf-123123adf",
 					user: {
@@ -50,6 +54,7 @@ export default {
 	},
 	methods: {
 		...mapActions('request', ['fetchIncomingRequests', 'postApprove', 'postReject']),
+		...mapActions('department', ['fetchDepartments']),
 		...mapActions('component', ['openSnackbar']),
 		nameToInitials(name) {
 			return nameToInitials(name);
@@ -98,7 +103,21 @@ export default {
 					})
 				});
 			this.dialog = false;
-		}
+		},
+		onFilterChange(val) {
+			this.value = val;
+			this.onChange();
+		},
+		onChange() {
+			this.fetchIncomingRequests({
+				name: this.search,
+				department: this.value,
+				type: 'REQUESTED'
+			})
+		},
+		debounceInput: _.debounce(function() {
+			this.onChange();
+		}, 500)
 	},
 	computed: {
 		...mapGetters('request', ['incomingRequests']),
@@ -109,9 +128,22 @@ export default {
 				return this.data.detail.leave.dates;
 			}
 			return null;
+		},
+	},
+	watch: {
+		search(val) {
+			if (!val) return;
+
+			this.debounceInput();
 		}
 	},
 	created() {
-		this.fetchIncomingRequests();
+		this.fetchIncomingRequests({
+			type: 'REQUESTED'
+		});
+		this.fetchDepartments()
+			.then(res => {
+				this.departments = res.data.data.map(department => department.name)
+			})
 	}
 };
