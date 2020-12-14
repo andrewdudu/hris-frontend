@@ -53,6 +53,7 @@ describe.only('Home Page', () => {
 
 		await page.waitForSelector('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
 		await page.click('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
+		await page.waitForTimeout(2000);
 		network.waitForNetworkIdle(page);
 		image = await page.screenshot();
 		expect(image).toMatchImageSnapshot();

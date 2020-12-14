@@ -72,7 +72,9 @@ export default {
 		onChange() {
 			this.fetchEmployees({
 				name: this.search,
-				department: this.$route.query.department
+				department: this.$route.query.department,
+				page: 0,
+				size: 10
 			})
 		},
 		async fetchExcelReportData() {
@@ -100,7 +102,9 @@ export default {
 	},
 	created() {
 		this.fetchEmployees({
-			department: this.$route.query.department
+			department: this.$route.query.department,
+			page: 0,
+			size: 10
 		});
 	}
 };

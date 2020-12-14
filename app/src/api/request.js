@@ -15,7 +15,6 @@ export default {
 		return axios.post(config.api.request.attendance, data);
 	},
 	fetchIncomingRequest(params) {
-		console.log(params);
 		return axios.get(config.api.request.incoming, {
 			params
 		});

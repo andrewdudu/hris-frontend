@@ -82,7 +82,7 @@
                 :color="color.blubluedark1"
                 :items="this.departments"
                 prepend-icon="mdi-filter-variant"
-                @change="onChange"
+                @change="onFilterChange"
             />
         </v-col>
 

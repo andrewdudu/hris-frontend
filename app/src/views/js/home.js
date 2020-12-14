@@ -30,19 +30,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions('user', [
-        'fetchCurrentUser'
-    ]),
-    ...mapActions('dashboard', [
-      'fetchDashboardSummary'
-    ]),
-    ...mapActions('announcement', [
-      'fetchAnnouncements'
-    ]),
-    ...mapActions('attendance', [
-        'postClockIn',
-        'postClockOut'
-    ]),
+    ...mapActions('user', ['fetchCurrentUser']),
+    ...mapActions('dashboard', ['fetchDashboardSummary']),
+    ...mapActions('announcement', ['fetchAnnouncements']),
+    ...mapActions('attendance', ['postClockIn', 'postClockOut']),
+    ...mapActions('component', ['openSnackbar']),
     onImageChange(file) {
       let reader = new FileReader();
       this.image = null;
@@ -82,20 +74,41 @@ export default {
           .then(this.onClockOutSuccess)
           .catch(this.onClockOutFail);
     },
-    onClockOutSuccess() {},
-    onClockOutFail() {},
+    onClockOutSuccess() {
+      this.openSnackbar({
+        message: "Clocked Out.",
+        color: 'success'
+      });
+    },
+    onClockOutFail(err) {
+      if (err.response.data.errors.message.includes('NOT_AVAILABLE')) {
+        this.openSnackbar({
+          message: "You haven't worked for 9 hours",
+          color: 'error'
+        })
+      }
+    },
     onClockInSuccess() {
       this.hasClockedIn = 1;
+      this.openSnackbar({
+        message: "Clocked In.",
+        color: 'success'
+      })
     },
-    onClockInFail() {},
+    onClockInFail() {
+      this.openSnackbar({
+        message: "Something went wrong, please try again.",
+        color: 'error'
+      })
+    },
     hourTime(time) {
       if (this.isMock) return 0;
-      const calculatedTime = moment.duration(moment().diff(moment.unix(time)));
+      const calculatedTime = moment.duration(moment().diff(moment(time)));
       return Math.floor(calculatedTime.asHours());
     },
     minuteTime(time) {
       if (this.isMock) return 0;
-      const calculatedTime = moment.duration(moment().diff(moment.unix(time)));
+      const calculatedTime = moment.duration(moment().diff(moment(time)));
       return Math.floor(calculatedTime.asMinutes()) % 60;
     },
     unixToShortDay(value) {
@@ -114,6 +127,12 @@ export default {
     ...mapGetters('user', ['currentUser']),
     initials() {
       return nameToInitials(this.currentUser.name);
+    },
+    employeeClockedIn() {
+      return !!(this.dashboardSummary && this.dashboardSummary.attendance.current.date.start);
+    },
+    hasAttend() {
+      return !(this.dashboardSummary.attendance.current.date.end);
     }
   },
   created() {

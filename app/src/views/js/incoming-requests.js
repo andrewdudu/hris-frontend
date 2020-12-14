@@ -16,6 +16,7 @@ export default {
 			color,
 			dialog: false,
 			search: '',
+			value: '',
 			departments: [],
 			data: {
 					id: "1823a87f-12387321adf-123123adf",
@@ -103,10 +104,15 @@ export default {
 				});
 			this.dialog = false;
 		},
+		onFilterChange(val) {
+			this.value = val;
+			this.onChange();
+		},
 		onChange() {
 			this.fetchIncomingRequests({
 				name: this.search,
-				department: this.value
+				department: this.value,
+				type: 'REQUESTED'
 			})
 		},
 		debounceInput: _.debounce(function() {
@@ -123,13 +129,6 @@ export default {
 			}
 			return null;
 		},
-		value() {
-			if (this.departments.length !== 0) {
-				return this.departments[0];
-			}
-
-			return '';
-		}
 	},
 	watch: {
 		search(val) {
@@ -139,7 +138,9 @@ export default {
 		}
 	},
 	created() {
-		this.fetchIncomingRequests();
+		this.fetchIncomingRequests({
+			type: 'REQUESTED'
+		});
 		this.fetchDepartments()
 			.then(res => {
 				this.departments = res.data.data.map(department => department.name)

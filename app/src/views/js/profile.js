@@ -33,6 +33,6 @@ export default {
 		},
 	},
 	created() {
-		this.fetchUserProfile(this.currentUser.username);
+		this.fetchUserProfile(this.currentUser.id);
 	}
 };
