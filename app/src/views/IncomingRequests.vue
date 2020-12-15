@@ -1,5 +1,10 @@
 <template>
-    <v-container v-if="incomingRequests !== null">
+    <v-container v-if="incomingRequests !== null" >
+        <v-breadcrumbs :items="breadcrumbsItems" class="margin-top-minus">
+            <template v-slot:divider>
+                <v-icon>mdi-chevron-right</v-icon>
+            </template>
+        </v-breadcrumbs>
         <v-dialog
                 v-model="dialog"
                 width="500"
@@ -138,6 +143,10 @@
     .margin-filter {
         padding: 0;
         margin-top: -10px;
+    }
+
+    .margin-top-minus {
+        margin-top: -15px !important;;
     }
 
 </style>

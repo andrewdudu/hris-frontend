@@ -1,7 +1,7 @@
 <template>
     <v-container v-if="departments !== null" class="dark">
         <div v-bind:key="department.code" v-for="department in departments">
-            <router-link class="text-decoration-none" :to="`/employee?department=${department.code}`">
+            <router-link class="text-decoration-none" :to="`/employee?department=${department.code}&name=${department.name}`">
                 <v-row class="margin-top dark" no-gutters>
                     <v-col class="col-11 text-capitalize">
                         {{ toLowerCase(department.name) }}

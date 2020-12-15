@@ -11,7 +11,19 @@ export default {
 			color,
 			config,
 			modal: false,
-			note: ''
+			note: '',
+			breadcrumbsItems: [
+				{
+					text: 'Request',
+					disabled: false,
+					href: '/request',
+				},
+				{
+					text: 'Extend Leave',
+					disabled: true,
+					href: 'calendar',
+				},
+			],
 		};
 	},
 	methods: {

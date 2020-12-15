@@ -18,6 +18,17 @@ export default {
 			search: '',
 			value: '',
 			departments: [],
+			breadcrumbsItems: [
+				{
+					text: 'Request',
+					disabled: false,
+					href: '/request',
+				},
+				{
+					text: 'Incoming Request',
+					disabled: true
+				},
+			],
 			data: {
 					id: "1823a87f-12387321adf-123123adf",
 					user: {

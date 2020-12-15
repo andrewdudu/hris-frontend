@@ -43,7 +43,7 @@ const routes = [
 				attendance: {
 					current: {
 						date: {
-							start: 1604545200
+							start: null
 						},
 						location: {
 							type: "INSIDE|OUTSIDE"

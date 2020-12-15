@@ -1,6 +1,11 @@
 <template>
 
     <v-container>
+        <v-breadcrumbs :items="breadcrumbsItems" class="margin-top-minus">
+            <template v-slot:divider>
+                <v-icon>mdi-chevron-right</v-icon>
+            </template>
+        </v-breadcrumbs>
         <v-row class="dark" no-gutters>
             <v-col class="col-12 text-center">
                 <h3 class="text-capitalize">{{ (this.$route.query.type !== 'EXTRA_LEAVE' && this.$route.query.type !== 'SUBSTITUTE_LEAVE')
@@ -91,6 +96,8 @@
 
 <style lang="scss" scoped>
 
-
+    .margin-top-minus {
+        margin-top: -15px !important;;
+    }
 
 </style>

@@ -1,6 +1,11 @@
 <template>
 
     <v-container v-if="extendLeave !== null">
+        <v-breadcrumbs :items="breadcrumbsItems" class="margin-top-minus">
+            <template v-slot:divider>
+                <v-icon>mdi-chevron-right</v-icon>
+            </template>
+        </v-breadcrumbs>
         <v-row v-if="extendLeave.status === 'UNAVAILABLE'">
             <v-col class="col-12 center margin-top">
                 <img class="image-svg" src="./../../assets/img/empty.svg"  alt="unavailable"/>
@@ -50,6 +55,10 @@
 
     .image-svg {
         width: 80%;
+    }
+
+    .margin-top-minus {
+        margin-top: -15px !important;;
     }
 
 </style>

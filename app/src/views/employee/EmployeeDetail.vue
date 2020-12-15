@@ -1,5 +1,10 @@
 <template>
     <v-container v-if="employeeDetail !== null">
+        <v-breadcrumbs :items="breadcrumbsItems" class="margin-top-minus">
+            <template v-slot:divider>
+                <v-icon>mdi-chevron-right</v-icon>
+            </template>
+        </v-breadcrumbs>
         <v-row class="margin-top" no-gutters>
             <v-col class="col-2 margin-left dark">
                 <v-avatar
@@ -93,6 +98,10 @@
     .map {
         height: 300px;
         width: 100%;
+    }
+
+    .margin-top-minus {
+        margin-top: -15px !important;;
     }
 
 </style>

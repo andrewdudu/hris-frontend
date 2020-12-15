@@ -1,5 +1,10 @@
 <template>
     <v-container>
+        <v-breadcrumbs :items="breadcrumbsItems" class="margin-top-minus">
+            <template v-slot:divider>
+                <v-icon>mdi-chevron-right</v-icon>
+            </template>
+        </v-breadcrumbs>
         <v-text-field
             v-model="search"
             color="grey"
@@ -22,7 +27,7 @@
             </v-col>
         </v-row>
         <img v-if="employee.length === 0" class="img-class" src="./../../assets/img/empty.svg"  alt="not-found"/>
-        <router-link v-bind:key="idx" v-for="(emp, idx) in employee" class="text-decoration-none" :to="`/employee/detail?id=${emp.id}`" no-gutters>
+        <router-link v-bind:key="idx" v-for="(emp, idx) in employee" class="text-decoration-none" :to="`/employee/detail?id=${emp.id}&department=${department}&name=${name}`" no-gutters>
             <v-row class="margin-top" no-gutters>
                 <v-col class="col-2 margin-left dark">
                     <v-avatar
@@ -75,6 +80,10 @@
         width: 100%;
         padding: 30px;
         margin-top: 50px;
+    }
+
+    .margin-top-minus {
+        margin-top: -15px !important;;
     }
 
 </style>
