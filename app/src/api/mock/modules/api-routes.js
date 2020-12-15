@@ -7,6 +7,7 @@ const routes = [
 			code: 200,
 			status: "Success",
 			data: {
+				id: "aw",
 				username: "example@example.com",
 				name: "Andrew Wijaya",
 				roles: ["EMPLOYEE"],
@@ -179,7 +180,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/api/users/example@example.com/profile',
+		url: '/api/users/aw/profile',
 		status: 200,
 		response: {
 			code: 200,
@@ -187,15 +188,14 @@ const routes = [
 			data: {
 				attendance: 230,
 				leave: {
-					sick: 5,
-					marriage: 2,
-					childBaptism: 2,
-					childCircumcision: 0,
-					childBirth: 0,
-					hajj: 0,
-					maternity: 0,
-					mainFamilyDeath: 0,
-					closeFamilyDeath: 0
+					pending: {
+						sick: 5,
+						childBirth: 10
+					},
+					approved: {
+						sick: 10,
+						childCircumcision: 3
+					}
 				},
 				quota: {
 					annual: 8,

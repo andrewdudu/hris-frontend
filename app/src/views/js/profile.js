@@ -8,7 +8,12 @@ export default {
 	name: "Login",
 	data() {
 		return {
-			color
+			color,
+			tab: null,
+			items: [
+				{ tab: 'Approved', content: 'approved' },
+				{ tab: 'Pending', content: 'pending' }
+			],
 		};
 	},
 	methods: {

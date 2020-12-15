@@ -52,6 +52,7 @@ $break_small: 620px;
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: -50px;
   width: 100%;
 }
 
