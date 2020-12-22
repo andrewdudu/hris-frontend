@@ -741,6 +741,16 @@ const routes = [
 				}
 			]
 		}
+	},
+	{
+		method: 'GET',
+		url: '/auth/logout',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {}
+		}
 	}
 ];
 

@@ -17,7 +17,7 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions('user', ['fetchUserProfile']),
+		...mapActions('user', ['fetchUserProfile', 'fetchCurrentUser']),
 		unixToString(value) {
 			return timestamp.unixToString(value);
 		},
@@ -38,6 +38,9 @@ export default {
 		},
 	},
 	created() {
-		this.fetchUserProfile(this.currentUser.id);
+		this.fetchCurrentUser()
+			.then(() => {
+				this.fetchUserProfile(this.currentUser.id);
+			});
 	}
 };

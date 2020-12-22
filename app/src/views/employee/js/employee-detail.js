@@ -18,17 +18,17 @@ export default {
 				{
 					text: 'Request',
 					disabled: false,
-					href: 'request',
+					href: '/request',
 				},
 				{
 					text: 'Employee',
 					disabled: false,
-					href: 'department',
+					href: '/department',
 				},
 				{
 					text: this.$route.query.name,
 					disabled: false,
-					href: `employee?department=${this.$route.query.department}&name=${this.$route.query.name}`
+					href: `/employee?department=${this.$route.query.department}&name=${this.$route.query.name}`
 				},
 				{
 					text: 'Detail',

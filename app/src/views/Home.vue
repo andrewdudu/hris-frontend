@@ -173,7 +173,7 @@
       </v-col>
       <div class="last-attendance center">
         <v-card v-if="dashboardSummary !== null" class="padding last-attendance-card">
-          <v-row v-if="dashboardSummary.attendance !== null && !currentUser.roles.includes('ADMIN') && dashboardSummary.attendance.latest.date !== null" no-gutters>
+          <v-row v-if="dashboardSummary.attendance !== null && !currentUser.roles.includes('ADMIN') && dashboardSummary.attendance.latest.date.start !== null" no-gutters>
             <v-col class="col-12 margin">
               <v-icon :color="color.blubluedark1" size="20">mdi-calendar</v-icon>
               <span class="bold dark margin-left">{{ unixToShortDay(dashboardSummary.attendance.latest.date.start) }}, {{ unixToString(dashboardSummary.attendance.latest.date.start) }}</span>
@@ -189,7 +189,7 @@
               <span class="dark margin-left text-capitalize">{{ dashboardSummary.attendance.latest.location.type.toLowerCase() }} Office</span>
             </v-col>
           </v-row>
-          <v-row v-if="dashboardSummary.report !== null" no-gutters>
+          <v-row v-else-if="dashboardSummary.report !== null" no-gutters>
             <v-col class="col-12 margin">
               <v-icon :color="color.blubluedark1" size="20">mdi-calendar</v-icon>
               <span class="bold dark margin-left">{{ dashboardSummary.report.absent }} absent(s)</span>
@@ -200,6 +200,9 @@
                   {{ dashboardSummary.report.working }} working
                 </span>
             </v-col>
+          </v-row>
+          <v-row v-else no-gutters>
+            <span class="dark">No Data</span>
           </v-row>
         </v-card>
       </div>

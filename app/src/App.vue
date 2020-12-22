@@ -1,10 +1,32 @@
 <template>
   <v-app>
     <div class="header">
+      <v-btn
+        icon
+        light
+        class="header-btn-left"
+      >
+        <router-link
+                class="text-decoration-none"
+                v-if="$routerHistory.hasPrevious()"
+                :to="{ path: $routerHistory.previous().path }">
+          <v-icon :color="color.blubluedark1">
+            mdi-chevron-left
+          </v-icon>
+        </router-link>
+      </v-btn>
       <img
         class="logo-header"
         src="./assets/img/default_2.png"
         alt="logo"/>
+      <v-btn
+        v-if="$route.path !== '/login'"
+        small
+        :color="color.blubluedark1"
+        dark
+        class="header-btn"
+        @click="onLogout"
+      >Logout</v-btn>
     </div>
     <Snackbar />
 
@@ -20,6 +42,7 @@
 import BottomNavigation from './components/BottomNavigation';
 import Snackbar from './components/Snackbar';
 import { mapActions } from "vuex";
+import color from "@/assets/js/color.js";
 
 export default {
   name: 'App',
@@ -30,12 +53,28 @@ export default {
   },
 
   methods: {
-    ...mapActions('user', ['fetchCurrentUser'])
+    ...mapActions('user', ['fetchCurrentUser']),
+    ...mapActions('authentication', ['postLogout']),
+    onLogout() {
+      this.postLogout()
+        .then(() => this.$router.push('/login'));
+    }
   },
 
-  data: () => ({
-    //
-  }),
+  computed: {
+    hasHistory() {
+      return this.$router;
+    },
+    backIsShown() {
+      return document.referrer
+    }
+  },
+
+  data() {
+    return {
+      color
+    }
+  },
 
   created() {
     this.fetchCurrentUser();
@@ -52,8 +91,19 @@ $break_small: 620px;
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: -50px;
   width: 100%;
+}
+
+.header-btn {
+  align-self: center;
+  position: absolute;
+  right: 10px;
+}
+
+.header-btn-left {
+  align-self: center;
+  position: absolute;
+  left: 17px;
 }
 
 .logo-header {

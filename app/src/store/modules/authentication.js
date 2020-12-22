@@ -11,6 +11,12 @@ const actions = {
 		return api
 			.postLogin(request)
 			.then(response => response)
+	},
+	// eslint-disable-next-line no-unused-vars
+	postLogout({ commit }) {
+		return api
+			.postLogout()
+			.then(response => response);
 	}
 };
 

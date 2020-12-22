@@ -17,7 +17,8 @@ export default {
 			dialog: false,
 			search: '',
 			value: '',
-			departments: [],
+			departmentData: [],
+			url: process.env.VUE_APP_URL,
 			breadcrumbsItems: [
 				{
 					text: 'Request',
@@ -67,6 +68,7 @@ export default {
 		...mapActions('request', ['fetchIncomingRequests', 'postApprove', 'postReject']),
 		...mapActions('department', ['fetchDepartments']),
 		...mapActions('component', ['openSnackbar']),
+		...mapActions('user', ['fetchCurrentUser']),
 		nameToInitials(name) {
 			return nameToInitials(name);
 		},
@@ -89,7 +91,10 @@ export default {
 					this.openSnackbar({
 						color: 'success',
 						message: 'Rejected.'
-					})
+					});
+					this.fetchIncomingRequests({
+						type: 'REQUESTED'
+					});
 				})
 				.catch(() => {
 					this.openSnackbar({
@@ -105,7 +110,10 @@ export default {
 					this.openSnackbar({
 						color: 'success',
 						message: 'Approved.'
-					})
+					});
+					this.fetchIncomingRequests({
+						type: 'REQUESTED'
+					});
 				})
 				.catch(() => {
 					this.openSnackbar({
@@ -120,9 +128,10 @@ export default {
 			this.onChange();
 		},
 		onChange() {
+			const deptCode = this.departments.find((department) => department.name === this.value).code;
 			this.fetchIncomingRequests({
 				name: this.search,
-				department: this.value,
+				department: deptCode,
 				type: 'REQUESTED'
 			})
 		},
@@ -132,6 +141,7 @@ export default {
 	},
 	computed: {
 		...mapGetters('request', ['incomingRequests']),
+		...mapGetters('department', ['departments']),
 		dates() {
 			if (this.data.type === 'LEAVE') {
 				this.data.detail.leave.dates.sort();
@@ -152,9 +162,14 @@ export default {
 		this.fetchIncomingRequests({
 			type: 'REQUESTED'
 		});
-		this.fetchDepartments()
-			.then(res => {
-				this.departments = res.data.data.map(department => department.name)
-			})
+		this.fetchCurrentUser()
+			.then((res) => {
+				if (res.data.data.roles.includes('ADMIN')) {
+					this.fetchDepartments()
+						.then(res => {
+							this.departmentData = res.data.data.map(department => department.name)
+						})
+				}
+			});
 	}
 };

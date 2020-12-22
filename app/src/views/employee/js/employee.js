@@ -77,7 +77,17 @@ export default {
 					}
 				},
 				"Last Modified By": "lastModifiedBy",
-				Notes: "notes"
+				Notes: "notes",
+				"Files": {
+					field: "files",
+					callback: (files) => {
+						if (files !== "") {
+							const filesWithUrl = files.map(file => process.env.VUE_APP_URL + file);
+
+							return filesWithUrl.join(", ");
+						}
+					}
+				}
 			}
 		};
 	},

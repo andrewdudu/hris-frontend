@@ -82,9 +82,16 @@ export default {
 					color: 'success'
 				});
 				this.$router.push('/');
-			}).catch(() => {
+			}).catch((err) => {
+				const errors = err.response.data.errors;
+				let message = 'Something went wrong, please try again later.';
+				let key = Object.keys(errors)[0];
+				if (err.response.data.code === 400) {
+					message = config.errMessage[errors[key]];
+				}
+
 				this.openSnackbar({
-					message: 'Something went wrong, please try again later.',
+					message,
 					color: 'error'
 				});
 			})
