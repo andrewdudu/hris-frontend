@@ -11,7 +11,19 @@ export default {
 			color,
 			config,
 			modal: false,
-			note: ''
+			note: '',
+			breadcrumbsItems: [
+				{
+					text: 'Request',
+					disabled: false,
+					href: '/request',
+				},
+				{
+					text: 'Extend Leave',
+					disabled: true,
+					href: 'calendar',
+				},
+			],
 		};
 	},
 	methods: {
@@ -21,7 +33,7 @@ export default {
 			return lowerCase(str);
 		},
 		toMonth(time) {
-			return moment.unix(time).format('MMM YYYY');
+			return moment(time).format('MMM YYYY');
 		},
 		onRequest() {
 			this.postExtendLeave({

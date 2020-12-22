@@ -1,7 +1,7 @@
 <template>
     <v-container v-if="availableSpecialRequests !== null" class="dark">
         <div v-bind:key="request" v-for="request in availableSpecialRequests">
-            <router-link class="text-decoration-none" :to="`/request/leave?type=${request}`">
+            <router-link class="text-decoration-none" :to="`/request/leave?type=${request}&special=1`">
                 <v-row class="margin-top dark" no-gutters>
                     <v-col class="col-11 text-capitalize">
                         {{ toLowerCase(request) }}

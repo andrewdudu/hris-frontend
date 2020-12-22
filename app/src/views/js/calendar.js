@@ -23,7 +23,19 @@ export default {
 			],
 			titleRules: [
 				v => !!v || 'Title is required',
-			]
+			],
+			breadcrumbsItems: [
+				{
+					text: 'Request',
+					disabled: false,
+					href: 'request',
+				},
+				{
+					text: 'Set Holiday',
+					disabled: true,
+					href: 'calendar',
+				},
+			],
 		};
 	},
 	methods: {

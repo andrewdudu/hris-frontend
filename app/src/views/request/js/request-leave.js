@@ -1,6 +1,6 @@
 import color from "@/assets/js/color.js";
 import { mapActions, mapGetters } from "vuex";
-import { lowerCase } from 'lodash';
+import { lowerCase, capitalize } from 'lodash';
 import config from '@/config';
 
 export default {
@@ -27,7 +27,19 @@ export default {
 			noteRules: [
 				v => this.$route.query.type !== 'SUBSTITUTE_LEAVE' || !!v || 'Note is required',
 				v => v.length <= 256 || 'Name must be less or equal than 256 characters'
-			]
+			],
+			breadcrumbsItems: [
+				{
+					text: 'Request',
+					disabled: false,
+					href: '/request',
+				},
+				{
+					text: capitalize(lowerCase(this.$route.query.type)),
+					disabled: true,
+					href: 'calendar',
+				},
+			],
 		};
 	},
 	methods: {
@@ -70,9 +82,16 @@ export default {
 					color: 'success'
 				});
 				this.$router.push('/');
-			}).catch(() => {
+			}).catch((err) => {
+				const errors = err.response.data.errors;
+				let message = 'Something went wrong, please try again later.';
+				let key = Object.keys(errors)[0];
+				if (err.response.data.code === 400) {
+					message = config.errMessage[errors[key]];
+				}
+
 				this.openSnackbar({
-					message: 'Something went wrong, please try again later.',
+					message,
 					color: 'error'
 				});
 			})

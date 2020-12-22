@@ -1,6 +1,5 @@
 import color from "@/assets/js/color.js";
 import { mapActions } from "vuex";
-import { lowerCase } from 'lodash';
 import config from '@/config';
 
 export default {
@@ -18,22 +17,28 @@ export default {
 			endHour: null,
 			menuStartHour: false,
 			menuEndHour: false,
-			dateRules: [
-				v => !!v || 'Date is required'
-			],
 			noteRules: [
 				v => v.length <= 256 || 'Name must be less or equal than 256 characters'
 			],
 			startHourRules: [(v) => !!v || "Clock In is required"],
-			endHourRules: [(v) => !!v || "Clock Out is required"]
+			endHourRules: [(v) => !!v || "Clock Out is required"],
+			breadcrumbsItems: [
+				{
+					text: 'Request',
+					disabled: false,
+					href: '/request',
+				},
+				{
+					text: 'Request Attendance',
+					disabled: true,
+					href: 'calendar',
+				},
+			],
 		};
 	},
 	methods: {
 		...mapActions('request', ['postRequestAttendance']),
 		...mapActions('component', ['openSnackbar']),
-		toLowerCase(str) {
-			return lowerCase(str);
-		},
 		onRequest() {
 			this.postRequestAttendance({
 				date: this.date,

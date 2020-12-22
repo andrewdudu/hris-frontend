@@ -14,6 +14,24 @@ export default {
 		return {
 			color,
 			search: '',
+			department: this.$route.query.department,
+			name: this.$route.query.name,
+			breadcrumbsItems: [
+				{
+					text: 'Request',
+					disabled: false,
+					href: 'request',
+				},
+				{
+					text: 'Employee',
+					disabled: false,
+					href: 'department',
+				},
+				{
+					text: this.$route.query.name,
+					disabled: true
+				},
+			],
 			excelFields: {
 				NIK: "employee.nik",
 				Name: "employee.name",
@@ -59,7 +77,17 @@ export default {
 					}
 				},
 				"Last Modified By": "lastModifiedBy",
-				Notes: "notes"
+				Notes: "notes",
+				"Files": {
+					field: "files",
+					callback: (files) => {
+						if (files !== "") {
+							const filesWithUrl = files.map(file => process.env.VUE_APP_URL + file);
+
+							return filesWithUrl.join(", ");
+						}
+					}
+				}
 			}
 		};
 	},

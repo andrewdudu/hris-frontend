@@ -1,5 +1,10 @@
 <template>
     <div>
+        <v-breadcrumbs :items="breadcrumbsItems" class="margin-top-minus">
+            <template v-slot:divider>
+                <v-icon>mdi-chevron-right</v-icon>
+            </template>
+        </v-breadcrumbs>
         <v-dialog
                 v-model="dialog"
                 width="500"
@@ -109,6 +114,10 @@
 
     .margin-top-calendar {
         margin-top: -10px;
+    }
+
+    .margin-top-minus {
+        margin-top: -15px !important;;
     }
 
 </style>

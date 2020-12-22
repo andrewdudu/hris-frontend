@@ -4,7 +4,10 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
+import VueRouterBackButton from 'vue-router-back-button';
 import '@vue-mock';
+
+Vue.use(VueRouterBackButton, { router });
 
 Vue.config.productionTip = false;
 

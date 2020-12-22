@@ -79,6 +79,7 @@ export default {
         message: "Clocked Out.",
         color: 'success'
       });
+      this.fetchDashboardSummary();
     },
     onClockOutFail(err) {
       if (err.response.data.errors.message.includes('NOT_AVAILABLE')) {
@@ -93,7 +94,8 @@ export default {
       this.openSnackbar({
         message: "Clocked In.",
         color: 'success'
-      })
+      });
+      this.fetchDashboardSummary();
     },
     onClockInFail() {
       this.openSnackbar({
