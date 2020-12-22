@@ -8,11 +8,16 @@ export default {
 	name: "Login",
 	data() {
 		return {
-			color
+			color,
+			tab: null,
+			items: [
+				{ tab: 'Approved', content: 'approved' },
+				{ tab: 'Pending', content: 'pending' }
+			],
 		};
 	},
 	methods: {
-		...mapActions('user', ['fetchUserProfile']),
+		...mapActions('user', ['fetchUserProfile', 'fetchCurrentUser']),
 		unixToString(value) {
 			return timestamp.unixToString(value);
 		},
@@ -33,6 +38,9 @@ export default {
 		},
 	},
 	created() {
-		this.fetchUserProfile(this.currentUser.id);
+		this.fetchCurrentUser()
+			.then(() => {
+				this.fetchUserProfile(this.currentUser.id);
+			});
 	}
 };

@@ -21,7 +21,7 @@
                         <v-col class="col-12">
                             <v-icon :color="color.blubluedark1" size="20">mdi-clock-outline</v-icon>
                             <span class="dark margin-left">
-                                {{ unixToTime(attendance.date.start) }} - {{ unixToTime(attendance.date.end) }}
+                                {{ unixToTime(attendance.date.start) }} <span v-if="attendance.date.end !== null">- {{ unixToTime(attendance.date.end) }}</span>
                             </span>
                         </v-col>
                         <v-col class="col-12">

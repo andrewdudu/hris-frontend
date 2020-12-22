@@ -1,8 +1,13 @@
 <template>
-    <v-container v-if="incomingRequests !== null">
+    <v-container v-if="incomingRequests !== null" >
+        <v-breadcrumbs :items="breadcrumbsItems" class="margin-top-minus">
+            <template v-slot:divider>
+                <v-icon>mdi-chevron-right</v-icon>
+            </template>
+        </v-breadcrumbs>
         <v-dialog
-                v-model="dialog"
-                width="500"
+            v-model="dialog"
+            width="500"
         >
             <v-card class="dark">
                 <v-card-title class="headline lighten-2 center text-capitalize">
@@ -30,7 +35,7 @@
                         </v-col>
                         <v-col v-if="data.type === 'LEAVE'" class="col-12">
                             <span class="dark text-capitalize">{{ data.detail.leave.type.toLowerCase() }}</span>
-                            <a v-if="data.detail.leave.type === 'SICK'" :href="data.detail.leave.files[0]" class="dark"><br/>View Sick Letter</a>
+                            <a v-if="data.detail.leave.type === 'SICK_WITH_MEDICAL_LETTER'" :href="url + data.detail.leave.files[0]"  target="_blank" class="dark"><br/>View Sick Letter</a>
                         </v-col>
                         <v-col class="col-12 margin-top">
                             <span class="dark">{{ data.detail[data.type.toLowerCase()].notes }}</span>
@@ -75,12 +80,12 @@
             return-object
         />
 
-        <v-col v-if="departments.length !== 0" class="col-7 bold dark no-gutters">
+        <v-col v-if="departmentData.length !== 0" class="col-7 bold dark no-gutters">
             <v-select
                 class="margin-filter"
                 :value="value"
                 :color="color.blubluedark1"
-                :items="this.departments"
+                :items="this.departmentData"
                 prepend-icon="mdi-filter-variant"
                 @change="onFilterChange"
             />
@@ -138,6 +143,10 @@
     .margin-filter {
         padding: 0;
         margin-top: -10px;
+    }
+
+    .margin-top-minus {
+        margin-top: -15px !important;;
     }
 
 </style>

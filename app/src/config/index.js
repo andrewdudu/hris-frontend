@@ -20,7 +20,8 @@ const config = {
 			attendances: '/api/attendances'
 		},
 		authentication: {
-			login: '/auth/login'
+			login: '/auth/login',
+			logout: '/auth/logout'
 		},
 		request: {
 			leave: '/api/request/leaves',
@@ -68,6 +69,9 @@ const config = {
 		CHILD_BAPTISM: false,
 		CHILD_CIRCUMCISION: false,
 		UNPAID_LEAVE: true
+	},
+	errMessage: {
+		QUOTA_NOT_AVAILABLE: 'You don\'t have enough Quota to request.'
 	}
 };
 
