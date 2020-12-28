@@ -335,6 +335,26 @@ const routes = [
 		}
 	},
 	{
+		method: 'POST',
+		url: '/api/request/attendances',
+		status: 400,
+		param_values: {
+			date: "2020-12-17",
+			clockIn: "05:00",
+			clockOut: "17:00"
+		},
+		response: {
+			code: 400,
+			status: "Success",
+			data: {
+				date: "2020-05-25",
+				clockIn: "08:00",
+				clockOut: "17:00",
+				notes: "notes"
+			}
+		}
+	},
+	{
 		method: 'GET',
 		url: '/api/attendances',
 		status: 200,
