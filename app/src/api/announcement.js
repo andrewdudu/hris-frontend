@@ -8,8 +8,11 @@ const defaultParams = {
 
 export default {
 	fetchAnnouncements(params = defaultParams) {
-		return axios.get(config.api.announcement, {
+		return axios.get(config.api.announcement.getAnnouncements, {
 			params
 		});
+	},
+	postAnnouncement(data) {
+		return axios.post(config.api.announcement.addAnnouncement, data);
 	}
 }

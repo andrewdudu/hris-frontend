@@ -13,7 +13,10 @@ const config = {
 		dashboard: {
 			summary: '/api/dashboard/summary'
 		},
-		announcement: '/api/announcements',
+		announcement: {
+			getAnnouncements: '/api/announcements',
+			addAnnouncement: '/api/announcement'
+		},
 		attendance: {
 			clockIn: '/api/attendances/_clock-in',
 			clockOut: '/api/attendances/_clock-out',
@@ -51,7 +54,8 @@ const config = {
 		EXTEND_ANNUAL_LEAVE: '/request/extend',
 		INCOMING_REQUESTS: '/request/incoming',
 		SET_HOLIDAY: '/calendar',
-		EMPLOYEE: '/department'
+		EMPLOYEE: '/department',
+		ADD_ANNOUNCEMENT: '/add-announcement'
 	},
 	leaveIsOneDay: {
 		ATTENDANCE: false,

@@ -19,6 +19,14 @@ const actions = {
 				return announcements;
 			})
 	},
+	// eslint-disable-next-line no-unused-vars
+	postAnnouncement({ commit }, data) {
+		return api
+			.postAnnouncement(data)
+			.then(announcement => {
+				return announcement;
+			})
+	}
 };
 
 const getters = {

@@ -249,7 +249,8 @@ const routes = [
 				"EXTEND_ANNUAL_LEAVE",
 				"INCOMING_REQUESTS",
 				"SET_HOLIDAY",
-				"EMPLOYEE"
+				"EMPLOYEE",
+				"ADD_ANNOUNCEMENT"
 			]
 		}
 	},
@@ -322,9 +323,15 @@ const routes = [
 	{
 		method: 'POST',
 		url: '/api/request/attendances',
-		status: 200,
+		status: 400,
+		param_values: {
+			date: "2020-12-17",
+			clockIn: "05:00",
+			clockOut: "17:00",
+			notes: ""
+		},
 		response: {
-			code: 200,
+			code: 400,
 			status: "Success",
 			data: {
 				date: "2020-05-25",
@@ -337,14 +344,9 @@ const routes = [
 	{
 		method: 'POST',
 		url: '/api/request/attendances',
-		status: 400,
-		param_values: {
-			date: "2020-12-17",
-			clockIn: "05:00",
-			clockOut: "17:00"
-		},
+		status: 200,
 		response: {
-			code: 400,
+			code: 200,
 			status: "Success",
 			data: {
 				date: "2020-05-25",
@@ -770,6 +772,19 @@ const routes = [
 			code: 200,
 			status: "Success",
 			data: {}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/announcement',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				title: "title",
+				notes: "notes"
+			}
 		}
 	}
 ];

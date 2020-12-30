@@ -12,6 +12,7 @@ export default {
 		return axios.post(config.api.request.extend, data);
 	},
 	postRequestAttendance(data) {
+		console.log(data);
 		return axios.post(config.api.request.attendance, data);
 	},
 	fetchIncomingRequest(params) {

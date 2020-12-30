@@ -3,7 +3,6 @@ import Router from "vue-router";
 
 Vue.use(Router);
 
-// USER PAGE
 const HomePage = () => import(/* webpackChunkName:'p-home' */"@/views/Home.vue");
 const AnnouncementPage = () => import(/* webpackChunkName:'p-announcement' */"@/views/Announcement.vue");
 const LoginPage = () => import("@/views/Login.vue");
@@ -21,6 +20,7 @@ const CalendarPage = () => import("@/views/Calendar.vue");
 const DepartmentPage = () => import("@/views/employee/EmployeeList.vue");
 const EmployeePage = () => import("@/views/employee/Employee.vue");
 const EmployeeDetailPage = () => import("@/views/employee/EmployeeDetail.vue");
+const AddAnnouncementPage = () => import("@/views/AddAnnouncement.vue");
 
 export default new Router({
   mode: "history",
@@ -110,6 +110,11 @@ export default new Router({
       path: "/employee/detail",
       name: "Employee Detail Page",
       component: EmployeeDetailPage
+    },
+    {
+      path: "/add-announcement",
+      name: "Add Announcement Page",
+      component: AddAnnouncementPage
     }
   ],
 });

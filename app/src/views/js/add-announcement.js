@@ -8,20 +8,11 @@ export default {
 		return {
 			color,
 			config,
-			date: null,
-			menu: false,
-			modal: false,
 			note: '',
-			url: null,
-			startHour: null,
-			endHour: null,
-			menuStartHour: false,
-			menuEndHour: false,
+			title: '',
 			noteRules: [
 				v => v.length <= 256 || 'Name must be less or equal than 256 characters'
 			],
-			startHourRules: [(v) => !!v || "Clock In is required"],
-			endHourRules: [(v) => !!v || "Clock Out is required"],
 			breadcrumbsItems: [
 				{
 					text: 'Request',
@@ -29,25 +20,23 @@ export default {
 					href: '/request',
 				},
 				{
-					text: 'Request Attendance',
+					text: 'Add Announcement',
 					disabled: true,
-					href: 'calendar',
+					href: '/add-announcement',
 				},
 			],
 		};
 	},
 	methods: {
-		...mapActions('request', ['postRequestAttendance']),
+		...mapActions('announcement', ['postAnnouncement']),
 		...mapActions('component', ['openSnackbar']),
 		onRequest() {
-			this.postRequestAttendance({
-				date: this.date,
-				clockIn: this.startHour,
-				clockOut: this.endHour,
+			this.postAnnouncement({
+				title: this.title,
 				notes: this.note
 			}).then(() => {
 				this.openSnackbar({
-					message: 'Request Successfully',
+					message: 'Added Successfully',
 					color: 'success'
 				});
 				this.$router.push('/');
@@ -61,7 +50,7 @@ export default {
 	},
 	computed: {
 		valid() {
-			return this.date !== null && (this.startHour !== null && this.startHour !== '') && (this.endHour !== null && this.endHour !== '');
+			return (this.note !== "" && this.note !== null) && (this.title !== "" && this.title !== null);
 		}
 	},
 };
