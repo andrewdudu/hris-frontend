@@ -786,6 +786,19 @@ const routes = [
 				notes: "notes"
 			}
 		}
+	},
+	{
+		method: 'POST',
+		url: '/api/substitute-leave',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				id: "id",
+				total: 3
+			}
+		}
 	}
 ];
 

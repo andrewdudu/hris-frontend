@@ -30,5 +30,8 @@ export default {
 		return axios.get(config.api.request.excel, {
 			params
 		})
+	},
+	postAddSubstituteLeave(data) {
+		return axios.post(config.api.request.addSubstituteLeave, data);
 	}
 }

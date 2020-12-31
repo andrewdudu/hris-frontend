@@ -13,6 +13,8 @@ export default {
 		return {
 			color,
 			dialog: false,
+			requestDialog: false,
+			total: 0,
 			id: this.$route.query.id,
 			breadcrumbsItems: [
 				{
@@ -39,15 +41,37 @@ export default {
 	},
 	methods: {
 		...mapActions('employee', ['fetchEmployeeDetail']),
+		...mapActions('request', ['postAddSubstituteLeave']),
+		...mapActions('component', ['openSnackbar']),
 		nameToInitials(name) {
 			return nameToInitials(name);
 		},
 		unixToTime(value) {
 			return timestamp.unixToTime(value);
+		},
+		onAddSubstituteLeave() {
+			this.postAddSubstituteLeave({
+				total: this.total,
+				id: this.id
+			}).then(() => {
+				this.openSnackbar({
+					message: 'Added Successfully.',
+					color: 'success'
+				})
+			}).catch(() => {
+				this.openSnackbar({
+					message: 'Something went wrong, please try again later.',
+					color: 'error'
+				})
+			});
+			this.requestDialog = false;
 		}
 	},
 	computed: {
 		...mapGetters('employee', ['employeeDetail']),
+		valid() {
+			return (typeof parseInt(this.total) === 'number') && this.total !== 0 && this.total > 0;
+		}
 	},
 	created() {
 		this.fetchEmployeeDetail(this.id);

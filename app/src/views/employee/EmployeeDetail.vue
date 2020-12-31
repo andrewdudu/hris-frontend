@@ -5,6 +5,31 @@
                 <v-icon>mdi-chevron-right</v-icon>
             </template>
         </v-breadcrumbs>
+        <v-dialog v-model="requestDialog">
+            <v-card>
+                <v-card-title class="headline lighten-2 dark">
+                    Add Substitute Leave
+                </v-card-title>
+
+                <v-card-text>
+                    <v-form>
+                        <v-text-field v-model="total" type="number" label="Total"/>
+                    </v-form>
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-spacer/>
+                    <v-btn
+                        color="primary"
+                        text
+                        @click="onAddSubstituteLeave"
+                        :disabled="!valid"
+                    >
+                        Add
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
         <v-row class="margin-top" no-gutters>
             <v-col class="col-2 margin-left dark">
                 <v-avatar
@@ -14,7 +39,7 @@
                     <span class="white--text headline-small">{{ nameToInitials(employeeDetail.user.name) }}</span>
                 </v-avatar>
             </v-col>
-            <v-col class="col-9 dark margin-top-name">
+            <v-col class="col-7 dark margin-top-name">
                 <v-row class="margin-left-name" no-gutters>
                     <v-col class="col-9 bold">
                         <span class="medium">{{ employeeDetail.user.name }}</span>
@@ -29,6 +54,11 @@
             </v-col>
         </v-row>
         <v-row class="padding">
+            <v-col class="col-12 center dark">
+                <v-btn class="white--text" :color="color.blubluedark1" @click="requestDialog = true">
+                    Add Substitute Leave
+                </v-btn>
+            </v-col>
             <v-col class="col-12 center dark medium bold">
                 <span>Today Attendance</span>
             </v-col>
@@ -61,6 +91,7 @@
         <v-dialog v-model="dialog">
             <img :src="employeeDetail.attendance.image"  alt="selfie-image"/>
         </v-dialog>
+
     </v-container>
     <img v-else class="img-class" src="./../../assets/img/empty.svg"  alt="not-found"/>
 </template>

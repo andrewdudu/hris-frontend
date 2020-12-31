@@ -33,7 +33,8 @@ const config = {
 			incoming: '/api/requests',
 			approve: (id) => `/api/requests/${id}/_approve`,
 			reject: (id) => `/api/requests/${id}/_reject`,
-			excel: '/api/reports/leaves'
+			excel: '/api/reports/leaves',
+			addSubstituteLeave: '/api/substitute-leave'
 		},
 		calendar: {
 			day: '/api/calendar/days',

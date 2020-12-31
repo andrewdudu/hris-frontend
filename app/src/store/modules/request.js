@@ -80,6 +80,13 @@ const actions = {
 				commit('setExcelReport', res.data.data);
 				return res;
 			});
+	},
+	// eslint-disable-next-line no-unused-vars
+	postAddSubstituteLeave({ commit }, data) {
+		return api.postAddSubstituteLeave(data)
+			.then(res => {
+				return res;
+			})
 	}
 };
 
