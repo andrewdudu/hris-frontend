@@ -34,7 +34,8 @@ const config = {
 			approve: (id) => `/api/requests/${id}/_approve`,
 			reject: (id) => `/api/requests/${id}/_reject`,
 			excel: '/api/reports/leaves',
-			addSubstituteLeave: '/api/substitute-leave'
+			addSubstituteLeave: '/api/substitute-leave',
+			hourlyLeave: '/api/request/hourly'
 		},
 		calendar: {
 			day: '/api/calendar/days',
@@ -56,7 +57,8 @@ const config = {
 		INCOMING_REQUESTS: '/request/incoming',
 		SET_HOLIDAY: '/calendar',
 		EMPLOYEE: '/department',
-		ADD_ANNOUNCEMENT: '/add-announcement'
+		ADD_ANNOUNCEMENT: '/add-announcement',
+		HOURLY_LEAVE: '/request/hourly'
 	},
 	leaveIsOneDay: {
 		ATTENDANCE: false,

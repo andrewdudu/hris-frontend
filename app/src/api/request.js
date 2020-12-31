@@ -33,5 +33,8 @@ export default {
 	},
 	postAddSubstituteLeave(data) {
 		return axios.post(config.api.request.addSubstituteLeave, data);
+	},
+	postHourlyLeave(data) {
+		return axios.post(config.api.request.hourlyLeave, data);
 	}
 }

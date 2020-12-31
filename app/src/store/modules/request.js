@@ -87,6 +87,13 @@ const actions = {
 			.then(res => {
 				return res;
 			})
+	},
+	// eslint-disable-next-line no-unused-vars
+	postHourlyLeave({ commit }, data) {
+		return api.postHourlyLeave(data)
+			.then(res => {
+				return res;
+			});
 	}
 };
 

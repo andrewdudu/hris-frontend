@@ -242,6 +242,7 @@ const routes = [
 			status: 'Success',
 			data: [
 				"ATTENDANCE",
+				"HOURLY_LEAVE",
 				"ANNUAL_LEAVE",
 				"SPECIAL_LEAVE",
 				"EXTRA_LEAVE",
@@ -797,6 +798,20 @@ const routes = [
 			data: {
 				id: "id",
 				total: 3
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/request/hourly',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				startTime: "11:00",
+				endTime: "13:00",
+				notes: "notes"
 			}
 		}
 	}

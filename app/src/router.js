@@ -21,6 +21,7 @@ const DepartmentPage = () => import("@/views/employee/EmployeeList.vue");
 const EmployeePage = () => import("@/views/employee/Employee.vue");
 const EmployeeDetailPage = () => import("@/views/employee/EmployeeDetail.vue");
 const AddAnnouncementPage = () => import("@/views/AddAnnouncement.vue");
+const HourlyLeavePage = () => import("@/views/request/HourlyLeave.vue");
 
 export default new Router({
   mode: "history",
@@ -115,6 +116,11 @@ export default new Router({
       path: "/add-announcement",
       name: "Add Announcement Page",
       component: AddAnnouncementPage
+    },
+    {
+      path: "/request/hourly",
+      name: "Hourly Leave Page",
+      component: HourlyLeavePage
     }
   ],
 });
