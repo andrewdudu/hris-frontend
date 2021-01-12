@@ -9,17 +9,9 @@ const matchImage = async (isNetworkIdle = false, delayTime = 2000) => {
 };
 
 // only mobile
-describe.only('Home Page', () => {
+describe.only('Request Attendance Page', () => {
 	beforeAll(async () => {
 		await responsive.setMobile(page);
-
-		page.on('request', request => request.method() !== 'GET' ? console.log('>>', request.method(), request.url(), request.postData()) : null);
-		// page.route('**', (route, request) => {
-		// 	if (request.method() !== 'GET') {
-		// 		console.log(request.url(), request.postData());
-		// 	}
-		// 	route.continue();
-		// });
 	});
 
 	beforeEach(async () => {
@@ -34,8 +26,8 @@ describe.only('Home Page', () => {
 		await page.click('.container > div:nth-child(1) > .text-decoration-none > .row > .col-11');
 		await matchImage();
 
-		await page.waitForSelector('.v-input #input-66');
-		await page.click('.v-input #input-66');
+		await page.waitForSelector('.v-input #input-72');
+		await page.click('.v-input #input-72');
 		await matchImage();
 
 		await page.waitForSelector('tbody > tr:nth-child(3) > td:nth-child(5) > .v-btn > .v-btn__content');
@@ -46,8 +38,8 @@ describe.only('Home Page', () => {
 		await page.click('.v-dialog > .v-picker > .v-picker__actions > .v-btn:nth-child(3) > .v-btn__content');
 		await matchImage();
 
-		await page.waitForSelector('.v-input #input-72');
-		await page.click('.v-input #input-72');
+		await page.waitForSelector('.v-input #input-78');
+		await page.click('.v-input #input-78');
 		await matchImage();
 
 		await page.waitForSelector('.v-picker__body > .v-time-picker-clock__container:nth-child(1) > .v-time-picker-clock > .v-time-picker-clock__inner > .v-time-picker-clock__item:nth-child(7)');
@@ -62,8 +54,8 @@ describe.only('Home Page', () => {
 		await page.click('.v-dialog > .v-picker > .v-picker__actions:nth-child(3) > .v-btn > .v-btn__content');
 		await matchImage(false, 1000);
 
-		await page.waitForSelector('.v-input #input-77');
-		await page.click('.v-input #input-77');
+		await page.waitForSelector('.v-input #input-83');
+		await page.click('.v-input #input-83');
 		await matchImage();
 
 		await page.waitForSelector('.v-picker__body > .v-time-picker-clock__container:nth-child(1) > .v-time-picker-clock > .v-time-picker-clock__inner > .v-time-picker-clock__item:nth-child(7)');
@@ -82,8 +74,8 @@ describe.only('Home Page', () => {
 		await page.click('.v-dialog > .v-picker > .v-picker__actions:nth-child(3) > .v-btn > .v-btn__content');
 		await matchImage();
 
-		await page.waitForSelector('.v-input #input-81');
-		await page.click('.v-input #input-81');
+		await page.waitForSelector('.v-input #input-87');
+		await page.click('.v-input #input-87');
 		await matchImage();
 
 		await page.waitForSelector('.row > .v-form > .col-12 > .white--text > .v-btn__content');
@@ -92,24 +84,25 @@ describe.only('Home Page', () => {
 	});
 
 	test('should not request attendance well', async () => {
+		await page.reload();
 		await page.waitForSelector('.container > div:nth-child(1) > .text-decoration-none > .row > .col-11');
 		await page.click('.container > div:nth-child(1) > .text-decoration-none > .row > .col-11');
 		await matchImage(true);
 
-		await page.waitForSelector('.v-input #input-66');
-		await page.click('.v-input #input-66');
+		await page.waitForSelector('.v-input #input-72');
+		await page.click('.v-input #input-72');
 		await matchImage(false, 500);
 
-		await page.waitForSelector('tbody > tr:nth-child(3) > td:nth-child(5) > .v-btn > .v-btn__content');
-		await page.click('tbody > tr:nth-child(3) > td:nth-child(5) > .v-btn > .v-btn__content');
+		await page.waitForSelector('tbody > tr:nth-child(4) > td:nth-child(6) > .v-btn > .v-btn__content');
+		await page.click('tbody > tr:nth-child(4) > td:nth-child(6) > .v-btn > .v-btn__content');
 		await matchImage(false, 500);
 
 		await page.waitForSelector('.v-dialog > .v-picker > .v-picker__actions > .v-btn:nth-child(3) > .v-btn__content');
 		await page.click('.v-dialog > .v-picker > .v-picker__actions > .v-btn:nth-child(3) > .v-btn__content');
 		await matchImage(false, 500);
 
-		await page.waitForSelector('.v-input #input-72');
-		await page.click('.v-input #input-72');
+		await page.waitForSelector('.v-input #input-78');
+		await page.click('.v-input #input-78');
 		await matchImage(false, 500);
 
 		await page.waitForSelector('.v-picker__body > .v-time-picker-clock__container:nth-child(1) > .v-time-picker-clock > .v-time-picker-clock__inner > .v-time-picker-clock__item:nth-child(7)');
@@ -124,8 +117,8 @@ describe.only('Home Page', () => {
 		await page.click('.v-dialog > .v-picker > .v-picker__actions:nth-child(3) > .v-btn > .v-btn__content');
 		await matchImage(false, 1000);
 
-		await page.waitForSelector('.v-input #input-77');
-		await page.click('.v-input #input-77');
+		await page.waitForSelector('.v-input #input-83');
+		await page.click('.v-input #input-83');
 		await matchImage(false, 500);
 
 		await page.waitForSelector('.v-picker__body > .v-time-picker-clock__container:nth-child(1) > .v-time-picker-clock > .v-time-picker-clock__inner > .v-time-picker-clock__item:nth-child(7)');
@@ -144,8 +137,8 @@ describe.only('Home Page', () => {
 		await page.click('.v-dialog > .v-picker > .v-picker__actions:nth-child(3) > .v-btn > .v-btn__content');
 		await matchImage(false, 500);
 
-		await page.waitForSelector('.v-input #input-81');
-		await page.click('.v-input #input-81');
+		await page.waitForSelector('.v-input #input-87');
+		await page.click('.v-input #input-87');
 		await matchImage(false, 500);
 
 		await page.waitForSelector('.row > .v-form > .col-12 > .white--text > .v-btn__content');

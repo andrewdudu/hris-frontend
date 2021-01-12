@@ -10,7 +10,7 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions('user', ['fetchLeaveQuotas']),
+		...mapActions('user', ['fetchLeaveQuotas', 'fetchCurrentUser']),
 		unixToString(unix) {
 			return timestamp.unixToString(unix);
 		}
@@ -37,6 +37,7 @@ export default {
 		}
 	},
 	created() {
-		this.fetchLeaveQuotas(this.currentUser.username);
+		this.fetchCurrentUser()
+			.then(() => this.fetchLeaveQuotas(this.currentUser.id));
 	}
 };

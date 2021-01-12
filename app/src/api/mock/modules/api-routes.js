@@ -206,7 +206,7 @@ const routes = [
 	},
 	{
 		method: 'GET',
-		url: '/api/users/example@example.com/leave-quotas',
+		url: '/api/users/aw/leave-quotas',
 		status: 200,
 		response: {
 			code: 200,
@@ -242,8 +242,8 @@ const routes = [
 			status: 'Success',
 			data: [
 				"ATTENDANCE",
-				"HOURLY_LEAVE",
 				"ANNUAL_LEAVE",
+				"HOURLY_LEAVE",
 				"SPECIAL_LEAVE",
 				"EXTRA_LEAVE",
 				"SUBSTITUTE_LEAVE",
@@ -275,6 +275,35 @@ const routes = [
 				"CHILD_CIRCUMCISION",
 				"UNPAID_LEAVE"
 			]
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/request/leaves',
+		status: 400,
+		param_values: {
+			dates: ["2021-01-19"],
+			files: ["pdf;iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNiOAMAANUAz5n+TlUAAAAASUVORK5CYII="],
+			notes: "",
+			type: "SICK_WITH_MEDICAL_LETTER"
+		},
+		response: {
+			errors: ["QUOTA_NOT_AVAILABLE"]
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/request/leaves',
+		status: 400,
+		param_values: {
+			dates: ["2021-01-22"],
+			files: ["pdf;iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNiOAMAANUAz5n+TlUAAAAASUVORK5CYII="],
+			notes: "",
+			type: "SICK_WITH_MEDICAL_LETTER"
+		},
+		response: {
+			code: 400,
+			errors: ["QUOTA_NOT_AVAILABLE"]
 		}
 	},
 	{
@@ -326,7 +355,7 @@ const routes = [
 		url: '/api/request/attendances',
 		status: 400,
 		param_values: {
-			date: "2020-12-17",
+			date: "2021-01-22",
 			clockIn: "05:00",
 			clockOut: "17:00",
 			notes: ""
@@ -416,6 +445,13 @@ const routes = [
 		response: {
 			code: 200,
 			status: "Success",
+			paging: {
+				page: 0,
+				total_page: 2,
+				item_per_page: 10,
+				total_item: 3,
+				sort_by: null
+			},
 			data: [
 				{
 					id: "1823a87f-12387321adf-123123adf",
@@ -778,6 +814,18 @@ const routes = [
 	{
 		method: 'POST',
 		url: '/api/announcement',
+		status: 400,
+		param_values: {
+			title: "Test",
+			notes: "Test"
+		},
+		response: {
+			code: 400
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/announcement',
 		status: 200,
 		response: {
 			code: 200,
@@ -812,6 +860,20 @@ const routes = [
 				startTime: "11:00",
 				endTime: "13:00",
 				notes: "notes"
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/request/_approve',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				ids: [
+					"abc"
+				]
 			}
 		}
 	}

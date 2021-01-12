@@ -2,13 +2,18 @@
     <div>
         <v-col class="col-7 bold dark no-gutters">
             <v-select
-                    v-model="value"
-                    :color="color.blubluedark1"
+                v-model="value"
+                :color="color.blubluedark1"
                 :items="['This Week', 'This Month']"
                 prepend-icon="mdi-filter-variant"
                 label="Filter"
                 @change="onFilterChange"
-            />
+            >
+                <template slot="item" slot-scope="data">
+                    <!-- HTML that describe how select should render items when the select is open -->
+                    <span :id="data.item.replace(/\s/g, '').toLowerCase()">{{ data.item }}</span>
+                </template>
+            </v-select>
         </v-col>
         <v-row v-bind:key="idx" v-for="(attendance, idx) in attendances" class="center" no-gutters>
             <div class="attendances center">

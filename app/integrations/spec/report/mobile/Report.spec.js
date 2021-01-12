@@ -2,17 +2,15 @@ const responsive = require('../../../utils/responsive');
 const network = require('../../../utils/network');
 
 // only mobile
-describe.only('Announcement Page', () => {
+describe.only('Report Page', () => {
 	beforeAll(async () => {
 		await responsive.setMobile(page);
-		await page.goto('http://localhost:8080/announcements', {
+		await page.goto('http://localhost:8080/report', {
 			waitUntil: 'networkidle'
 		});
-
-		await page.waitForSelector('#app > .v-application--wrap > .v-main > .v-main__wrap > div')
 	});
 
-	test('should get announcements well', async () => {
+	test('should get reports well', async () => {
 		await page.waitForTimeout(2000);
 		network.waitForNetworkIdle(page);
 		let image = await page.screenshot();

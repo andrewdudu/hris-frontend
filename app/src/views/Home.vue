@@ -4,7 +4,7 @@
       <v-row no-gutters>
         <v-col class="col-4 text-align-right">
           <v-avatar
-            :color="color.blubluedark1"
+            :color="currentUser !== null && currentUser.roles !== undefined ? config.roleColor[currentUser.roles[0]] : color.blubluedark1"
             size="80"
           >
             <span class="white--text headline">{{ initials }}</span>
@@ -143,7 +143,7 @@
         </v-row>
       </div>
     </v-col>
-    <v-row class="margin-bot" no-gutters>
+    <v-row v-if="announcements !== null && announcements.length > 0" class="margin-bot" no-gutters>
       <v-col class="col-6 bold dark">
         <span class="padding-left">Announcement</span>
       </v-col>
@@ -181,7 +181,7 @@
             <v-col class="col-12">
               <v-icon :color="color.blubluedark1" size="20">mdi-clock-outline</v-icon>
               <span class="dark margin-left">
-                {{ unixToTime(dashboardSummary.attendance.latest.date.start) }} - {{ unixToTime(dashboardSummary.attendance.latest.date.end) }}
+                {{ unixToTime(dashboardSummary.attendance.latest.date.start) }} <span v-if="dashboardSummary.attendance.latest.date.end !== null">- {{ unixToTime(dashboardSummary.attendance.latest.date.end) }} </span>
               </span>
             </v-col>
             <v-col class="col-12">

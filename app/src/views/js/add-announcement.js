@@ -10,9 +10,6 @@ export default {
 			config,
 			note: '',
 			title: '',
-			noteRules: [
-				v => v.length <= 256 || 'Name must be less or equal than 256 characters'
-			],
 			breadcrumbsItems: [
 				{
 					text: 'Request',

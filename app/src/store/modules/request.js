@@ -3,6 +3,7 @@ import api from '@/api/request';
 const state = {
 	extendLeave: null,
 	incomingRequests: [],
+	incomingRequestTotalPage: null,
 	excelReport: []
 };
 
@@ -17,6 +18,9 @@ const mutations = {
 	},
 	setIncomingRequests(state, requests) {
 		state.incomingRequests = requests;
+	},
+	setIncomingRequestTotalPage(state, requests) {
+		state.incomingRequestTotalPage = requests;
 	},
 	setExcelReport(state, requests) {
 		state.excelReport = requests;
@@ -57,6 +61,8 @@ const actions = {
 		return api.fetchIncomingRequest(data)
 			.then(res => {
 				commit('setIncomingRequests', res.data.data);
+				commit('setIncomingRequestTotalPage', res.data.paging.total_page);
+
 				return res;
 			})
 	},
@@ -94,6 +100,13 @@ const actions = {
 			.then(res => {
 				return res;
 			});
+	},
+	// eslint-disable-next-line no-unused-vars
+	postBulkApprove({ commit }, data) {
+		return api.postBulkApprove(data)
+			.then(res => {
+				return res;
+			})
 	}
 };
 
@@ -103,6 +116,9 @@ const getters = {
 	},
 	incomingRequests(state) {
 		return state.incomingRequests || null;
+	},
+	incomingRequestTotalPage(state) {
+		return state.incomingRequestTotalPage || null;
 	},
 	excelReport(state) {
 		return state.excelReport || null;

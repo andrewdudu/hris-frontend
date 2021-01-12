@@ -3,6 +3,7 @@ import nameToInitials from "@/utils/name-to-initials";
 import timestamp from "@/utils/timestamp";
 import moment from 'moment';
 import pdf from 'vue-pdf';
+import config from '@/config';
 import { mapActions, mapGetters } from "vuex";
 import _ from "lodash";
 
@@ -17,7 +18,10 @@ export default {
 			dialog: false,
 			search: '',
 			value: '',
+			page: 1,
 			departmentData: [],
+			dialogApprove: false,
+			size: config.pageSize,
 			url: process.env.VUE_APP_URL,
 			breadcrumbsItems: [
 				{
@@ -65,7 +69,7 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions('request', ['fetchIncomingRequests', 'postApprove', 'postReject']),
+		...mapActions('request', ['fetchIncomingRequests', 'postApprove', 'postReject', 'postBulkApprove']),
 		...mapActions('department', ['fetchDepartments']),
 		...mapActions('component', ['openSnackbar']),
 		...mapActions('user', ['fetchCurrentUser']),
@@ -93,7 +97,9 @@ export default {
 						message: 'Rejected.'
 					});
 					this.fetchIncomingRequests({
-						type: 'REQUESTED'
+						type: 'REQUESTED',
+						page: this.page - 1,
+						size: this.size
 					});
 				})
 				.catch(() => {
@@ -112,7 +118,9 @@ export default {
 						message: 'Approved.'
 					});
 					this.fetchIncomingRequests({
-						type: 'REQUESTED'
+						type: 'REQUESTED',
+						page: this.page - 1,
+						size: this.size
 					});
 				})
 				.catch(() => {
@@ -128,19 +136,45 @@ export default {
 			this.onChange();
 		},
 		onChange() {
-			const deptCode = this.departments.find((department) => department.name === this.value).code;
+			const deptCode = this.departments !== null ? this.departments.filter((department) => department.name === this.value)[0].code : null;
 			this.fetchIncomingRequests({
 				name: this.search,
 				department: deptCode,
-				type: 'REQUESTED'
+				type: 'REQUESTED',
+				page: this.page - 1,
+				size: this.size
 			})
 		},
 		debounceInput: _.debounce(function() {
 			this.onChange();
-		}, 500)
+		}, 500),
+		onBulkApprove() {
+			const ids = this.incomingRequests.map(req => req.id);
+			this.postBulkApprove({
+				ids
+			})
+				.then(() => {
+					this.openSnackbar({
+						color: 'success',
+						message: 'Approved.'
+					});
+					this.fetchIncomingRequests({
+						type: 'REQUESTED',
+						page: this.page - 1,
+						size: this.size
+					});
+				})
+				.catch(() => {
+					this.openSnackbar({
+						color: 'error',
+						message: 'Something went wrong.'
+					})
+				});
+			this.dialogApprove = false;
+		}
 	},
 	computed: {
-		...mapGetters('request', ['incomingRequests']),
+		...mapGetters('request', ['incomingRequests', 'incomingRequestTotalPage']),
 		...mapGetters('department', ['departments']),
 		dates() {
 			if (this.data.type === 'LEAVE') {
@@ -149,7 +183,7 @@ export default {
 				return this.data.detail.leave.dates;
 			}
 			return null;
-		},
+		}
 	},
 	watch: {
 		search(val) {
@@ -160,7 +194,9 @@ export default {
 	},
 	created() {
 		this.fetchIncomingRequests({
-			type: 'REQUESTED'
+			type: 'REQUESTED',
+			page: this.page - 1,
+			size: this.size
 		});
 		this.fetchCurrentUser()
 			.then((res) => {

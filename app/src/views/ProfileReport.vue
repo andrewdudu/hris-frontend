@@ -27,7 +27,16 @@
                     <span class="bold padding-left">Exp. Date</span>
                 </v-col>
                 <v-col class="col-7">
-                    <span class="padding-right">: {{ unixToString(annual.expire) }}</span>
+                    <v-row no-gutters>
+                        <span class="">:</span>
+                        <ul>
+                            <li class="no-gutters" v-bind:key="idx" v-for="(exp, idx) in annual.expiries">
+                                <v-col class="col-12">
+                                    <span class="padding-right">{{ unixToString(exp) }}</span>
+                                </v-col>
+                            </li>
+                        </ul>
+                    </v-row>
                 </v-col>
             </v-row>
         </v-container>
@@ -59,7 +68,7 @@
                     <span class="bold padding-left">Exp. Date</span>
                 </v-col>
                 <v-col class="col-7">
-                    <span class="padding-right">: {{ unixToString(extra.expire) }}</span>
+                    <span class="padding-right">: {{ unixToString(extra.expiry) }}</span>
                 </v-col>
             </v-row>
         </v-container>
@@ -94,7 +103,7 @@
                     <v-row no-gutters>
                         <span class="">:</span>
                         <ul>
-                            <li class="no-gutters" v-bind:key="exp" v-for="exp in substitute.expiries">
+                            <li class="no-gutters" v-bind:key="idx" v-for="(exp, idx) in substitute.expiries">
                                 <v-col class="col-12">
                                     <span class="padding-right">{{ unixToString(exp) }}</span>
                                 </v-col>

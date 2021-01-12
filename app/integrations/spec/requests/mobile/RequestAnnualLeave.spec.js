@@ -9,7 +9,7 @@ const matchImage = async (isNetworkIdle = false, delayTime = 2000) => {
 };
 
 // only mobile
-describe.only('Home Page', () => {
+describe.only('Request Annual Leave Page', () => {
 	beforeAll(async () => {
 		await responsive.setMobile(page);
 	});
@@ -25,8 +25,8 @@ describe.only('Home Page', () => {
 		await page.click('.container > div:nth-child(2) > .text-decoration-none > .row > .col-11')
 		await matchImage();
 
-		await page.waitForSelector('.v-input #input-66')
-		await page.click('.v-input #input-66')
+		await page.waitForSelector('.v-input #date')
+		await page.click('.v-input #date')
 		await matchImage();
 
 		await page.waitForSelector('tbody > tr:nth-child(3) > td:nth-child(5) > .v-btn > .v-btn__content')

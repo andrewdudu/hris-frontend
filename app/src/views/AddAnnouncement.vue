@@ -14,6 +14,7 @@
             <v-form class="col-12 no-gutters">
                 <v-col class="col-12">
                     <v-text-field
+                        id="title"
                         v-model="title"
                         label="Title"
                         required
@@ -21,8 +22,8 @@
                 </v-col>
                 <v-col class="col-12">
                     <v-textarea
+                            id="notes"
                             v-model="note"
-                            :rules="noteRules"
                             :counter="256"
                             maxlength="256"
                             label="Notes"

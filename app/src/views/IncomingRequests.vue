@@ -68,6 +68,36 @@
             </v-card>
         </v-dialog>
 
+        <v-dialog
+            v-model="dialogApprove"
+            persistent
+            max-width="290"
+        >
+            <v-card>
+                <v-card-title class="headline">
+                    Bulk Approve
+                </v-card-title>
+                <v-card-text>You will approve all request on this page.</v-card-text>
+                <v-card-actions>
+                    <v-spacer/>
+                    <v-btn
+                            :color="color.blubluedark1"
+                            text
+                            @click="dialogApprove = false"
+                    >
+                        No
+                    </v-btn>
+                    <v-btn
+                            :color="color.blubluedark1"
+                            text
+                            @click="onBulkApprove"
+                    >
+                        Yes
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
         <v-text-field
             v-model="search"
             color="grey"
@@ -80,16 +110,32 @@
             return-object
         />
 
-        <v-col v-if="departmentData.length !== 0" class="col-7 bold dark no-gutters">
-            <v-select
-                class="margin-filter"
-                :value="value"
-                :color="color.blubluedark1"
-                :items="this.departmentData"
-                prepend-icon="mdi-filter-variant"
-                @change="onFilterChange"
-            />
-        </v-col>
+        <div v-if="departmentData.length !== 0">
+            <v-row>
+                <v-col class="col-7 bold dark no-gutters">
+                    <v-select
+                        class="margin-filter"
+                        :value="value"
+                        :color="color.blubluedark1"
+                        :items="this.departmentData"
+                        prepend-icon="mdi-filter-variant"
+                        @change="onFilterChange"
+                    />
+                </v-col>
+                <v-col class="col-5 text-align-right">
+                    <v-btn class="white--text" :color="color.blubluedark1" @click="dialogApprove = true">
+                        <span>Approve All</span>
+                    </v-btn>
+                </v-col>
+            </v-row>
+        </div>
+        <div v-else>
+            <v-col class="col-12 text-align-right">
+                <v-btn class="white--text" :color="color.blubluedark1" @click="dialogApprove = true">
+                    <span>Approve All</span>
+                </v-btn>
+            </v-col>
+        </div>
 
         <v-row v-bind:key="idx" v-for="(request, idx) in incomingRequests" class="margin-top" @click="onClick(request)" no-gutters>
             <v-col class="col-2 margin-left dark">
@@ -117,6 +163,14 @@
                 <v-divider class="margin-top"/>
             </v-col>
         </v-row>
+        <v-pagination
+            v-if="incomingRequestTotalPage !== null"
+            v-model="page"
+            class="margin-top"
+            @input="onChange"
+            :length="incomingRequestTotalPage"
+            :total-visible="7"
+        />
     </v-container>
 </template>
 

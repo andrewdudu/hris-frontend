@@ -1,7 +1,8 @@
 import color from "@/assets/js/color.js";
 import { mapActions, mapGetters } from "vuex";
-import { lowerCase, capitalize } from 'lodash';
+import { lowerCase, capitalize, uniq } from 'lodash';
 import config from '@/config';
+import moment from 'moment';
 
 export default {
 	name: "request-leave",
@@ -65,14 +66,25 @@ export default {
 			let date = this.date;
 			let files = this.file;
 			if (Array.isArray(date)) {
-				date.sort;
+				date.sort();
+				const startDate = moment(date[0], "YYYY-MM-DD");
+				const endDate = moment(date[date.length - 1], "YYYY-MM-DD");
+				let dateNow = startDate.add(1, 'days');
+				do {
+					date.push(dateNow.format("YYYY-MM-DD"));
+					dateNow = dateNow.add(1, 'days');
+				} while (dateNow.format('YYYY-MM-DD') !== endDate.format('YYYY-MM-DD'));
+
+				date.sort();
+
+				date = uniq(date);
 			}
 			else date = [date];
 			if (this.file !== null) {
 				files = ['pdf;' + this.file]
 			}
 			this.postRequestLeave({
-				dates: date,
+				dates: Array.from(date),
 				files,
 				notes: this.note,
 				type: this.$route.query.type

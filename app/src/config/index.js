@@ -35,7 +35,8 @@ const config = {
 			reject: (id) => `/api/requests/${id}/_reject`,
 			excel: '/api/reports/leaves',
 			addSubstituteLeave: '/api/substitute-leave',
-			hourlyLeave: '/api/request/hourly'
+			hourlyLeave: '/api/request/hourly',
+			bulkApprove: '/api/requests/_approve'
 		},
 		calendar: {
 			day: '/api/calendar/days',
@@ -79,6 +80,12 @@ const config = {
 	},
 	errMessage: {
 		QUOTA_NOT_AVAILABLE: 'You don\'t have enough Quota to request.'
+	},
+	pageSize: 10,
+	roleColor: {
+		ADMIN: '#daf3ff',
+		EMPLOYEE: '#0072a7',
+		MANAGER: '#0eb3ff'
 	}
 };
 

@@ -9,7 +9,7 @@ const matchImage = async (isNetworkIdle = false, delayTime = 2000) => {
 };
 
 // only mobile
-describe.only('Home Page', () => {
+describe.only('Request List Page', () => {
 	beforeAll(async () => {
 		await responsive.setMobile(page);
 	});
