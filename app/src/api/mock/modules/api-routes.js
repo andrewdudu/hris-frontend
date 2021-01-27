@@ -48,7 +48,8 @@ const routes = [
 						},
 						location: {
 							type: "INSIDE|OUTSIDE"
-						}
+						},
+						status: "AVAILABLE"
 					},
 					latest: {
 						date: {
@@ -874,6 +875,42 @@ const routes = [
 				ids: [
 					"abc"
 				]
+			}
+		}
+	},
+	{
+		method: 'GET',
+		url: '/api/users/leave-quotas?code=ANNUAL_LEAVE',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				leaveQuota: 2
+			}
+		}
+	},
+	{
+		method: 'GET',
+		url: '/api/users/leave-quotas?code=EXTRA_LEAVE',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				leaveQuota: 2
+			}
+		}
+	},
+	{
+		method: 'GET',
+		url: '/api/users/leave-quotas?code=SUBSTITUTE_LEAVE',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				leaveQuota: 2
 			}
 		}
 	}

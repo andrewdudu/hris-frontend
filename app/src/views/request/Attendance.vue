@@ -29,6 +29,7 @@
                     >
                         <v-date-picker
                             v-model="date"
+                            :allowed-dates="allowedDates"
                             no-title
                             scrollable
                         >

@@ -76,7 +76,8 @@
                     <span class="dark">
                         You are using
                         <strong class="text-capitalize">{{ toLowerCase(this.$route.query.type) }}</strong>
-                        Leave
+                        Leave.
+                        <strong class="text-capitalize" v-if="hasQuota"><br/>{{ quotaLeave }} leave remaining.</strong>
                     </span>
                 </v-col>
                 <v-col class="col-12 center margin-top">

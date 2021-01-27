@@ -105,7 +105,7 @@
             hide-selected
             item-text="Description"
             item-value="Search"
-            placeholder="Start typing to Search"
+            placeholder="Search by Employee's Name"
             prepend-icon="mdi-magnify"
             return-object
         />

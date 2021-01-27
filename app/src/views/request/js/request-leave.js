@@ -45,7 +45,7 @@ export default {
 	},
 	methods: {
 		...mapActions('request', ['postRequestLeave']),
-		...mapActions('user', ['fetchAvailableSpecialRequests']),
+		...mapActions('user', ['fetchAvailableSpecialRequests', 'fetchQuotaLeave']),
 		...mapActions('component', ['openSnackbar']),
 		toLowerCase(str) {
 			return lowerCase(str);
@@ -65,7 +65,7 @@ export default {
 		onRequest() {
 			let date = this.date;
 			let files = this.file;
-			if (Array.isArray(date)) {
+			if (Array.isArray(date) && date.length > 1) {
 				date.sort();
 				const startDate = moment(date[0], "YYYY-MM-DD");
 				const endDate = moment(date[date.length - 1], "YYYY-MM-DD");
@@ -79,7 +79,7 @@ export default {
 
 				date = uniq(date);
 			}
-			else date = [date];
+			else if (!Array.isArray(date)) date = [date];
 			if (this.file !== null) {
 				files = ['pdf;' + this.file]
 			}
@@ -110,12 +110,16 @@ export default {
 		},
 	},
 	computed: {
-		...mapGetters('user', ['availableSpecialRequests']),
+		...mapGetters('user', ['availableSpecialRequests', 'quotaLeave']),
 		valid() {
 			return (this.pdf !== null || this.$route.query.type !== 'SICK_WITH_MEDICAL_LETTER') && this.date !== null && (this.note.length !== 0 || this.$route.query.type !== 'SUBSTITUTE_LEAVE') && this.note.length <= 256;
+		},
+		hasQuota() {
+			return (this.$route.query.type === 'ANNUAL_LEAVE' || this.$route.query.type === 'EXTRA_LEAVE' || this.$route.query.type === 'SUBSTITUTE_LEAVE')
 		}
 	},
 	created() {
 		this.fetchAvailableSpecialRequests();
+		this.fetchQuotaLeave(this.$route.query.type);
 	}
 };

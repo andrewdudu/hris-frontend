@@ -22,5 +22,8 @@ export default {
 	},
 	fetchAttendanceSummary() {
 		return axios.get(config.api.user.attendanceSummary);
+	},
+	fetchQuotaLeave(code) {
+		return axios.get(config.api.user.quotaLeave(code));
 	}
 }

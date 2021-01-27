@@ -8,7 +8,8 @@ const config = {
 			availableSpecialRequests: '/api/users/current-user/available-special-requests',
 			profile: (id) => `/api/users/${id}/profile`,
 			leaveQuotas: (id) => `/api/users/${id}/leave-quotas`,
-			attendanceSummary: '/api/users/current-user/attendance-summary'
+			attendanceSummary: '/api/users/current-user/attendance-summary',
+			quotaLeave: (code) => `/api/users/leave-quotas?code=${code}`
 		},
 		dashboard: {
 			summary: '/api/dashboard/summary'
@@ -79,7 +80,8 @@ const config = {
 		UNPAID_LEAVE: true
 	},
 	errMessage: {
-		QUOTA_NOT_AVAILABLE: 'You don\'t have enough Quota to request.'
+		QUOTA_NOT_AVAILABLE: 'You don\'t have enough Quota to request.',
+		EXCEED_ALLOWABLE_QUOTA: 'You have inputted more days than allowed.'
 	},
 	pageSize: 10,
 	roleColor: {

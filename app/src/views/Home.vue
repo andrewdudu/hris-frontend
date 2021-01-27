@@ -1,5 +1,34 @@
 <template>
   <div>
+    <v-dialog
+            v-model="dialogApprove"
+            persistent
+            max-width="290"
+    >
+      <v-card>
+        <v-card-title class="headline">
+          Warning
+        </v-card-title>
+        <v-card-text>You haven't worked for 9 hours. Are you sure want to clock out?</v-card-text>
+        <v-card-actions>
+          <v-spacer/>
+          <v-btn
+                :color="color.blubluedark1"
+                text
+                @click="dialogApprove = false"
+          >
+            No
+          </v-btn>
+          <v-btn
+                :color="color.blubluedark1"
+                text
+                @click="onWarning"
+          >
+            Yes
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <div class="wave-container">
       <v-row no-gutters>
         <v-col class="col-4 text-align-right">

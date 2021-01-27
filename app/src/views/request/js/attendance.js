@@ -1,6 +1,7 @@
 import color from "@/assets/js/color.js";
 import { mapActions } from "vuex";
 import config from '@/config';
+import moment from 'moment';
 
 export default {
 	name: "request-leave",
@@ -54,6 +55,9 @@ export default {
 					color: 'error'
 				});
 			})
+		},
+		allowedDates(val) {
+			return val < moment().format('YYYY-MM-DD');
 		}
 	},
 	computed: {

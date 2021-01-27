@@ -4,6 +4,7 @@ import config from "@/config";
 import nameToInitials from "@/utils/name-to-initials";
 import timestamp from "@/utils/timestamp";
 import moment from 'moment';
+import Compress from 'compress.js';
 const Map = () => import(/* webpackChunkName:'c-map' */'@/components/Map.vue');
 
 export default {
@@ -15,8 +16,10 @@ export default {
     return {
       color,
       config,
+      dialogApprove: false,
       isMock: process.env.VUE_APP_ENVIRONMENT !== 'prod' && process.env.VUE_APP_IS_MOCK === 'true',
       hasClockedIn: 0,
+      hasClockedOut: 0,
       location,
       dialog: false,
       loading: false,
@@ -38,16 +41,20 @@ export default {
     ...mapActions('attendance', ['postClockIn', 'postClockOut']),
     ...mapActions('component', ['openSnackbar']),
     onImageChange(file) {
-      let reader = new FileReader();
       this.image = null;
       this.url = null;
-      reader.readAsDataURL(file);
-      this.imageSize = file.size;
+      const files = [file];
+      const compress = new Compress();
+      compress.compress(files, {
+        size: 4, // the max size in MB, defaults to 2MB
+        quality: 0.75, // the quality of the image, max is 1,
+        maxWidth: 1920, // the max width of the output image, defaults to 1920px
+        maxHeight: 1920, // the max height of the output image, defaults to 1920px
+        resize: true // defaults to true, set false if you do not want to resize the image width and height
+      }).then((data) => {
+        this.image = data[0].data;
+      });
       this.imageUrl = URL.createObjectURL(file);
-      this.fileExtension = file.name.split('.').pop();
-      reader.onload = () => {
-        this.image = reader.result.substr(reader.result.indexOf(",") + 1);
-      };
     },
     onLocationFound(coordinates) {
       if (!coordinates) {
@@ -68,15 +75,29 @@ export default {
           .then(this.onClockInSuccess)
           .catch(this.onClockInFail);
     },
-    onClockOutSubmit() {
+    onWarning() {
       this.dialog = false;
+      this.dialogApprove = false;
       this.postClockOut({
         location: this.location
       })
           .then(this.onClockOutSuccess)
           .catch(this.onClockOutFail);
     },
+    onClockOutSubmit() {
+      if (this.hourTime(this.dashboardSummary.attendance.current.date.start) < 9) {
+        this.dialogApprove = true;
+      } else {
+        this.dialog = false;
+        this.postClockOut({
+          location: this.location
+        })
+            .then(this.onClockOutSuccess)
+            .catch(this.onClockOutFail);
+      }
+    },
     onClockOutSuccess() {
+      this.hasClockedOut = 1;
       this.openSnackbar({
         message: "Clocked Out.",
         color: 'success'
@@ -123,7 +144,7 @@ export default {
     },
     unixToTime(value) {
       return timestamp.unixToTime(value);
-    }
+    },
   },
   computed: {
     ...mapGetters('announcement', ['announcements']),
@@ -136,7 +157,7 @@ export default {
       return !!(this.dashboardSummary && this.dashboardSummary.attendance.current.date.start);
     },
     hasAttend() {
-      return !(this.dashboardSummary.attendance.current.date.end);
+      return this.dashboardSummary.attendance.current.status === 'AVAILABLE';
     }
   },
   created() {

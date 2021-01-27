@@ -7,7 +7,8 @@ const state = {
 	leaveQuotas: null,
 	availableRequests: null,
 	availableSpecialRequests: null,
-	attendanceSummary: null
+	attendanceSummary: null,
+	quotaLeave: 0,
 };
 
 const mutations = {
@@ -31,6 +32,9 @@ const mutations = {
 	},
 	setAttendanceSummary(state, data) {
 		state.attendanceSummary = data;
+	},
+	setQuotaLeave(state, data) {
+		state.quotaLeave = data;
 	}
 };
 
@@ -83,6 +87,13 @@ const actions = {
 				commit('setAttendanceSummary', res.data.data);
 				return res;
 			})
+	},
+	fetchQuotaLeave({ commit }, code) {
+		return api.fetchQuotaLeave(code)
+			.then(res => {
+				commit('setQuotaLeave', res.data.data.leaveQuota);
+				return res;
+			})
 	}
 };
 
@@ -107,6 +118,9 @@ const getters = {
 	},
 	attendanceSummary(state) {
 		return state.attendanceSummary || null;
+	},
+	quotaLeave(state) {
+		return state.quotaLeave || 0;
 	}
 };
 

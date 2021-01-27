@@ -78,6 +78,13 @@ describe.only('Home Page', () => {
 
 		await page.waitForSelector('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
 		await page.click('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
+		await page.waitForTimeout(2000);
+		network.waitForNetworkIdle(page);
+		image = await page.screenshot();
+		expect(image).toMatchImageSnapshot();
+
+		await page.waitForSelector('.v-dialog > .v-card > .v-card__actions > .v-btn:nth-child(3) > .v-btn__content')
+		await page.click('.v-dialog > .v-card > .v-card__actions > .v-btn:nth-child(3) > .v-btn__content')
 		await page.waitForTimeout(5000);
 		network.waitForNetworkIdle(page);
 		image = await page.screenshot();
