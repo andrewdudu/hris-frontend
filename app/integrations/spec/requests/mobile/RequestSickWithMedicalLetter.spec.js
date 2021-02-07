@@ -1,7 +1,7 @@
 const responsive = require('../../../utils/responsive');
 const network = require('../../../utils/network');
 
-const matchImage = async (isNetworkIdle = false, delayTime = 2000) => {
+const matchImage = async (isNetworkIdle = true, delayTime = 2000) => {
 	await page.waitForTimeout(delayTime);
 	if (isNetworkIdle) network.waitForNetworkIdle(page);
 	let image = await page.screenshot();

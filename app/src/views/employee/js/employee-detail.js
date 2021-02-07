@@ -50,6 +50,7 @@ export default {
 			return timestamp.unixToTime(value);
 		},
 		onAddSubstituteLeave() {
+			console.log(this.total);
 			this.postAddSubstituteLeave({
 				total: this.total,
 				id: this.id

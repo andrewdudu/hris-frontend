@@ -1,6 +1,5 @@
 import color from "@/assets/js/color.js";
 import { mapActions, mapGetters } from "vuex";
-import { lowerCase } from 'lodash';
 import config from '@/config';
 import moment from 'moment';
 
@@ -29,9 +28,6 @@ export default {
 	methods: {
 		...mapActions('request', ['getExtendLeave', 'postExtendLeave']),
 		...mapActions('component', ['openSnackbar']),
-		toLowerCase(str) {
-			return lowerCase(str);
-		},
 		toMonth(time) {
 			return moment(time).format('MMM YYYY');
 		},

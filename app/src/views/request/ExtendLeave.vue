@@ -18,6 +18,7 @@
             <v-form class="col-12 no-gutters">
                 <v-col class="col-12">
                     <v-textarea
+                            id="textarea-text"
                             v-model="note"
                             :counter="256"
                             maxlength="256"

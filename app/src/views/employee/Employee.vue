@@ -6,6 +6,7 @@
             </template>
         </v-breadcrumbs>
         <v-text-field
+            id="search-bar"
             v-model="search"
             color="grey"
             hide-no-data
@@ -19,6 +20,7 @@
         <v-row no-gutters>
             <v-col class="col-12 text-align-right">
                 <json-excel
+                        id="downloadExcel"
                         :fetch="fetchExcelReportData"
                         :fields="excelFields"
                         :data="excelReport">

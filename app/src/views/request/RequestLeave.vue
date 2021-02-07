@@ -55,7 +55,6 @@
                 <v-col v-if="this.$route.query.type === 'SICK_WITH_MEDICAL_LETTER'" class="col-12">
                     <v-file-input
                         id="file"
-                        messages="Max file size : 1 MB"
                         accept="pdf/*"
                         label="Medical Letter"
                         v-model="pdf"

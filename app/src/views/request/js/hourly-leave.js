@@ -16,9 +16,6 @@ export default {
 			endHour: null,
 			menuStartHour: false,
 			menuEndHour: false,
-			noteRules: [
-				v => v.length <= 256 || 'Name must be less or equal than 256 characters'
-			],
 			startHourRules: [(v) => !!v || "Start time is required"],
 			endHourRules: [(v) => !!v || "End time is required"],
 			breadcrumbsItems: [

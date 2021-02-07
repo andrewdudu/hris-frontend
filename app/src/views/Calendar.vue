@@ -20,6 +20,7 @@
                             <span class="dark medium bold">{{ unixToShortDay(date) }}, {{ unixToString(date) }}</span>
                             <v-form v-model="valid">
                                 <v-text-field
+                                    id="title-text"
                                     label="Title"
                                     v-model="title"
                                     :rules="titleRules"
@@ -27,6 +28,7 @@
                                 <v-textarea
                                     label="Notes"
                                     v-model="notes"
+                                    id="textarea-text"
                                     :rules="notesRules"
                                     maxLength="256"
                                     :counter="256"
@@ -61,7 +63,12 @@
                 prepend-icon="mdi-filter-variant"
                 label="Filter"
                 @change="onFilterChange"
-            />
+            >
+                <template slot="item" slot-scope="data">
+                    <!-- HTML that describe how select should render items when the select is open -->
+                    <span :id="data.item.toLowerCase()">{{ data.item }}</span>
+                </template>
+            </v-select>
         </v-col>
         <div class="margin-top-calendar">
             <v-row v-bind:key="idx" v-for="(calendar, idx) in calendarDay" class="center" no-gutters>

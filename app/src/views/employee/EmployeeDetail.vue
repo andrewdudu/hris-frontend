@@ -13,7 +13,7 @@
 
                 <v-card-text>
                     <v-form>
-                        <v-text-field v-model="total" type="number" label="Total"/>
+                        <v-text-field id="total-text" v-model="total" type="number" label="Total"/>
                     </v-form>
                 </v-card-text>
 
@@ -55,7 +55,7 @@
         </v-row>
         <v-row class="padding">
             <v-col class="col-12 center dark">
-                <v-btn class="white--text" :color="color.blubluedark1" @click="requestDialog = true">
+                <v-btn id="add-subs-leave-btn" class="white--text" :color="color.blubluedark1" @click="requestDialog = true">
                     Add Substitute Leave
                 </v-btn>
             </v-col>

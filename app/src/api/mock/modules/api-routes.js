@@ -10,7 +10,7 @@ const routes = [
 				id: "aw",
 				username: "example@example.com",
 				name: "Andrew Wijaya",
-				roles: ["EMPLOYEE"],
+				roles: ["EMPLOYEE", "ADMIN"],
 				department: "Technology",
 				office: {
 					name: "Sarana Jaya"
@@ -132,6 +132,32 @@ const routes = [
 				location: {
 					lat: 787.123123,
 					lon: 178.123123
+				}
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/auth/login',
+		status: 400,
+		param_values: {
+			username: 'test@email.com',
+			password: 'password'
+		},
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				username: "example@example.com",
+				name: "John Doe",
+				roles: ["EMPLOYEE"],
+				department: "Technology",
+				office: {
+					name: "Sarana Jaya"
+				},
+				joinDate: 1603970498,
+				leave: {
+					remaining: 10
 				}
 			}
 		}
@@ -341,6 +367,22 @@ const routes = [
 	{
 		method: 'POST',
 		url: '/api/request/extend-leave',
+		status: 400,
+		param_values: {
+			notes: 'test'
+		},
+		response: {
+			code: 200,
+			status: 'Success',
+			data: {
+				status: 'REQUESTED',
+				notes: 'notes'
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/request/extend-leave',
 		status: 200,
 		response: {
 			code: 200,
@@ -477,7 +519,7 @@ const routes = [
 					date: 1590339600000
 				},
 				{
-					id: "1823a87f-12387321adf-123123adf",
+					id: "1823a87f-12387321adf-123123adff",
 					user: {
 						name: "John Doe",
 						department: "Technology",
@@ -489,7 +531,7 @@ const routes = [
 					type: "LEAVE",
 					detail: {
 						leave: {
-							dates: ["2020-09-25"],
+							dates: ["2020-09-25", "2020-09-26"],
 							files: ["http://file.pdf", "http://file.webp"],
 							notes: "Forgot to fill attendance on 18 August 2020",
 							type: "SICK"
@@ -520,7 +562,38 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/api/request/1823a87f-12387321adf-123123adf/_approve',
+		url: '/api/requests/1823a87f-12387321adf-123123adff/_approve',
+		status: 400,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				id: "1823a87f-12387321adf-123123adf",
+				user: {
+					name: "John Doe",
+					department: "Technology",
+					office: {
+						name: "Sarana Jaya"
+					}
+				},
+				status: "PENDING",
+				type: "ATTENDANCE",
+				detail: {
+					attendance: {
+						date: {
+							start: 788781273,
+							end: 788781273
+						},
+						notes: "Forgot to fill attendance on 18 August 2020"
+					}
+				},
+				date: 1590339600000
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/requests/1823a87f-12387321adf-123123adf/_approve',
 		status: 200,
 		response: {
 			code: 200,
@@ -551,7 +624,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/api/request/1823a87f-12387321adf-123123adf/_reject',
+		url: '/api/requests/1823a87f-12387321adf-123123adf/_reject',
 		status: 200,
 		response: {
 			code: 200,
@@ -616,24 +689,6 @@ const routes = [
 				// 	]
 				// },
 				{
-					date: 1606435200000,
-					status: "WORKING",
-					events: [
-						{
-							name: "Independence Day"
-						}
-					]
-				},
-				{
-					date: 1609521600000,
-					status: "WORKING",
-					events: [
-						{
-							name: "Independence Day"
-						}
-					]
-				},
-				{
 					date: 1608708000000,
 					status: "WORKING",
 					events: [
@@ -641,8 +696,32 @@ const routes = [
 							name: "Independence Day"
 						}
 					]
+				},
+				{
+					date: 1640908800000,
+					status: "WORKING",
+					events: []
+				},
+				{
+					date: 1640822400000,
+					status: "WORKING",
+					events: []
 				}
 			]
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/calendar/days/2021-12-31/events',
+		status: 200,
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				name: "Independence Day",
+				notes: "Notes",
+				calendarStatus: "HOLIDAY"
+			}
 		}
 	},
 	{
@@ -797,6 +876,38 @@ const routes = [
 					createdBy: "username",
 					lastModifiedDate: 1608708000000,
 					lastModifiedBy: "username",
+					notes: "",
+					files: ["test"]
+				},
+				{
+					id: "1273-123-1243",
+					employee: {
+						nik: "1273",
+						name: "name",
+						position: {
+							name: "name"
+						},
+						department: {
+							name: "Technology"
+						},
+						organizationUnit: {
+							name: "name"
+						},
+						office: {
+							name: "Sarana Jaya"
+						}
+					},
+					dateString: "2020-05-25",
+					type: "HAJJ",
+					typeLabel: "Hajj",
+					date: {
+						start: 1608708000000,
+						end: 1608708000000
+					},
+					createdDate: 1608708000000,
+					createdBy: "username",
+					lastModifiedDate: 1608708000000,
+					lastModifiedBy: "username",
 					notes: ""
 				}
 			]
@@ -840,6 +951,23 @@ const routes = [
 	{
 		method: 'POST',
 		url: '/api/substitute-leave',
+		status: 400,
+		param_values: {
+			total: '5',
+			id: 'aw'
+		},
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				id: "id",
+				total: 3
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/substitute-leave',
 		status: 200,
 		response: {
 			code: 200,
@@ -847,6 +975,25 @@ const routes = [
 			data: {
 				id: "id",
 				total: 3
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/request/hourly',
+		status: 400,
+		param_values: {
+			startTime: "05:00",
+			endTime: "17:00",
+			notes: "fail"
+		},
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				startTime: "05:00",
+				endTime: "17:00",
+				notes: "notes"
 			}
 		}
 	},
@@ -866,7 +1013,7 @@ const routes = [
 	},
 	{
 		method: 'POST',
-		url: '/api/request/_approve',
+		url: '/api/requests/_approve',
 		status: 200,
 		response: {
 			code: 200,

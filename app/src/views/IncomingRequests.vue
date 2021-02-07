@@ -99,6 +99,7 @@
         </v-dialog>
 
         <v-text-field
+            id="search"
             v-model="search"
             color="grey"
             hide-no-data
@@ -120,7 +121,12 @@
                         :items="this.departmentData"
                         prepend-icon="mdi-filter-variant"
                         @change="onFilterChange"
-                    />
+                    >
+                        <template slot="item" slot-scope="data">
+                            <!-- HTML that describe how select should render items when the select is open -->
+                            <span :id="data.item.replace(/\s/g, '').toLowerCase()">{{ data.item }}</span>
+                        </template>
+                    </v-select>
                 </v-col>
                 <v-col class="col-5 text-align-right">
                     <v-btn class="white--text" :color="color.blubluedark1" @click="dialogApprove = true">

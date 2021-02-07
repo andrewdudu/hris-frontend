@@ -19,11 +19,9 @@ export default {
 			pdf: null,
 			pdfSize: null,
 			pdfUrl: null,
-			dateRules: [
-				v => !!v || 'Date is required'
-			],
 			pdfRules: [
-				v => !!v || 'File is required'
+				v => !!v || 'File is required',
+				v => v ? v.size < 1000000 || 'Max size: 1 MB' : 'File is required'
 			],
 			noteRules: [
 				v => this.$route.query.type !== 'SUBSTITUTE_LEAVE' || !!v || 'Note is required',
@@ -107,12 +105,12 @@ export default {
 					color: 'error'
 				});
 			})
-		},
+		}
 	},
 	computed: {
 		...mapGetters('user', ['availableSpecialRequests', 'quotaLeave']),
 		valid() {
-			return (this.pdf !== null || this.$route.query.type !== 'SICK_WITH_MEDICAL_LETTER') && this.date !== null && (this.note.length !== 0 || this.$route.query.type !== 'SUBSTITUTE_LEAVE') && this.note.length <= 256;
+			return (this.pdf !== null || this.$route.query.type !== 'SICK_WITH_MEDICAL_LETTER') && this.date !== null && (this.note.length !== 0 || this.$route.query.type !== 'SUBSTITUTE_LEAVE') && this.note.length <= 256 && this.pdfSize < 1000000;
 		},
 		hasQuota() {
 			return (this.$route.query.type === 'ANNUAL_LEAVE' || this.$route.query.type === 'EXTRA_LEAVE' || this.$route.query.type === 'SUBSTITUTE_LEAVE')
@@ -120,6 +118,7 @@ export default {
 	},
 	created() {
 		this.fetchAvailableSpecialRequests();
-		this.fetchQuotaLeave(this.$route.query.type);
+		if (this.hasQuota)
+			this.fetchQuotaLeave(this.$route.query.type);
 	}
 };

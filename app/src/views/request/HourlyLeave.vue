@@ -73,7 +73,6 @@
                 <v-col class="col-12">
                     <v-textarea
                             v-model="note"
-                            :rules="noteRules"
                             :counter="256"
                             maxlength="256"
                             label="Notes"

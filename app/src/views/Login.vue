@@ -6,6 +6,7 @@
             lazy-validation
         >
             <v-text-field
+                id="email"
                 v-model="email"
                 :rules="emailRules"
                 label="Email"
@@ -13,6 +14,7 @@
             />
 
             <v-text-field
+                id="password"
                 type="password"
                 v-model="password"
                 :rules="passwordRules"

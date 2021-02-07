@@ -18,8 +18,7 @@ export default {
 			startUnix: moment().startOf('month').toString(),
 			endUnix: moment().endOf('month').toString(),
 			notesRules: [
-				v => !!v || 'Note is required',
-				v => v.length <= 256 || 'Name must be less or equal than 256 characters'
+				v => !!v || 'Note is required'
 			],
 			titleRules: [
 				v => !!v || 'Title is required',
@@ -49,9 +48,6 @@ export default {
 		},
 		unixToString(value) {
 			return timestamp.unixToString(value);
-		},
-		unixToTime(value) {
-			return timestamp.unixToTime(value);
 		},
 		isPassed(calendar) {
 			return moment().unix()*1000 < calendar.date;

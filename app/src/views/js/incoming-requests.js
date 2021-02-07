@@ -177,12 +177,9 @@ export default {
 		...mapGetters('request', ['incomingRequests', 'incomingRequestTotalPage']),
 		...mapGetters('department', ['departments']),
 		dates() {
-			if (this.data.type === 'LEAVE') {
-				this.data.detail.leave.dates.sort();
+			this.data.detail.leave.dates.sort();
 
-				return this.data.detail.leave.dates;
-			}
-			return null;
+			return this.data.detail.leave.dates;
 		}
 	},
 	watch: {
