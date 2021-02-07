@@ -67,10 +67,11 @@ export default {
 				date.sort();
 				const startDate = moment(date[0], "YYYY-MM-DD");
 				const endDate = moment(date[date.length - 1], "YYYY-MM-DD");
-				let dateNow = startDate.add(1, 'days');
+				let dateNow = startDate;
 				do {
-					date.push(dateNow.format("YYYY-MM-DD"));
 					dateNow = dateNow.add(1, 'days');
+					date.push(dateNow.format("YYYY-MM-DD"));
+					console.log(date);
 				} while (dateNow.format('YYYY-MM-DD') !== endDate.format('YYYY-MM-DD'));
 
 				date.sort();
