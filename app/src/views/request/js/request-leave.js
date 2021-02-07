@@ -19,6 +19,7 @@ export default {
 			pdf: null,
 			pdfSize: null,
 			pdfUrl: null,
+			fileType: null,
 			pdfRules: [
 				v => !!v || 'File is required',
 				v => v ? v.size < 1000000 || 'Max size: 1 MB' : 'File is required'
@@ -55,6 +56,7 @@ export default {
 				reader.readAsDataURL(file);
 				this.pdfSize = file.size;
 				this.pdfUrl = URL.createObjectURL(file);
+				this.fileType = file.name.split('.').pop();
 				reader.onload = () => {
 					this.file = reader.result.substr(reader.result.indexOf(",") + 1);
 				};
@@ -71,7 +73,6 @@ export default {
 				do {
 					dateNow = dateNow.add(1, 'days');
 					date.push(dateNow.format("YYYY-MM-DD"));
-					console.log(date);
 				} while (dateNow.format('YYYY-MM-DD') !== endDate.format('YYYY-MM-DD'));
 
 				date.sort();
@@ -80,7 +81,7 @@ export default {
 			}
 			else if (!Array.isArray(date)) date = [date];
 			if (this.file !== null) {
-				files = ['pdf;' + this.file]
+				files = [`${this.fileType};` + this.file]
 			}
 			this.postRequestLeave({
 				dates: Array.from(date),
