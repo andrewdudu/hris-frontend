@@ -98,19 +98,6 @@
             </v-card>
         </v-dialog>
 
-        <v-text-field
-            id="search"
-            v-model="search"
-            color="grey"
-            hide-no-data
-            hide-selected
-            item-text="Description"
-            item-value="Search"
-            placeholder="Search by Employee's Name"
-            prepend-icon="mdi-magnify"
-            return-object
-        />
-
         <div v-if="departmentData.length !== 0">
             <v-row>
                 <v-col class="col-7 bold dark no-gutters">
@@ -142,6 +129,7 @@
                 </v-btn>
             </v-col>
         </div>
+        <img v-if="incomingRequests.length === 0" class="img-class" src="./../assets/img/empty.svg"  alt="not-found"/>
 
         <v-row v-bind:key="idx" v-for="(request, idx) in incomingRequests" class="margin-top" @click="onClick(request)" no-gutters>
             <v-col class="col-2 margin-left dark">
@@ -207,6 +195,12 @@
 
     .margin-top-minus {
         margin-top: -15px !important;;
+    }
+
+    .img-class {
+        width: 100%;
+        padding: 30px;
+        margin-top: 50px;
     }
 
 </style>
