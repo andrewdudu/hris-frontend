@@ -19,16 +19,6 @@ describe.only('Incoming Request Page', () => {
 		await page.reload();
 	});
 
-	test('should get incoming request well', async () => {
-		await page.waitForSelector('#search');
-		await page.fill('#search', 'abc');
-		await matchImage();
-
-		await page.waitForSelector('#search');
-		await page.fill('#search', '');
-		await matchImage();
-	});
-
 	test('should approve well', async () => {
 		await page.waitForSelector('.container > .row:nth-child(6) > .col-9 > .row > .col-12')
 		await page.click('.container > .row:nth-child(6) > .col-9 > .row > .col-12')
@@ -70,6 +60,24 @@ describe.only('Incoming Request Page', () => {
 	})
 
 	test('should bulk approve well', async () => {
+		await page.waitForSelector('.row > .col-5 > .white--text > .v-btn__content > span')
+		await page.click('.row > .col-5 > .white--text > .v-btn__content > span')
+		await matchImage();
+
+		await page.waitForSelector('.v-dialog__content > .v-dialog > .v-card > .v-card__actions > .v-btn:nth-child(3)')
+		await page.click('.v-dialog__content > .v-dialog > .v-card > .v-card__actions > .v-btn:nth-child(3)');
+		await matchImage();
+	})
+
+	test('should not bulk approve well', async () => {
+		await page.waitForSelector('.v-input > .v-input__control > .v-input__slot > .v-select__slot > .v-select__selections')
+		await page.click('.v-input > .v-input__control > .v-input__slot > .v-select__slot > .v-select__selections')
+		await matchImage();
+
+		await page.waitForSelector('#operation')
+		await page.click('#operation');
+		await matchImage();
+
 		await page.waitForSelector('.row > .col-5 > .white--text > .v-btn__content > span')
 		await page.click('.row > .col-5 > .white--text > .v-btn__content > span')
 		await matchImage();

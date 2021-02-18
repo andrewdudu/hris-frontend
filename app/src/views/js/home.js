@@ -20,7 +20,7 @@ export default {
       isMock: process.env.VUE_APP_ENVIRONMENT !== 'prod' && process.env.VUE_APP_IS_MOCK === 'true',
       hasClockedIn: 0,
       hasClockedOut: 0,
-      location,
+      location: null,
       dialog: false,
       loading: false,
       fileExtension: '',
@@ -57,10 +57,6 @@ export default {
       this.imageUrl = URL.createObjectURL(file);
     },
     onLocationFound(coordinates) {
-      if (!coordinates) {
-        // TODO: if GPS Notfound
-        return;
-      }
       this.location = {
         lat: coordinates[0],
         lon: coordinates[1]

@@ -108,12 +108,55 @@ const routes = [
 	{
 		method: 'POST',
 		url: '/api/attendances/_clock-in',
+		status: 400,
+		param_values: {
+			image: "png;iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNiOAMAANUAz5n+TlUAAAAASUVORK5CYII=",
+			location: {
+				lat: 0,
+				lon: 0
+			}
+		},
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				location: {
+					lat: 787.123123,
+					lon: 178.123123
+				}
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/attendances/_clock-in',
 		status: 200,
 		response: {
 			code: 200,
 			status: "Success",
 			data: {
 				image: "http://image.webp",
+				location: {
+					lat: 787.123123,
+					lon: 178.123123
+				}
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/attendances/_clock-out',
+		status: 400,
+		param_values: {
+			location: {
+				lat: -6.17626763,
+				lon: -253.18260312
+			}
+		},
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
 				location: {
 					lat: 787.123123,
 					lon: 178.123123
@@ -310,7 +353,7 @@ const routes = [
 		status: 400,
 		param_values: {
 			dates: ["2021-01-19"],
-			files: ["pdf;iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNiOAMAANUAz5n+TlUAAAAASUVORK5CYII="],
+			files: ["png;iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNiOAMAANUAz5n+TlUAAAAASUVORK5CYII="],
 			notes: "",
 			type: "SICK_WITH_MEDICAL_LETTER"
 		},
@@ -324,7 +367,7 @@ const routes = [
 		status: 400,
 		param_values: {
 			dates: ["2021-01-22"],
-			files: ["pdf;iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNiOAMAANUAz5n+TlUAAAAASUVORK5CYII="],
+			files: ["png;iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNiOAMAANUAz5n+TlUAAAAASUVORK5CYII="],
 			notes: "",
 			type: "SICK_WITH_MEDICAL_LETTER"
 		},
@@ -479,6 +522,70 @@ const routes = [
 					absent: 2
 				}
 			}
+		}
+	},
+	{
+		method: 'GET',
+		url: '/api/requests',
+		status: 200,
+		param_values: {
+			department: 'OPERATION',
+			page: 0,
+			size: 10,
+			type: 'REQUESTED',
+			name: ''
+		},
+		response: {
+			code: 200,
+			status: "Success",
+			paging: {
+				page: 0,
+				total_page: 2,
+				item_per_page: 10,
+				total_item: 3,
+				sort_by: null
+			},
+			data: [
+				{
+					id: "1823a87f-12387321adf-123123adff",
+					user: {
+						name: "John Doe",
+						department: "Technology",
+						office: {
+							name: "Sarana Jaya"
+						}
+					},
+					status: "PENDING",
+					type: "LEAVE",
+					detail: {
+						leave: {
+							dates: ["2020-09-25", "2020-09-26"],
+							files: ["http://file.pdf", "http://file.webp"],
+							notes: "Forgot to fill attendance on 18 August 2020",
+							type: "SICK"
+						}
+					},
+					date: 788781273
+				},
+				{
+					id: "1823a87f-12387321adf-123123adf",
+					user: {
+						name: "John Doe",
+						department: "Technology",
+						office: {
+							name: "Sarana Jaya"
+						}
+					},
+					status: "PENDING",
+					type: "EXTEND",
+					detail: {
+						extend: {
+							notes: "Forgot to fill attendance on 18 August 2020"
+						}
+					},
+					date: 788781273
+				}
+			]
 		}
 	},
 	{
@@ -1008,6 +1115,26 @@ const routes = [
 				startTime: "11:00",
 				endTime: "13:00",
 				notes: "notes"
+			}
+		}
+	},
+	{
+		method: 'POST',
+		url: '/api/requests/_approve',
+		status: 400,
+		param_values: {
+			ids: [
+				"1823a87f-12387321adf-123123adff",
+				"1823a87f-12387321adf-123123adf"
+			]
+		},
+		response: {
+			code: 200,
+			status: "Success",
+			data: {
+				ids: [
+					"abc"
+				]
 			}
 		}
 	},

@@ -33,7 +33,7 @@ export default {
 		},
 		onRequest() {
 			this.postExtendLeave({
-				notes: this.notes,
+				notes: this.note,
 			}).then(() => {
 				this.openSnackbar({
 					message: 'Request Successfully',

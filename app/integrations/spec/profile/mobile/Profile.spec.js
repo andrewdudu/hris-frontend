@@ -12,16 +12,16 @@ describe.only('Profile Page', () => {
 
 	test('should get profile well', async () => {
 		await page.waitForTimeout(2000);
-		network.waitForNetworkIdle(page);
+		await network.waitForNetworkIdle(page);
 		let image = await page.screenshot();
-		expect(image).toMatchImageSnapshot();
+		await expect(image).toMatchImageSnapshot();
 
 		await page.waitForSelector('.col-12 > .clock > .col-12 > .v-btn > .v-btn__content');
 		await page.click('.col-12 > .clock > .col-12 > .v-btn > .v-btn__content');
 		await page.waitForTimeout(2000);
-		network.waitForNetworkIdle(page);
+		await network.waitForNetworkIdle(page);
 		image = await page.screenshot();
-		expect(image).toMatchImageSnapshot();
+		await expect(image).toMatchImageSnapshot();
 
 	});
 });

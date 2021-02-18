@@ -35,7 +35,7 @@ export default {
 				},
 				() => {
 					this.loaded = true;
-					this.$emit('locationFound', null);
+					this.$emit('locationFound', this.center);
 				}
 			);
 		} else {

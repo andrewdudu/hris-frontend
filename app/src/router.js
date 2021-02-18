@@ -5,23 +5,23 @@ Vue.use(Router);
 
 const HomePage = () => import(/* webpackChunkName:'p-home' */"@/views/Home.vue");
 const AnnouncementPage = () => import(/* webpackChunkName:'p-announcement' */"@/views/Announcement.vue");
-const LoginPage = () => import("@/views/Login.vue");
-const ProfilePage = () => import("@/views/Profile.vue");
-const ProfileReportPage = () => import("@/views/ProfileReport.vue");
-const RequestPage = () => import("@/views/Request.vue");
-const SpecialLeaveListPage = () => import("@/views/request/SpecialLeaveList.vue");
-const RequestLeavePage = () => import("@/views/request/RequestLeave.vue");
-const ExtendLeavePage = () => import("@/views/request/ExtendLeave.vue");
-const RequestAttendancePage = () => import("@/views/request/Attendance.vue");
-const AttendancePage = () => import("@/views/Attendance.vue");
-const ReportPage = () => import("@/views/Report.vue");
-const IncomingRequestPage = () => import("@/views/IncomingRequests.vue");
-const CalendarPage = () => import("@/views/Calendar.vue");
-const DepartmentPage = () => import("@/views/employee/EmployeeList.vue");
-const EmployeePage = () => import("@/views/employee/Employee.vue");
-const EmployeeDetailPage = () => import("@/views/employee/EmployeeDetail.vue");
-const AddAnnouncementPage = () => import("@/views/AddAnnouncement.vue");
-const HourlyLeavePage = () => import("@/views/request/HourlyLeave.vue");
+const LoginPage = () => import(/* webpackChunkName:'p-login' */"@/views/Login.vue");
+const ProfilePage = () => import(/* webpackChunkName:'p-profile' */"@/views/Profile.vue");
+const ProfileReportPage = () => import(/* webpackChunkName:'p-profile-report' */"@/views/ProfileReport.vue");
+const RequestPage = () => import(/* webpackChunkName:'p-request-page' */"@/views/Request.vue");
+const SpecialLeaveListPage = () => import(/* webpackChunkName:'p-special-leave' */"@/views/request/SpecialLeaveList.vue");
+const RequestLeavePage = () => import(/* webpackChunkName:'p-request-leave' */"@/views/request/RequestLeave.vue");
+const ExtendLeavePage = () => import(/* webpackChunkName:'p-extend-leave' */"@/views/request/ExtendLeave.vue");
+const RequestAttendancePage = () => import(/* webpackChunkName:'p-attendance-request' */"@/views/request/Attendance.vue");
+const AttendancePage = () => import(/* webpackChunkName:'p-attendance-page' */"@/views/Attendance.vue");
+const ReportPage = () => import(/* webpackChunkName:'p-report' */"@/views/Report.vue");
+const IncomingRequestPage = () => import(/* webpackChunkName:'p-incoming-request' */"@/views/IncomingRequests.vue");
+const CalendarPage = () => import(/* webpackChunkName:'p-calendar' */"@/views/Calendar.vue");
+const DepartmentPage = () => import(/* webpackChunkName:'p-department' */"@/views/employee/EmployeeList.vue");
+const EmployeePage = () => import(/* webpackChunkName:'p-employee' */"@/views/employee/Employee.vue");
+const EmployeeDetailPage = () => import(/* webpackChunkName:'p-employee-detail' */"@/views/employee/EmployeeDetail.vue");
+const AddAnnouncementPage = () => import(/* webpackChunkName:'p-add-announcement' */"@/views/AddAnnouncement.vue");
+const HourlyLeavePage = () => import(/* webpackChunkName:'p-hourly' */"@/views/request/HourlyLeave.vue");
 
 export default new Router({
   mode: "history",
@@ -40,87 +40,87 @@ export default new Router({
     {
       path: "/login",
       name: "login",
-      component: LoginPage
+      component: LoginPage,
     },
     {
       path: "/profile",
       name: "profile",
-      component: ProfilePage
+      component: ProfilePage,
     },
     {
       path: "/profile/report",
       name: "profile report",
-      component: ProfileReportPage
+      component: ProfileReportPage,
     },
     {
       path: "/request",
       name: "request page",
-      component: RequestPage
+      component: RequestPage,
     },
     {
       path: "/request/special",
       name: "special request list",
-      component: SpecialLeaveListPage
+      component: SpecialLeaveListPage,
     },
     {
       path: "/request/leave",
       name: "Request Leave",
-      component: RequestLeavePage
+      component: RequestLeavePage,
     },
     {
       path: "/request/extend",
       name: "Extend Leave",
-      component: ExtendLeavePage
+      component: ExtendLeavePage,
     },
     {
       path: "/request/attendance",
       name: "Request Attendance",
-      component: RequestAttendancePage
+      component: RequestAttendancePage,
     },
     {
       path: "/attendance",
       name: "Attendance Page",
-      component: AttendancePage
+      component: AttendancePage,
     },
     {
       path: "/report",
       name: "Report Page",
-      component: ReportPage
+      component: ReportPage,
     },
     {
       path: "/request/incoming",
       name: "Incoming Page",
-      component: IncomingRequestPage
+      component: IncomingRequestPage,
     },
     {
       path: "/calendar",
       name: "Calendar Page",
-      component: CalendarPage
+      component: CalendarPage,
     },
     {
       path: "/department",
       name: "Department Page",
-      component: DepartmentPage
+      component: DepartmentPage,
     },
     {
       path: "/employee",
       name: "Employee Page",
-      component: EmployeePage
+      component: EmployeePage,
     },
     {
       path: "/employee/detail",
       name: "Employee Detail Page",
-      component: EmployeeDetailPage
+      component: EmployeeDetailPage,
     },
     {
       path: "/add-announcement",
       name: "Add Announcement Page",
-      component: AddAnnouncementPage
+      component: AddAnnouncementPage,
     },
     {
       path: "/request/hourly",
       name: "Hourly Leave Page",
-      component: HourlyLeavePage
-    }
+      component: HourlyLeavePage,
+    },
   ],
 });

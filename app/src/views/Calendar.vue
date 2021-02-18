@@ -89,7 +89,7 @@
                             </v-col>
                             <v-col class="col-12 center">
                                 <v-btn
-                                    v-if="calendar.events.length === 0 && isPassed(calendar)"
+                                    v-if="calendar.status === 'WORKING' && isPassed(calendar)"
                                     :color="color.blubluedark1"
                                     dark
                                     @click="onSetHoliday(calendar.date)"

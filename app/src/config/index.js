@@ -81,7 +81,8 @@ const config = {
 	},
 	errMessage: {
 		QUOTA_NOT_AVAILABLE: 'You don\'t have enough Quota to request.',
-		EXCEED_ALLOWABLE_QUOTA: 'You have inputted more days than allowed.'
+		EXCEED_ALLOWABLE_QUOTA: 'You have inputted more days than allowed.',
+		EXCEED_LIMIT: 'You have inputted more hours than allowed.'
 	},
 	pageSize: 10,
 	roleColor: {

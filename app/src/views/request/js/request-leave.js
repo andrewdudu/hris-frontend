@@ -25,8 +25,7 @@ export default {
 				v => v ? v.size < 1000000 || 'Max size: 1 MB' : 'File is required'
 			],
 			noteRules: [
-				v => this.$route.query.type !== 'SUBSTITUTE_LEAVE' || !!v || 'Note is required',
-				v => v.length <= 256 || 'Name must be less or equal than 256 characters'
+				v => this.$route.query.type !== 'SUBSTITUTE_LEAVE' || !!v || 'Note is required'
 			],
 			breadcrumbsItems: [
 				{

@@ -3,9 +3,9 @@ const network = require('../../../utils/network');
 
 const matchImage = async (isNetworkIdle = true, delayTime = 2000) => {
 	await page.waitForTimeout(delayTime);
-	if (isNetworkIdle) network.waitForNetworkIdle(page);
+	if (isNetworkIdle) await network.waitForNetworkIdle(page);
 	let image = await page.screenshot();
-	expect(image).toMatchImageSnapshot();
+	await expect(image).toMatchImageSnapshot();
 };
 
 // only mobile
@@ -33,6 +33,10 @@ describe.only('Request Sick With Medical Letter Page', () => {
 		await page.click('.v-input #date')
 		await matchImage();
 
+		await page.waitForSelector('tbody > tr:nth-child(4) > td:nth-child(3) > .v-btn > .v-btn__content')
+		await page.click('tbody > tr:nth-child(4) > td:nth-child(3) > .v-btn > .v-btn__content')
+		await matchImage();
+
 		await page.waitForSelector('tbody > tr:nth-child(4) > td:nth-child(5) > .v-btn > .v-btn__content')
 		await page.click('tbody > tr:nth-child(4) > td:nth-child(5) > .v-btn > .v-btn__content')
 		await matchImage();
@@ -42,7 +46,7 @@ describe.only('Request Sick With Medical Letter Page', () => {
 		await matchImage();
 
 		await page.waitForSelector('.v-input > .v-input__control > .v-input__slot > .v-text-field__slot > .v-file-input__text')
-		page.on('filechooser', async (filechooser) => {
+		await page.on('filechooser', async (filechooser) => {
 			await filechooser.setFiles('integrations/assets/image.png');
 		});
 		await page.click('.v-input > .v-input__control > .v-input__slot > .v-text-field__slot > .v-file-input__text')
@@ -67,6 +71,14 @@ describe.only('Request Sick With Medical Letter Page', () => {
 		await page.click('.v-input #date')
 		await matchImage();
 
+		await page.waitForSelector('div > .v-date-picker-header > .v-date-picker-header__value > .accent--text > button')
+		await page.click('div > .v-date-picker-header > .v-date-picker-header__value > .accent--text > button')
+		await matchImage();
+
+		await page.waitForSelector('tbody > tr:nth-child(1) > td:nth-child(1) > .v-btn > .v-btn__content')
+		await page.click('tbody > tr:nth-child(1) > td:nth-child(1) > .v-btn > .v-btn__content')
+		await matchImage();
+
 		await page.waitForSelector('tbody > tr:nth-child(4) > td:nth-child(6) > .v-btn > .v-btn__content')
 		await page.click('tbody > tr:nth-child(4) > td:nth-child(6) > .v-btn > .v-btn__content')
 		await matchImage();
@@ -76,7 +88,7 @@ describe.only('Request Sick With Medical Letter Page', () => {
 		await matchImage();
 
 		await page.waitForSelector('.v-input > .v-input__control > .v-input__slot > .v-text-field__slot > .v-file-input__text')
-		page.on('filechooser', async (filechooser) => {
+		await page.on('filechooser', async (filechooser) => {
 			await filechooser.setFiles('integrations/assets/small.png');
 		});
 		await page.click('.v-input > .v-input__control > .v-input__slot > .v-text-field__slot > .v-file-input__text')
@@ -101,6 +113,14 @@ describe.only('Request Sick With Medical Letter Page', () => {
 		await page.click('.v-input #date')
 		await matchImage();
 
+		await page.waitForSelector('div > .v-date-picker-header > .v-date-picker-header__value > .accent--text > button')
+		await page.click('div > .v-date-picker-header > .v-date-picker-header__value > .accent--text > button')
+		await matchImage();
+
+		await page.waitForSelector('tbody > tr:nth-child(1) > td:nth-child(1) > .v-btn > .v-btn__content')
+		await page.click('tbody > tr:nth-child(1) > td:nth-child(1) > .v-btn > .v-btn__content')
+		await matchImage();
+
 		await page.waitForSelector('tbody > tr:nth-child(4) > td:nth-child(3) > .v-btn > .v-btn__content')
 		await page.click('tbody > tr:nth-child(4) > td:nth-child(3) > .v-btn > .v-btn__content')
 		await matchImage();
@@ -110,7 +130,7 @@ describe.only('Request Sick With Medical Letter Page', () => {
 		await matchImage();
 
 		await page.waitForSelector('.v-input > .v-input__control > .v-input__slot > .v-text-field__slot > .v-file-input__text')
-		page.on('filechooser', async (filechooser) => {
+		await page.on('filechooser', async (filechooser) => {
 			await filechooser.setFiles('integrations/assets/small.png');
 		});
 		await page.click('.v-input > .v-input__control > .v-input__slot > .v-text-field__slot > .v-file-input__text')

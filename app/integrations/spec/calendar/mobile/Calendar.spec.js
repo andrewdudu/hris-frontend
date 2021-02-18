@@ -43,8 +43,8 @@ describe.only('Calendar Page', () => {
 		await page.click('.v-input > .v-input__control > .v-input__slot > .v-select__slot > .v-select__selections')
 		await matchImage();
 
-		await page.waitForSelector('#february')
-		await page.click('#february')
+		await page.waitForSelector('#january')
+		await page.click('#january')
 		await matchImage();
 
 		await page.waitForSelector('.row:nth-child(3) > .attendances > .announcements-card > .row > .col-12 > .v-btn > .v-btn__content')

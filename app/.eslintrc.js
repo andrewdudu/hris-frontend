@@ -25,7 +25,8 @@ module.exports = {
         jest: true
       },
       globals: {
-        page: "writable"
+        page: "writable",
+        context: "readonly"
       }
     }
   ]

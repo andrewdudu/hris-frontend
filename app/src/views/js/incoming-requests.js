@@ -5,7 +5,6 @@ import moment from 'moment';
 import pdf from 'vue-pdf';
 import config from '@/config';
 import { mapActions, mapGetters } from "vuex";
-import _ from "lodash";
 
 export default {
 	name: "incoming-request",
@@ -145,9 +144,6 @@ export default {
 				size: this.size
 			})
 		},
-		debounceInput: _.debounce(function() {
-			this.onChange();
-		}, 500),
 		onBulkApprove() {
 			const ids = this.incomingRequests.map(req => req.id);
 			this.postBulkApprove({
@@ -180,13 +176,6 @@ export default {
 			this.data.detail.leave.dates.sort();
 
 			return this.data.detail.leave.dates;
-		}
-	},
-	watch: {
-		search(val) {
-			if (!val) return;
-
-			this.debounceInput();
 		}
 	},
 	created() {

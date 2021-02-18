@@ -92,8 +92,8 @@ describe.only('Request Hourly Leave', () => {
 		await page.click('.v-dialog > .v-picker > .v-picker__actions:nth-child(3) > .v-btn > .v-btn__content');
 		await matchImage(false, 1000);
 
-		await page.waitForSelector('.v-input #input-78')
-		await page.click('.v-input #input-78')
+		await page.waitForSelector('.v-input #input-78');
+		await page.click('.v-input #input-78');
 		await matchImage();
 
 		await page.waitForSelector('.v-picker__body > .v-time-picker-clock__container:nth-child(1) > .v-time-picker-clock > .v-time-picker-clock__inner > .v-time-picker-clock__item:nth-child(7)');

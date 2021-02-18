@@ -16,8 +16,14 @@ describe.only('Home Page', () => {
 	});
 
 	test('should clock in and clock out well', async () => {
+		page.evaluate(() => {
+			Date.now = () => {
+				return 1609477200000; //Jan 1, 2021
+			};
+		});
+
 		await page.waitForTimeout(2000);
-		network.waitForNetworkIdle(page);
+		await network.waitForNetworkIdle(page);
 		let image = await page.screenshot();
 		expect(image).toMatchImageSnapshot();
 
@@ -26,40 +32,61 @@ describe.only('Home Page', () => {
 		await page.waitForSelector('.col-12 > .clock > .row > .col-12 > .v-btn');
 		await page.click('.col-12 > .clock > .row > .col-12 > .v-btn');
 		await page.waitForTimeout(2000);
-		network.waitForNetworkIdle(page);
+		await network.waitForNetworkIdle(page);
 		image = await page.screenshot();
-		expect(image).toMatchImageSnapshot();
+		await expect(image).toMatchImageSnapshot();
 
 		await page.waitForSelector('.v-input > .v-input__control > .v-input__slot > .v-text-field__slot > .v-file-input__text');
-		page.on('filechooser', async (filechooser) => {
+		await page.on('filechooser', async (filechooser) => {
 			await filechooser.setFiles('integrations/assets/image.png');
 		});
 		await page.click('.v-input > .v-input__control > .v-input__slot > .v-text-field__slot > .v-file-input__text');
 		await page.waitForTimeout(1000);
 		image = await page.screenshot();
-		expect(image).toMatchImageSnapshot();
+		await expect(image).toMatchImageSnapshot();
 
 		await page.waitForSelector('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
 		await page.click('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
 		await page.waitForTimeout(3000);
 		image = await page.screenshot();
-		expect(image).toMatchImageSnapshot();
+		await expect(image).toMatchImageSnapshot();
+
+		await page.waitForSelector('.clock > .row > .col-12 > .white--text > .v-btn__content');
+		await page.click('.clock > .row > .col-12 > .white--text > .v-btn__content');
+		await page.waitForTimeout(2000);
+		network.waitForNetworkIdle(page);
+		image = await page.screenshot();
+		await expect(image).toMatchImageSnapshot();
+
+		await page.waitForSelector('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
+		await page.click('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
+		await page.waitForTimeout(2000);
+		network.waitForNetworkIdle(page);
+		image = await page.screenshot();
+		await expect(image).toMatchImageSnapshot();
+
+		await page.waitForSelector('.v-dialog > .v-card > .v-card__actions > .v-btn:nth-child(3) > .v-btn__content')
+		await page.click('.v-dialog > .v-card > .v-card__actions > .v-btn:nth-child(3) > .v-btn__content')
+		await page.waitForTimeout(500);
+		network.waitForNetworkIdle(page);
+		image = await page.screenshot();
+		await expect(image).toMatchImageSnapshot();
 	});
 
 	test('should clock out well', async () => {
 
 		await page.waitForTimeout(2000);
-		network.waitForNetworkIdle(page);
+		await network.waitForNetworkIdle(page);
 
 		await page.click('#app > .v-application--wrap > .v-main > .v-main__wrap > div');
 
 		await page.waitForSelector('.col-12 > .clock > .row > .col-12 > .v-btn');
 		await page.click('.col-12 > .clock > .row > .col-12 > .v-btn');
 		await page.waitForTimeout(2000);
-		network.waitForNetworkIdle(page);
+		await network.waitForNetworkIdle(page);
 
 		await page.waitForSelector('.v-input > .v-input__control > .v-input__slot > .v-text-field__slot > .v-file-input__text');
-		page.on('filechooser', async (filechooser) => {
+		await page.on('filechooser', async (filechooser) => {
 			await filechooser.setFiles('integrations/assets/image.png');
 		});
 		await page.click('.v-input > .v-input__control > .v-input__slot > .v-text-field__slot > .v-file-input__text');
@@ -67,27 +94,27 @@ describe.only('Home Page', () => {
 
 		await page.waitForSelector('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
 		await page.click('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
-		await page.waitForTimeout(2000);
+		await page.waitForTimeout(5000);
 
 		await page.waitForSelector('.clock > .row > .col-12 > .white--text > .v-btn__content');
 		await page.click('.clock > .row > .col-12 > .white--text > .v-btn__content');
 		await page.waitForTimeout(2000);
-		network.waitForNetworkIdle(page);
+		await network.waitForNetworkIdle(page);
 		let image = await page.screenshot();
-		expect(image).toMatchImageSnapshot();
+		await expect(image).toMatchImageSnapshot();
 
 		await page.waitForSelector('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
 		await page.click('.v-dialog > .v-card > .v-card__actions > .v-btn > .v-btn__content');
 		await page.waitForTimeout(2000);
-		network.waitForNetworkIdle(page);
+		await network.waitForNetworkIdle(page);
 		image = await page.screenshot();
-		expect(image).toMatchImageSnapshot();
+		await expect(image).toMatchImageSnapshot();
 
 		await page.waitForSelector('.v-dialog > .v-card > .v-card__actions > .v-btn:nth-child(3) > .v-btn__content')
 		await page.click('.v-dialog > .v-card > .v-card__actions > .v-btn:nth-child(3) > .v-btn__content')
-		await page.waitForTimeout(5000);
-		network.waitForNetworkIdle(page);
+		await page.waitForTimeout(500);
+		await network.waitForNetworkIdle(page);
 		image = await page.screenshot();
-		expect(image).toMatchImageSnapshot();
+		await expect(image).toMatchImageSnapshot();
 	})
 });

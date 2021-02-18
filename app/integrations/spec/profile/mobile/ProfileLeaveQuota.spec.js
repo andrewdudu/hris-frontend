@@ -12,7 +12,7 @@ describe.only('Profile Page', () => {
 
 	test('should get profile well', async () => {
 		await page.waitForTimeout(2000);
-		network.waitForNetworkIdle(page);
+		await network.waitForNetworkIdle(page);
 		let image = await page.screenshot();
 		expect(image).toMatchImageSnapshot();
 	});

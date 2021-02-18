@@ -9,7 +9,7 @@ const matchImage = async (isNetworkIdle = true, delayTime = 2000) => {
 };
 
 // only mobile
-describe.only('Calendar Page', () => {
+describe.only('Login Page', () => {
 	beforeEach(async () => {
 		await responsive.setMobile(page);
 		await page.goto('http://localhost:8080/login', {

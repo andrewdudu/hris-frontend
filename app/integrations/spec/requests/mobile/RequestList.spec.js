@@ -1,13 +1,6 @@
 const responsive = require('../../../utils/responsive');
 const network = require('../../../utils/network');
 
-const matchImage = async (isNetworkIdle = false, delayTime = 2000) => {
-	await page.waitForTimeout(delayTime);
-	if (isNetworkIdle) network.waitForNetworkIdle(page);
-	let image = await page.screenshot();
-	expect(image).toMatchImageSnapshot();
-};
-
 // only mobile
 describe.only('Request List Page', () => {
 	beforeAll(async () => {
@@ -22,8 +15,8 @@ describe.only('Request List Page', () => {
 
 	test('should load request list well', async () => {
 		await page.waitForTimeout(2000);
-		network.waitForNetworkIdle(page);
+		await network.waitForNetworkIdle(page);
 		let image = await page.screenshot();
-		expect(image).toMatchImageSnapshot();
+		await expect(image).toMatchImageSnapshot();
 	});
 });
